@@ -1,0 +1,1019 @@
+<resources>
+    <string name="app_name">PATHY</string>
+    <string name="settings">הגדרות</string>
+    <string name="select_language">בחרו שפה</string>
+    <string name="sign_out">התנתקות</string>
+    <string name="back">חזרה</string>
+    <string name="settings_location_services">שירותי מיקום</string>
+    <string name="common_enabled">מופעל</string>
+    <string name="common_disabled">כבוי</string>
+    <string name="home_welcome">שלום, %1$s</string>
+    <string name="home_intro">ההרפתקה הבאה מתחילה כאן</string>
+    <string name="home_totals">כל הפעילויות שהוקלטו</string>
+    <string name="home_sign_in">יש להתחבר כדי לראות את הנתונים שלך</string>
+    <string name="load_failed">לא ניתן לטעון את הנתונים. נסו שוב.</string>
+    <string name="retry">נסו שוב</string>
+    <string name="home_distance">%1$.1f ק״מ</string>
+    <string name="home_empty">הפעילות הראשונה שלך תופיע כאן לאחר ההקלטה.</string>
+    <string name="home_track">הקלטת פעילות</string>
+    <string name="home_map">פתיחת מפה</string>
+    <string name="home_discover">גילוי מסלולים קרובים</string>
+    <string name="home_history">היסטוריית פעילויות</string>
+    <string name="home_scout">שאלו את Scout</string>
+    <string name="home_profile">פרופיל</string>
+    <string name="weather_title">מזג האוויר בקרבתך</string>
+    <string name="weather_action">הצגת מזג אוויר מקומי</string>
+    <string name="weather_unavailable">מזג האוויר אינו זמין. בדקו התחברות, מיקום ורשת.</string>
+    <string name="weather_value">%1$.0f°C · רוח %2$.0f קמ״ש</string>
+    <string name="language_system">שפת המכשיר</string>
+
+    <!-- AuthViewModel.kt -->
+    <string name="auth_reset_failed">שליחת האימייל לאיפוס נכשלה.</string>
+    <string name="auth_enter_email_for_reset">הזינו כתובת אימייל כדי לקבל קישור לאיפוס הסיסמה.</string>
+    <string name="auth_save_user_failed">שמירת הפרופיל נכשלה: %1$s</string>
+    <string name="auth_sign_up_failed">ההרשמה נכשלה.</string>
+    <string name="auth_photo_upload_failed">העלאת התמונה נכשלה: %1$s</string>
+    <string name="auth_google_failed">ההתחברות עם Google נכשלה.</string>
+    <string name="auth_user_missing">לא ניתן היה לטעון את החשבון לאחר ההתחברות. נסו שוב.</string>
+    <string name="auth_sign_in_failed">ההתחברות נכשלה. נסו שוב או בדקו את הפרטים.</string>
+    <string name="error_network_check">שגיאת רשת. בדקו את החיבור שלכם.</string>
+    <string name="auth_too_many_requests">יותר מדי ניסיונות. נסו שוב מאוחר יותר.</string>
+    <string name="auth_user_disabled">החשבון הושבת. נא לפנות לתמיכה.</string>
+    <string name="auth_invalid_credentials">האימייל או הסיסמה שגויים.</string>
+    <string name="auth_email_unverified_link_sent">כתובת האימייל טרם אומתה. שלחנו לך קישור לאימות.</string>
+    <string name="auth_fill_all_fields">נא למלא את כל השדות.</string>
+
+    <!-- OnboardingScreen.kt -->
+    <string name="onboarding_get_started">בואו נתחיל</string>
+    <string name="common_next">הבא</string>
+    <string name="common_skip">דילוג</string>
+    <string name="onboarding_progress_body">הקליטו את המסלולים שלכם, צברו הישגים ושתפו את ההרפתקאות עם הקהילה.</string>
+    <string name="onboarding_progress_title">עקבו אחר ההתקדמות שלכם</string>
+    <string name="onboarding_friends_body">ראו את חברי הקבוצה על המפה בזמן אמת ודברו ביניכם דרך מכשיר הקשר המובנה.</string>
+    <string name="onboarding_friends_title">צאו להרפתקה עם חברים</string>
+    <string name="onboarding_navigate_body">הנחיות פנייה אחר פנייה, מפות לא מקוונות ופרופילי גובה שומרים אתכם על המסלול.</string>
+    <string name="onboarding_navigate_title">נווטו בביטחון</string>
+    <string name="onboarding_discover_body">גלו מיליוני מסלולי הליכה, אופני הרים, רכיבה ושטח מכל רחבי העולם.</string>
+    <string name="onboarding_discover_title">גלו מסלולים מדהימים</string>
+
+    <!-- SettingsScreen.kt -->
+    <string name="sign_out_confirm_message">בטוחים שברצונכם להתנתק מהחשבון?</string>
+    <string name="sign_out_confirm_title">להתנתק?</string>
+    <string name="common_cancel">ביטול</string>
+    <string name="settings_location_manual">יש להפעיל את שירותי המיקום בהגדרות המכשיר.</string>
+
+    <!-- SignInScreen.kt -->
+    <string name="common_just_a_moment">רק רגע…</string>
+    <string name="signin_new_user">הרשמה למשתמש חדש</string>
+    <string name="signin_with_google">התחברות עם Google</string>
+    <string name="google_logo_desc">הלוגו של Google</string>
+    <string name="signin_title">התחברות</string>
+    <string name="signin_general_error">שגיאה בהתחברות: %1$s</string>
+    <string name="signin_email_unverified">האימייל טרם אומת. יש לאמת את כתובת הדוא״ל.</string>
+    <string name="profile_load_error">טעינת הפרופיל נכשלה: %1$s</string>
+    <string name="signin_success">ההתחברות הצליחה</string>
+    <string name="signin_invalid_identifier">הזינו כתובת אימייל או מספר טלפון תקינים.</string>
+    <string name="signin_forgot_password">שכחתם סיסמה?</string>
+    <string name="reset_email_sent">נשלח אימייל לאיפוס הסיסמה.</string>
+    <string name="signin_remember_me">זכרו אותי</string>
+    <string name="field_password">סיסמה</string>
+    <string name="field_email">אימייל</string>
+    <string name="error_generic_with_message">שגיאה: %1$s</string>
+    <string name="error_network_retry">שגיאת רשת. נסו שוב.</string>
+    <string name="signin_wrong_password">הסיסמה שגויה.</string>
+    <string name="signin_no_user">לא נמצא חשבון עם כתובת האימייל הזו.</string>
+    <string name="profile_create_error">יצירת הפרופיל נכשלה: %1$s</string>
+    <string name="signin_google_success">ההתחברות עם Google הצליחה</string>
+
+    <!-- SignUpScreen.kt -->
+    <string name="common_ok">אישור</string>
+    <string name="signup_verify_then_sign_in">יש לאמת את האימייל ולאחר מכן להתחבר.</string>
+    <string name="signup_verification_message">נשלח קישור אימות לכתובת האימייל שלך. יש לאמת לפני שממשיכים.</string>
+    <string name="signup_verification_title">נדרש אימות</string>
+    <string name="signup_create_account">יצירת חשבון</string>
+    <string name="signup_email_taken">כבר קיים חשבון עם כתובת האימייל הזו.</string>
+    <string name="signup_passwords_mismatch">הסיסמאות אינן תואמות.</string>
+    <string name="error_invalid_email">הזינו כתובת אימייל תקינה.</string>
+    <string name="field_gender">מגדר:</string>
+    <string name="field_phone_optional">טלפון (לא חובה)</string>
+    <string name="field_confirm_password">אימות סיסמה</string>
+    <string name="field_full_name">שם מלא</string>
+    <string name="signup_title">הרשמה</string>
+
+    <!-- Gender / settings -->
+    <string name="gender_male">זכר</string>
+    <string name="gender_female">נקבה</string>
+    <string name="settings_version_label">גרסה %1$s</string>
+
+    <!-- EmergencySOSScreen.kt -->
+    <string name="sos_add_contact">הוספת איש קשר</string>
+    <string name="sos_no_contacts_body">הוסיפו לפחות איש קשר אחד למקרי חירום.</string>
+    <string name="sos_no_contacts_title">אין אנשי קשר לשעת חירום</string>
+    <string name="common_call">חיוג</string>
+    <string name="sos_confirm_send">שליחת SOS</string>
+    <string name="sos_confirm_message">המערכת תשלח התראת חירום עם המיקום הנוכחי שלכם לכל אנשי הקשר לשעת חירום.</string>
+    <string name="sos_confirm_title">להפעיל קריאת חירום?</string>
+    <string name="common_add">הוספה</string>
+    <string name="sos_contacts_title">אנשי קשר לשעת חירום</string>
+    <string name="sos_share_location">שיתוף מיקום</string>
+    <string name="sos_call_emergency">חיוג לשירותי חירום</string>
+    <string name="sos_quick_actions">פעולות מהירות</string>
+    <string name="sos_info_line_sms">• נשלח ב-SMS ולכן פועל גם ללא אינטרנט</string>
+    <string name="sos_info_line_call">• מאפשר לחייג לשירותי החירום בנגיעה אחת\n</string>
+    <string name="sos_info_line_link">• כולל קישור ל-Google Maps למיקום שלכם\n</string>
+    <string name="sos_info_line_contacts">• שולח את המיקום שלכם לאנשי הקשר לשעת חירום\n</string>
+    <string name="sos_info_title">מה קורה כשמפעילים קריאת חירום?</string>
+    <string name="sos_tap_hint">הקישו כדי לשלוח התראת חירום</string>
+    <string name="sos_hero_title">קריאת חירום SOS</string>
+    <string name="sos_title">קריאת חירום SOS</string>
+
+    <!-- EmergencySOSActivity.kt -->
+    <string name="common_save">שמירה</string>
+    <string name="error_phone_invalid">מספר הטלפון אינו תקין.</string>
+    <string name="error_name_required">יש להזין שם.</string>
+    <string name="field_phone">מספר טלפון</string>
+    <string name="field_name">שם</string>
+    <string name="sos_contact_dialog_title">איש קשר לשעת חירום</string>
+    <string name="sos_share_failed">השיתוף נכשל: %1$s</string>
+    <string name="sos_location_shared">המיקום נשלח לאנשי הקשר.</string>
+    <string name="sos_send_failed">השליחה נכשלה: %1$s</string>
+    <string name="sos_sent">הודעת החירום נשלחה.</string>
+    <string name="sos_add_contact_first">הוסיפו לפחות איש קשר אחד לשעת חירום.</string>
+    <string name="sos_sms_permission_needed">נדרשת הרשאת SMS כדי לשלוח הודעות חירום.</string>
+
+    <!-- EmergencySOS.kt -->
+    <string name="sos_msg_sharing_location">המיקום הנוכחי שלי: %1$s</string>
+    <string name="sos_location_unavailable">המיקום אינו זמין</string>
+    <string name="sos_msg_location_link">המיקום שלי בעת שליחת קריאת החירום: %1$s</string>
+    <string name="sos_msg_time">\nשעה: %1$s</string>
+    <string name="sos_msg_footer">\n\nנשלח מאפליקציית PATHY</string>
+    <string name="sos_msg_maps">\n\nGoogle Maps:</string>
+    <string name="sos_msg_accuracy">\nדיוק: %1$s מ׳</string>
+    <string name="sos_msg_longitude">\nקו אורך: %1$s</string>
+    <string name="sos_msg_latitude">\nקו רוחב: %1$s</string>
+    <string name="sos_msg_location_header">\n\nמיקום:</string>
+    <string name="sos_default_message">חירום! נדרשת עזרה. המיקום שלי:</string>
+
+    <!-- BookmarksScreen.kt -->
+    <string name="bookmarks_empty_body">התחילו לשמור את המסלולים האהובים עליכם!</string>
+    <string name="bookmarks_empty_title">עדיין אין מועדפים</string>
+    <string name="bookmarks_remove">הסרה מהמועדפים</string>
+    <string name="bookmark_saved_ago">נשמר %1$s</string>
+    <string name="bookmarks_create_list">יצירת רשימה</string>
+    <string name="bookmarks_toggle_view">החלפת תצוגה</string>
+    <string name="bookmarks_title">מועדפים</string>
+
+    <!-- BookmarksActivity.kt -->
+    <string name="bookmarks_remove_failed">ההסרה נכשלה: %1$s</string>
+    <string name="trail_details_unavailable">אין פרטי מסלול להצגה.</string>
+    <string name="bookmarks_load_failed">טעינת המועדפים נכשלה: %1$s</string>
+    <string name="bookmarks_sign_in_required">יש להתחבר כדי לראות את המועדפים.</string>
+
+    <!-- ActivityHistoryScreen.kt -->
+    <string name="history_try_other_filter">נסו סינון אחר</string>
+    <string name="history_empty_body">התחילו להקליט את ההרפתקה הראשונה שלכם!</string>
+    <string name="history_empty_title">עדיין אין פעילויות</string>
+    <string name="history_loading">טוען פעילויות…</string>
+    <string name="history_filter">סינון</string>
+
+    <!-- ProfileScreen.kt -->
+    <string name="trail_load_failed">טעינת המסלול נכשלה.</string>
+    <string name="trail_not_found">המסלול לא נמצא.</string>
+    <string name="trail_load_error">שגיאה בטעינת המסלול.</string>
+    <string name="profile_user_details">פרטי משתמש</string>
+    <string name="profile_sos_button">🆘 חירום (SOS)</string>
+    <string name="profile_bookmarks_button">🔖 מועדפים</string>
+    <string name="profile_activity_history_button">📜 היסטוריית פעילויות</string>
+    <string name="profile_record_activity_button">🏃 הקלטת פעילות</string>
+    <string name="profile_user_points">נקודות המשתמש</string>
+    <string name="profile_my_points">הנקודות שלי</string>
+    <string name="profile_image_desc">תמונת פרופיל</string>
+    <string name="profile_offline_trails_button">📁 מסלולי אופליין</string>
+    <string name="profile_load_failed_retry">טעינת הנתונים נכשלה, נסו שוב מאוחר יותר.</string>
+    <string name="profile_saved_trails_button">☁️ מסלולים שמורים</string>
+    <string name="profile_change_photo">החלפת תמונה</string>
+    <string name="profile_edit_desc">עריכת פרופיל</string>
+
+    <!-- EnhancedProfileScreen.kt -->
+    <string name="profile_highest_m">הגבוה ביותר (מ׳)</string>
+    <string name="profile_longest_km">הארוך ביותר (ק״מ)</string>
+    <string name="profile_best_streak">הרצף הטוב ביותר</string>
+    <string name="profile_day_streak">ימים ברצף</string>
+    <string name="profile_streaks_records">רצפים ושיאים</string>
+    <string name="activity_mtb">אופני הרים</string>
+    <string name="activity_cycling">רכיבה על אופניים</string>
+    <string name="activity_running">ריצה</string>
+    <string name="activity_hiking">הליכה</string>
+    <string name="profile_activity_breakdown">פילוח פעילויות</string>
+    <string name="common_more">עוד אפשרויות</string>
+    <string name="common_view_all">הצגת הכול</string>
+    <string name="profile_achievements">הישגים</string>
+    <string name="profile_m_climbed">מ׳ טיפוס</string>
+    <string name="profile_km_total">ק״מ בסך הכול</string>
+    <string name="profile_overview">סקירה כללית</string>
+    <string name="profile_level">רמה %1$s</string>
+    <string name="profile_trails">מסלולים</string>
+    <string name="profile_following">במעקב</string>
+    <string name="profile_followers">עוקבים</string>
+    <string name="common_edit">עריכה</string>
+
+    <!-- EditProfileScreen.kt -->
+    <string name="edit_profile_save">שמירת שינויים</string>
+    <string name="field_gender_plain">מגדר</string>
+
+    <!-- AttendeesScreen.kt -->
+    <string name="attendees_title">נרשמים לאירוע</string>
+
+    <!-- Plurals and relative time -->
+    <string name="time_ago_just_now">הרגע</string>
+    <plurals name="time_ago_minutes">
+        <item quantity="one">לפני דקה</item>
+        <item quantity="two">לפני שתי דקות</item>
+        <item quantity="other">לפני %d דקות</item>
+    </plurals>
+    <plurals name="time_ago_hours">
+        <item quantity="one">לפני שעה</item>
+        <item quantity="two">לפני שעתיים</item>
+        <item quantity="other">לפני %d שעות</item>
+    </plurals>
+    <plurals name="time_ago_days">
+        <item quantity="one">לפני יום</item>
+        <item quantity="two">לפני יומיים</item>
+        <item quantity="other">לפני %d ימים</item>
+    </plurals>
+    <plurals name="time_ago_months">
+        <item quantity="one">לפני חודש</item>
+        <item quantity="two">לפני חודשיים</item>
+        <item quantity="other">לפני %d חודשים</item>
+    </plurals>
+    <plurals name="saved_trails_count">
+        <item quantity="one">מסלול שמור אחד</item>
+        <item quantity="two">שני מסלולים שמורים</item>
+        <item quantity="other">%d מסלולים שמורים</item>
+    </plurals>
+    <plurals name="minutes_count">
+        <item quantity="one">דקה אחת</item>
+        <item quantity="two">שתי דקות</item>
+        <item quantity="other">%d דקות</item>
+    </plurals>
+    <plurals name="home_activity_count">
+        <item quantity="one">פעילות אחת מוקלטת</item>
+        <item quantity="two">שתי פעילויות מוקלטות</item>
+        <item quantity="other">%d פעילויות מוקלטות</item>
+    </plurals>
+
+    <!-- Units, filters -->
+    <string name="filter_all">הכול</string>
+    <string name="history_empty_filter">אין פעילויות בקטגוריה הזו</string>
+    <string name="unit_km">%1$s ק״מ</string>
+    <string name="unit_m">%1$s מ׳</string>
+    <string name="unit_kmh">%1$s קמ״ש</string>
+    <string name="duration_hours_minutes">%1$s ש׳ %2$s ד׳</string>
+    <string name="duration_minutes">%1$s ד׳</string>
+
+    <!-- CommunityScreen.kt -->
+    <string name="error_slow_connection">החיבור לאינטרנט איטי או לא יציב.</string>
+    <string name="community_new_event">אירוע חדש</string>
+    <string name="community_new_post">פוסט חדש</string>
+    <string name="trail_invalid">מסלול לא תקין.</string>
+    <string name="common_loading">טוען…</string>
+    <string name="post_publishing">מפרסמים את הפוסט שלך…</string>
+    <string name="post_published">הפוסט פורסם!</string>
+    <string name="community_title">קהילה</string>
+    <string name="images_upload_failed">העלאת התמונות נכשלה: %1$s</string>
+    <string name="event_create_failed">יצירת האירוע נכשלה: %1$s</string>
+    <string name="default_user_name">משתמש</string>
+    <string name="post_upload_failed">פרסום הפוסט נכשל: %1$s</string>
+
+    <!-- CreatePostScreen.kt -->
+    <string name="post_discard_confirm">האם לבטל את יצירת הפוסט?</string>
+    <string name="confirm_exit_title">אישור יציאה</string>
+    <string name="common_continue">המשך</string>
+    <string name="common_discard">ביטול</string>
+    <string name="post_publish_button">פרסום הפוסט</string>
+    <string name="moderation_unavailable">בדיקת התוכן אינה זמינה כרגע – נעשה שימוש בסינון המקומי בלבד.</string>
+    <string name="moderation_rephrase">אנא נסחו מחדש – נמצאו מילים לא מתאימות.</string>
+    <string name="moderation_blocked">התוכן פוגעני ונחסם.</string>
+    <string name="post_content_required">יש לכתוב תוכן לפוסט.</string>
+    <string name="error_select_trail">יש לבחור מסלול.</string>
+    <string name="field_photos">תמונות</string>
+    <string name="post_description_label">תיאור הפוסט</string>
+    <string name="select_trail">בחרו מסלול</string>
+    <string name="trails_load_failed_retry">טעינת המסלולים נכשלה, נסו שוב מאוחר יותר.</string>
+    <string name="field_trail">מסלול</string>
+
+    <!-- CreateGroupScreen.kt -->
+    <string name="common_close">סגירה</string>
+    <string name="common_lets_go">בואו נתחיל 🚀</string>
+    <string name="group_saved">הקבוצה נשמרה</string>
+    <string name="group_saved_local">✅ הקבוצה נשמרה במכשיר</string>
+    <string name="group_created_synced">✨ הקבוצה נוצרה ונשמרה!</string>
+    <string name="group_save_button">שמירת הקבוצה</string>
+    <string name="common_saving">שומר…</string>
+    <string name="error_location_unavailable_retry">לא התקבל מיקום — נסו שוב.</string>
+    <string name="error_location_permission">אין הרשאת מיקום.</string>
+    <string name="group_name_required">נא למלא שם קבוצה.</string>
+    <string name="group_private">קבוצה פרטית</string>
+    <string name="group_public">קבוצה ציבורית</string>
+    <string name="group_description_label">תיאור הקבוצה</string>
+    <string name="group_name_label">שם הקבוצה</string>
+    <string name="group_create_title">יצירת קבוצה חדשה</string>
+
+    <!-- FindNearbyGroupsScreen.kt -->
+    <string name="common_grant_permission">מתן הרשאה</string>
+    <string name="groups_location_needed">כדי למצוא קבוצות קרובות נדרשת הרשאת מיקום.</string>
+    <string name="groups_join">הצטרפות</string>
+    <string name="groups_connect_offline">התחברות אופליין (P2P)</string>
+    <string name="groups_distance">מרחק: %1$s</string>
+    <string name="groups_no_location">ללא מיקום</string>
+    <string name="groups_no_location_offline">ללא מיקום (אופליין)</string>
+    <string name="groups_none_local">אין קבוצות מקומיות במכשיר</string>
+    <string name="groups_join_saved_offline">ההצטרפות נשמרה אופליין ותסונכרן כשיהיה אינטרנט.</string>
+    <string name="groups_already_joined">כבר הצטרפתם לקבוצה זו.</string>
+    <string name="groups_joined">ההצטרפות לקבוצה הצליחה!</string>
+    <string name="groups_sign_in_to_join">יש להתחבר כדי להצטרף.</string>
+    <string name="groups_none_in_range">לא נמצאו קבוצות בטווח %1$s ק״מ</string>
+    <string name="groups_waiting_location">ממתינים למיקום…</string>
+    <string name="groups_tab_local">מקומיות (אופליין)</string>
+    <string name="groups_tab_nearby">קרובות</string>
+    <string name="groups_status_location_on">📡 מיקום פעיל</string>
+    <string name="groups_status_locating">📡 מאתרים מיקום…</string>
+    <string name="groups_status_no_permission">🚫 אין הרשאת מיקום</string>
+    <string name="common_refresh">רענון</string>
+    <string name="groups_nearby_title">קבוצות קרובות</string>
+    <string name="error_location_not_received">לא התקבל מיקום.</string>
+    <string name="error_location_failed">לא הצלחנו לקבל מיקום.</string>
+
+    <!-- CreateEventScreen.kt -->
+    <string name="event_discard_confirm">האם לבטל את יצירת האירוע?</string>
+    <string name="event_pick_end_date">בחירת תאריך סיום</string>
+    <string name="event_pick_start_date">בחירת תאריך התחלה</string>
+    <string name="event_create_button">יצירת האירוע</string>
+    <string name="moderation_event_blocked">תוכן האירוע פוגעני ונחסם.</string>
+    <string name="error_end_time_required">יש לבחור שעת סיום.</string>
+    <string name="error_start_time_required">יש לבחור שעת התחלה.</string>
+    <string name="error_end_date_required">יש לבחור תאריך סיום.</string>
+    <string name="error_start_date_required">יש לבחור תאריך התחלה.</string>
+    <string name="error_location_required">יש למלא מיקום.</string>
+    <string name="error_description_required">יש למלא תיאור.</string>
+    <string name="error_title_required">יש למלא כותרת.</string>
+    <string name="event_datetimes_invalid">יש למלא תאריכים ושעות תקינים.</string>
+    <string name="event_start_date_before_end">תאריך ההתחלה חייב להיות לפני תאריך הסיום.</string>
+    <string name="event_start_time_before_end">שעת ההתחלה חייבת להיות מוקדמת משעת הסיום.</string>
+    <string name="event_datetime_invalid">יש למלא תאריך ושעה תקינים.</string>
+    <string name="event_registration_open_q">האם ההרשמה פתוחה?</string>
+    <string name="event_registration_header">הרשמה לאירוע</string>
+    <string name="event_end_time">שעת סיום: %1$s</string>
+    <string name="event_start_time">שעת התחלה: %1$s</string>
+    <string name="event_times_header">שעות</string>
+    <string name="event_end_date">תאריך סיום: %1$s</string>
+    <string name="event_start_date">תאריך התחלה: %1$s</string>
+    <string name="event_dates_header">תאריכים</string>
+    <string name="event_location_label">מיקום האירוע</string>
+    <string name="field_description">תיאור</string>
+    <string name="event_title_label">כותרת האירוע</string>
+
+    <!-- EventDetailsScreen.kt -->
+    <string name="event_pick_end_time">בחירת שעת סיום</string>
+    <string name="event_pick_start_time">בחירת שעת התחלה</string>
+    <string name="event_registration_closed_short">סגורה</string>
+    <string name="event_registration_open">פתוחה</string>
+    <string name="event_field_registration">📌 מצב הרשמה</string>
+    <string name="event_field_trail">🥾 מסלול</string>
+    <string name="event_field_location">📍 מיקום</string>
+    <string name="event_field_times">⏰ שעות</string>
+    <string name="event_field_dates">📅 תאריכים</string>
+    <string name="event_field_description">🗒️ תיאור</string>
+    <string name="event_end_after_start_time">שעת הסיום חייבת להיות אחרי שעת ההתחלה</string>
+    <string name="event_field_end_time">⏰ שעת סיום</string>
+    <string name="event_field_start_time">⏰ שעת התחלה</string>
+    <string name="event_end_after_start_date">תאריך הסיום חייב להיות אחרי תאריך ההתחלה</string>
+    <string name="event_field_end_date">📅 תאריך סיום</string>
+    <string name="event_field_start_date">📅 תאריך התחלה</string>
+    <string name="field_location">מיקום</string>
+    <string name="field_title">כותרת</string>
+    <string name="event_cancel_registration">ביטול ההרשמה</string>
+    <string name="event_cancel_failed">לא ניתן לבטל כרגע, נסו שוב.</string>
+    <string name="event_unregistered">ההרשמה בוטלה</string>
+    <string name="event_already_registered">✅ כבר נרשמתם לאירוע זה</string>
+    <string name="event_registration_closed">ההרשמה נסגרה</string>
+    <string name="event_register_cta">להרשמה</string>
+    <string name="event_register_failed">ההרשמה לא הצליחה, נסו שוב מאוחר יותר.</string>
+    <string name="event_register_success">ההרשמה הצליחה!</string>
+    <string name="event_delete_button">🗑️ מחיקת האירוע</string>
+    <string name="event_deleted">האירוע נמחק</string>
+    <string name="event_edit_button">✏️ עריכת האירוע</string>
+    <string name="event_save_changes">💾 שמירת שינויים</string>
+    <string name="event_updated">האירוע עודכן</string>
+    <string name="event_attendees_title">👥 משתתפים באירוע</string>
+
+    <!-- Plurals (events) -->
+    <plurals name="event_registered_count">
+        <item quantity="one">נרשם אדם אחד עד כה</item>
+        <item quantity="two">נרשמו שני אנשים עד כה</item>
+        <item quantity="other">נרשמו %d אנשים עד כה</item>
+    </plurals>
+
+    <!-- Misc -->
+    <string name="common_choose">בחרו</string>
+
+    <!-- SearchScreen.kt -->
+    <string name="filter_reset">🔄 איפוס סינון</string>
+    <string name="filter_min_elevation">⛰️ עלייה מצטברת מינימלית: %1$s מ׳</string>
+    <string name="filter_group_type">👥 סוג קבוצה:</string>
+    <string name="filter_suitable_for">🏃‍♂️ מתאים ל:</string>
+    <string name="tag_accessible">נגיש</string>
+    <string name="tag_extreme">מקטע קיצוני</string>
+    <string name="tag_viewpoint">תצפית</string>
+    <string name="tag_water">מים</string>
+    <string name="tag_forest">יער</string>
+    <string name="filter_by_tags_header">🎯 סינון לפי תיוגים</string>
+    <string name="filter_by_tags_title">סינון לפי תיוגים</string>
+    <string name="filter_apply">החלת סינון</string>
+    <string name="search_nearby_title">📍 מסלולים באזורך</string>
+    <string name="search_results_title">🔍 תוצאות החיפוש שלך</string>
+    <string name="search_sort_button">⚙️ מיון: %1$s</string>
+    <string name="search_filter_button">🎯 סינון</string>
+    <string name="search_no_results_for">לא נמצאו תוצאות עבור ”%1$s“</string>
+    <string name="trails_loading">טוען מסלולים…</string>
+    <string name="search_history_title">🕘 היסטוריית חיפוש</string>
+    <string name="search_show_my_location">הצגת המיקום הנוכחי</string>
+    <string name="search_show_nearby">הצגת מסלולים קרובים</string>
+    <string name="common_search">חיפוש</string>
+    <string name="search_failed">שגיאה בביצוע החיפוש.</string>
+    <string name="search_no_results">לא נמצאו תוצאות לחיפוש.</string>
+    <string name="search_clear">ניקוי החיפוש</string>
+    <string name="search_place_hint">חיפוש מקום</string>
+
+    <!-- TrailDetailsScreen.kt -->
+    <string name="trail_saved_offline">המסלול נשמר לשימוש אופליין!</string>
+    <string name="trail_play_video">הפעלת סרטון</string>
+    <string name="share_chooser_title">שיתוף באמצעות</string>
+    <string name="share_button">🔗 שיתוף</string>
+    <string name="share_failed">השיתוף נכשל. נסו שוב.</string>
+    <string name="bookmark_add_button">הוספה למועדפים</string>
+    <string name="bookmark_remove_button">הסרה מהמועדפים</string>
+    <string name="bookmark_removed">הוסר מהמועדפים</string>
+    <string name="bookmark_added">נוסף למועדפים</string>
+    <string name="bookmarks_sign_in_to_save">יש להתחבר כדי לשמור במועדפים.</string>
+    <string name="trail_save_button">שמירת המסלול</string>
+    <string name="trail_save_error">שגיאה בשמירת המסלול.</string>
+    <string name="error_not_signed_in">המשתמש אינו מחובר.</string>
+    <string name="trail_already_saved">מסלול זה כבר שמור.</string>
+    <string name="trail_saved">המסלול נשמר בהצלחה</string>
+    <string name="trail_download_button">⬇️ הורדה לאופליין</string>
+    <string name="trail_start_button">🚀 התחלת מסלול</string>
+    <string name="trail_location_unavailable">אין גישה למיקום כרגע.</string>
+    <string name="trail_location_permission_needed">יש לאשר הרשאת מיקום כדי להתחיל מסלול.</string>
+    <string name="common_options">אפשרויות</string>
+    <string name="trail_downloading_offline">מוריד מסלול לאופליין</string>
+    <string name="stat_max_elevation">גובה מקסימלי</string>
+    <string name="stat_elevation_gain">עלייה מצטברת</string>
+    <string name="trail_details_header">פרטי המסלול</string>
+    <string name="stat_difficulty">קושי</string>
+    <string name="stat_time">זמן</string>
+    <string name="stat_length">אורך</string>
+
+    <!-- TrailDiscoveryScreen.kt -->
+    <string name="adjust_filters">נסו לשנות את הסינון</string>
+    <string name="trails_none_found">לא נמצאו מסלולים</string>
+    <string name="discovering_trails">מגלים מסלולים…</string>
+    <string name="difficulty_extreme">אתגרי מאוד</string>
+    <string name="difficulty_hard">קשה</string>
+    <string name="difficulty_moderate">בינוני</string>
+    <string name="difficulty_easy">קל</string>
+    <string name="location_wait_or_check">אנא המתינו או בדקו את הרשאות המיקום</string>
+    <string name="location_getting">מאתרים את המיקום שלכם…</string>
+    <string name="stat_duration">משך</string>
+    <string name="stat_elevation">גובה</string>
+    <string name="stat_distance">מרחק</string>
+    <string name="unknown_location">מיקום לא ידוע</string>
+    <string name="sort_by">מיון לפי</string>
+    <string name="min_elevation_gain">עלייה מצטברת מינימלית: %1$s מ׳</string>
+    <string name="max_distance">מרחק מרבי: %1$s ק״מ</string>
+    <string name="field_difficulty">רמת קושי</string>
+    <string name="type_offroad_chip">🚙 שטח</string>
+    <string name="type_cycling_chip">🚴 רכיבה</string>
+    <string name="type_hiking_chip">🥾 הליכה</string>
+    <string name="common_filters">מסננים</string>
+    <string name="discover_title">גילוי מסלולים</string>
+
+    <!-- OfflineTrailDetailsScreen.kt -->
+    <string name="trail_difficulty_line">📈 קושי: %1$s</string>
+    <string name="trail_rating_line">⭐ דירוג: %1$s/5</string>
+    <string name="trail_time_line">⏱️ זמן: %1$s ד׳</string>
+    <string name="trail_length_line">🛣️ אורך: %1$s מ׳</string>
+
+    <!-- SavedTrailsScreen.kt -->
+    <string name="saved_trails_delete_confirm">למחוק את המסלולים שנבחרו?</string>
+    <string name="confirm_delete_title">אישור מחיקה</string>
+    <string name="common_delete">מחיקה</string>
+    <string name="saved_trails_title">מסלולים שמורים</string>
+
+    <!-- CloudSavedTrailsScreen.kt -->
+    <string name="trail_distance_line">🛣 מרחק: %1$s מ׳</string>
+
+    <!-- MapResultScreen.kt -->
+    <string name="map_go_to_trail">🚀 מעבר למסלול</string>
+    <string name="map_no_trail_selected">לא נבחר מסלול.</string>
+    <string name="common_no">לא</string>
+    <string name="common_yes">כן</string>
+    <string name="map_is_hiking">🥾 מסלול הליכה:</string>
+    <string name="map_points_count">🧭 מספר נקודות:</string>
+
+    <!-- TrailBottomSheet.kt -->
+    <string name="sheet_view_full_details">הצגת כל הפרטים</string>
+    <string name="sheet_start_navigation">התחלת ניווט</string>
+    <string name="sheet_current_conditions">תנאים נוכחיים</string>
+    <string name="sheet_features">מאפיינים</string>
+    <string name="sheet_surface">סוג המשטח</string>
+    <string name="sheet_trail_type">קטגוריית המסלול</string>
+    <string name="sheet_one_way">חד-כיווני</string>
+    <string name="sheet_loop">מעגלי</string>
+    <string name="sheet_route_type">סוג המסלול</string>
+    <string name="sheet_trail_info">מידע על המסלול</string>
+    <string name="sheet_about">אודות</string>
+
+    <!-- Sorting, tags, misc -->
+    <string name="sort_distance">לפי מרחק</string>
+    <string name="sort_length_desc">מהארוך לקצר</string>
+    <string name="sort_length_asc">מהקצר לארוך</string>
+    <string name="sort_difficulty_asc">מהקל אל הקשה</string>
+    <string name="sort_difficulty_desc">מהקשה אל הקל</string>
+    <string name="sort_name">לפי א׳–ב׳</string>
+    <string name="tag_walk">הליכה</string>
+    <string name="tag_bike">אופניים</string>
+    <string name="tag_car">רכב</string>
+    <string name="group_solo">בודד</string>
+    <string name="group_couple">זוג</string>
+    <string name="group_family">משפחה</string>
+    <string name="group_small_kids">ילדים קטנים</string>
+    <string name="common_unavailable">לא זמין</string>
+    <string name="saved_trail_summary">אורך: %1$s, זמן: %2$s</string>
+
+    <!-- Plurals (trails) -->
+    <plurals name="trails_found_count">
+        <item quantity="one">נמצא מסלול אחד</item>
+        <item quantity="two">נמצאו שני מסלולים</item>
+        <item quantity="other">נמצאו %d מסלולים</item>
+    </plurals>
+    <plurals name="delete_trails_count">
+        <item quantity="one">מחיקת מסלול אחד</item>
+        <item quantity="two">מחיקת שני מסלולים</item>
+        <item quantity="other">מחיקת %d מסלולים</item>
+    </plurals>
+
+    <!-- NavigationScreen.kt -->
+    <string name="nav_suitable_for">המסלול מתאים ל:</string>
+    <string name="tag_chip_accessible">♿ נגיש</string>
+    <string name="tag_chip_extreme">⚠️ אקסטרים</string>
+    <string name="tag_chip_viewpoint">🔭 תצפית</string>
+    <string name="tag_chip_water">💧 מים</string>
+    <string name="tag_chip_forest">🌲 יער</string>
+    <string name="nav_more_tags">תיוגים נוספים</string>
+    <string name="nav_difficulty_label">רמת קושי:</string>
+    <string name="nav_rate_trail">דרגו את המסלול:</string>
+    <string name="field_trail_name">שם המסלול</string>
+    <string name="nav_mode_locked">לא ניתן לשנות מצב תנועה בזמן ניווט.</string>
+    <string name="nav_report_desc">דיווח</string>
+    <string name="nav_stop_button">עצירת ניווט</string>
+    <string name="nav_mic_desc">מיקרופון</string>
+    <string name="nav_mic_off">🔇 המיקרופון כובה</string>
+    <string name="nav_mic_on">🎙️ המיקרופון הופעל</string>
+    <string name="nav_group_list_desc">רשימת הקבוצה</string>
+    <string name="nav_group_screen_error">שגיאה בפתיחת מסך חברי הקבוצה.</string>
+    <string name="default_user_numbered">משתמש %1$s</string>
+    <string name="nav_no_group">אין קבוצה – פתחו קבוצה או הצטרפו לקבוצה קודם.</string>
+    <string name="nav_confirm_and_save">אישור ושמירה</string>
+    <string name="trail_saved_success">המסלול נשמר בהצלחה!</string>
+    <string name="nav_no_connection_retry">אין חיבור יציב, נסו שוב מאוחר יותר.</string>
+    <string name="nav_close">❌ סגירה</string>
+    <string name="nav_create_event">📅 יצירת אירוע</string>
+    <string name="nav_create_post">📝 יצירת פוסט</string>
+    <string name="nav_share_with_community">רוצים לשתף אותו עם הקהילה?</string>
+    <string name="nav_route_saved_title">✨ המסלול נשמר בהצלחה!</string>
+    <string name="nav_empty_route">לא ניתן לשמור מסלול ללא תנועה.</string>
+    <string name="nav_stop_confirm_title">לעצור ניווט?</string>
+    <string name="nav_continue">המשך ניווט</string>
+    <string name="nav_stop_and_exit">עצירה ויציאה</string>
+    <string name="nav_stop_confirm_message">בטוחים שברצונכם להפסיק את הניווט?</string>
+    <string name="nav_unstable_connection">החיבור לא יציב, אך נתחיל בניווט.</string>
+    <string name="nav_center_me_desc">מרכוז על המיקום שלי</string>
+    <string name="nav_change_view_desc">שינוי תצוגה</string>
+
+    <!-- TrailNavigationScreen.kt -->
+    <string name="nav_distance_to_start">מרחק לנקודת ההתחלה: %1$s</string>
+    <string name="nav_continue_straight">המשיכו ישר</string>
+    <string name="nav_arrived">הגעתם ליעד!</string>
+    <string name="nav_go_to_start">גשו לנקודת ההתחלה של המסלול</string>
+
+    <!-- TrackingScreen.kt -->
+    <string name="tracking_finish">סיום</string>
+    <string name="tracking_resume">המשך</string>
+    <string name="tracking_pause">השהיה</string>
+    <string name="tracking_start">התחלת הקלטה</string>
+    <string name="stat_calories">קלוריות</string>
+    <string name="stat_avg_pace">קצב ממוצע</string>
+    <string name="stat_speed">מהירות</string>
+    <string name="tracking_paused">מושהה</string>
+    <string name="tracking_recording">מקליט</string>
+
+    <!-- TrackingActivity.kt -->
+    <string name="tracking_location_permission_needed">יש לאשר הרשאת מיקום כדי להקליט פעילות.</string>
+
+    <!-- NavigationUI.kt -->
+
+    <!-- ElevationProfile.kt -->
+    <string name="elev_min">מינימום</string>
+    <string name="elev_max">מקסימום</string>
+    <string name="elev_loss">ירידה</string>
+    <string name="elev_gain">עלייה</string>
+
+    <!-- TrailNavigationActivity.kt -->
+    <string name="trail_data_unavailable">נתוני המסלול אינם זמינים.</string>
+    <string name="nav_location_permission_needed">יש לאשר הרשאת מיקום כדי לנווט במסלול.</string>
+
+    <!-- MainActivity.kt -->
+    <string name="map_style_outdoors">שטח</string>
+    <string name="map_style_light">בהירה</string>
+    <string name="map_style_dark">כהה</string>
+    <string name="map_style_satellite">לוויין</string>
+    <string name="map_style_standard">סטנדרטית</string>
+    <string name="map_style_title">בחירת סגנון מפה</string>
+    <string name="main_record_hike">הקלטת הטיול</string>
+    <string name="menu_desc">תפריט</string>
+    <string name="location_services_off">שירותי המיקום כבויים.</string>
+    <string name="conversion_error">שגיאת המרה: %1$s</string>
+    <string name="map_location_permission_needed">יש לאשר הרשאת מיקום כדי שהמפה תפעל.</string>
+
+    <!-- WalkieTalkieScreen.kt -->
+    <string name="walkie_participants">משתתפים (%1$s)</string>
+    <string name="walkie_stop">עצירה</string>
+    <string name="walkie_start">התחלת תקשורת</string>
+    <string name="walkie_enter_code">יש להזין קוד קבוצה.</string>
+    <string name="walkie_join">מצטרף</string>
+    <string name="walkie_host">מארח</string>
+    <string name="walkie_mode_label">מצב:</string>
+    <string name="walkie_room_label">קוד קבוצה / חדר</string>
+    <string name="walkie_username_label">השם שלכם בקבוצה</string>
+    <string name="walkie_title">ווקי־טוקי</string>
+    <string name="walkie_permissions_needed">נדרשות הרשאות קול וקירבה להפעלה.</string>
+    <string name="error_generic">אירעה שגיאה</string>
+    <string name="walkie_mode_connecting">⚠️ מתחבר…</string>
+    <string name="walkie_mode_local">📡 P2P מקומי (עד %1$s מ׳)</string>
+    <string name="walkie_mode_internet">🌐 מצב אינטרנט (טווח בלתי מוגבל)</string>
+    <string name="walkie_connecting">מתחבר…</string>
+
+    <!-- WalkieTalkieService.kt -->
+    <string name="walkie_channel_name">ערוץ ווקי־טוקי</string>
+    <string name="walkie_service_text">שירות הקול פעיל</string>
+    <string name="walkie_service_title">הווקי־טוקי פועל</string>
+
+    <!-- Walkie / tags -->
+    <string name="tag_offroad">רכבי שטח</string>
+    <string name="walkie_current_speaker">דובר נוכחי: %1$s</string>
+    <string name="walkie_no_speaker">— אין —</string>
+
+    <!-- Utils.kt -->
+    <string name="group_create">יצירת קבוצה</string>
+    <string name="groups_find">חיפוש קבוצות</string>
+    <string name="nav_group_needs_group">כדי להתחיל ניווט קבוצתי, הצטרפו לקבוצה פעילה או צרו אחת חדשה.</string>
+    <string name="nav_mode_group">קבוצתי</string>
+    <string name="nav_mode_solo">אישי</string>
+    <string name="angle_set">אישור</string>
+    <string name="angle_title">מצאו את הזווית שלכם</string>
+    <string name="shared_trail_message">%1$s שיתף איתך מסלול חדש!</string>
+    <string name="shared_trail_title">🚀 מסלול משותף</string>
+    <string name="trail_go_to">מעבר למסלול</string>
+    <string name="unknown_user">משתמש לא ידוע</string>
+    <string name="common_got_it">הבנתי</string>
+    <string name="location_needed_for_navigation">יש להפעיל את שירותי המיקום כדי להתחיל ניווט.</string>
+    <string name="location_off_short">שירותי המיקום כבויים</string>
+    <string name="common_maybe_later">אולי אחר כך</string>
+    <string name="location_turn_on">הפעלת מיקום</string>
+    <string name="location_off_body">הפעילו את שירותי המיקום כדי ליהנות מהמסלולים סביבכם.</string>
+    <string name="location_off_title">נראה ששירותי המיקום כבויים</string>
+    <string name="saved_empty_body">צאו לטייל ושמרו מסלול</string>
+    <string name="saved_empty_title">אין מסלולים שמורים!</string>
+    <string name="nav_turn_left">פנו שמאלה</string>
+    <string name="nav_turn_right">פנו ימינה</string>
+    <string name="nav_turn_around">הסתובבו לאחור</string>
+    <string name="trail_upload_error">שגיאה בשמירת המסלול: %1$s</string>
+    <string name="trail_link_save_error">שגיאה בשמירה בקישור למשתמש: %1$s</string>
+    <string name="trail_in_place">מסלול ב%1$s</string>
+
+    <!-- Card.kt -->
+    <string name="card_points_and_label">%1$s נקודות • %2$s</string>
+    <string name="trail_view_desc">תצוגת מסלול</string>
+    <string name="trail_kind_offroad">מסלול שטח</string>
+    <string name="trail_kind_bike">מסלול אופניים</string>
+    <string name="trail_kind_hiking">מסלול הליכה</string>
+    <string name="post_delete_confirm">בטוחים שברצונכם למחוק את הפוסט? פעולה זו אינה הפיכה.</string>
+    <string name="common_send">שליחה</string>
+    <string name="comment_add_hint">הוסיפו תגובה…</string>
+    <string name="comments_title">תגובות</string>
+    <string name="event_register_button">הרשמה לאירוע</string>
+    <string name="comment_add_label">הוספת תגובה</string>
+    <string name="comment_desc">תגובה</string>
+    <string name="like_desc">לייק</string>
+    <string name="common_read_more">המשך קריאה</string>
+    <string name="common_show_less">הצגת פחות</string>
+    <string name="event_delete">מחיקת האירוע</string>
+    <string name="post_delete">מחיקת הפוסט</string>
+
+    <!-- OutdoorWeatherService.kt -->
+    <string name="w_err_get">לא ניתן לקבל נתוני מזג אוויר</string>
+    <string name="w_rec_dangerous">שמרו על הבטיחות – הימנעו מפעילות בחוץ. 🚨</string>
+    <string name="w_rec_poor">לא אידיאלי, אך אפשרי עם אמצעי זהירות. ⚠️</string>
+    <string name="w_rec_fair">מתאים לפעילות בחוץ עם הכנה מתאימה. 👌</string>
+    <string name="w_rec_good">יום מצוין לצאת החוצה! ✨</string>
+    <string name="w_rec_excellent">תנאים מושלמים לפעילות בחוץ! 🌟</string>
+    <string name="w_warn_dry">🏜️ יבש מאוד – הקפידו לשתות</string>
+    <string name="w_warn_humid">💧 לחות גבוהה מאוד – תחושה לא נוחה</string>
+    <string name="w_warn_thunderstorm">⚡ סופת רעמים – חפשו מחסה מיד</string>
+    <string name="w_warn_light_precip">🌧️ גשם או שלג קלים</string>
+    <string name="w_warn_heavy_precip">☔ משקעים כבדים – ראות ירודה</string>
+    <string name="w_warn_dangerous_wind">🚨 רוחות מסוכנות – הישארו בפנים</string>
+    <string name="w_warn_strong_wind">⚠️ רוחות חזקות – נא לנקוט זהירות</string>
+    <string name="w_warn_windy">💨 תנאי רוח</string>
+    <string name="w_warn_humidity_heat">💦 הלחות גורמת לתחושת חום חזקה יותר</string>
+    <string name="w_warn_wind_chill">🌬️ הרוח גורמת לתחושת קור חזקה יותר</string>
+    <string name="w_warn_dangerous_heat">🚨 חום מסוכן – הימנעו מפעילות בחוץ</string>
+    <string name="w_warn_very_hot">⚠️ חם מאוד – סכנת מכת חום</string>
+    <string name="w_warn_hot">🔥 חם – הקפידו לשתות</string>
+    <string name="w_warn_very_cold">🥶 קר מאוד – התלבשו חם</string>
+    <string name="w_warn_extreme_cold">⚠️ קור קיצוני – סכנת כוויות קור</string>
+    <string name="w_err_fetch">לא ניתן לטעון נתוני מזג אוויר</string>
+
+    <!-- WeatherIndicator.kt -->
+
+    <!-- ReportDialog.kt -->
+    <string name="report_points_awarded">🏅 +5 נקודות!</string>
+    <string name="report_save_failed">שמירת הדיווח נכשלה.</string>
+    <string name="report_location_unavailable">מיקום לא זמין, נסו שוב.</string>
+    <string name="report_select_category">יש לבחור קטגוריה.</string>
+    <string name="report_description_hint">תיאור (לא חובה)</string>
+
+    <!-- ReportDialogsAndSheets.kt -->
+    <string name="poi_short">נק׳ עניין</string>
+    <string name="poi_report_desc">דיווח נקודת עניין</string>
+    <string name="report_hazard_short">סכנה</string>
+    <string name="report_hazard_title">דיווח סכנה</string>
+    <string name="report_selected_toast">נבחר: %1$s</string>
+    <string name="poi_title">נקודת עניין</string>
+    <string name="report_sent_toast">נשלח דיווח: %1$s</string>
+
+    <!-- ReportOptions.kt -->
+    <string name="poi_fuel">נקודת תדלוק</string>
+    <string name="poi_parking">חניון מסודר</string>
+    <string name="poi_shade">אזור צל</string>
+    <string name="poi_camping">מקום למחנאות</string>
+    <string name="poi_viewpoint">תצפית</string>
+    <string name="poi_spring">מעיין</string>
+    <string name="report_flood">שיטפון</string>
+    <string name="report_rollover">סכנת התהפכות</string>
+    <string name="report_blocked_road">דרך חסומה</string>
+    <string name="report_mud">שטח בוצי</string>
+    <string name="report_cliff">צוק מסוכן</string>
+    <string name="report_obstacle">מכשול בדרך</string>
+
+    <!-- ImageUploader.kt -->
+    <string name="image_remove_desc">הסרת תמונה</string>
+    <string name="image_pick_title">בחרו תמונות</string>
+    <string name="image_source_camera">מצלמה</string>
+    <string name="image_source_gallery">גלריה</string>
+    <string name="image_source_title">בחירת מקור התמונה</string>
+    <string name="image_replace_confirm">בטוחים שברצונכם להחליף את תמונת הפרופיל?</string>
+    <string name="not_signed_in_upload">יש להתחבר כדי להעלות תמונות</string>
+
+    <!-- Utils -->
+    <string name="trail_unnamed">מסלול ללא שם</string>
+
+    <!-- ScoutAI.kt -->
+    <string name="scout_q_expert">מסלולים לרמת מומחים</string>
+    <string name="scout_q_hard">מסלולים מאתגרים</string>
+    <string name="scout_q_moderate">מסלולי הליכה ברמת קושי בינונית</string>
+    <string name="scout_q_easy">מסלולים קלים למתחילים</string>
+    <string name="scout_q_offroad">הרפתקאות שטח</string>
+    <string name="scout_q_cycling">שבילי אופניים בקרבת מקום</string>
+    <string name="scout_q_mtb_routes">חפשו מסלולי אופני הרים</string>
+    <string name="scout_q_hiking_trails">הציגו מסלולי הליכה</string>
+    <string name="scout_q_bring">מה כדאי להביא?</string>
+    <string name="scout_q_group">מצאו לי קבוצה להצטרף אליה</string>
+    <string name="scout_q_navigation">איך משתמשים בניווט?</string>
+    <string name="scout_q_safety">טיפים לבטיחות בטיולי הליכה</string>
+    <string name="scout_q_mtb">המליצו על מסלולי אופני הרים</string>
+    <string name="scout_q_easy_hikes">הציגו לי מסלולי הליכה קלים</string>
+    <string name="scout_q_weather">איך מזג האוויר?</string>
+    <string name="scout_sug_nearby">חיפוש מסלולים קרובים</string>
+    <string name="scout_sug_safety">קבלת טיפים לבטיחות</string>
+    <string name="scout_sug_weather">בדיקת מזג אוויר</string>
+    <string name="scout_sug_recommended">הצגת מסלולים מומלצים</string>
+    <string name="scout_unavailable">Scout אינו זמין כרגע. נסו שוב. 📱</string>
+    <string name="scout_unreadable">Scout לא הצליח לקרוא את ההודעה. נסו לנסח מחדש. ✍️</string>
+    <string name="scout_limit_reached">הגעתם למגבלת השימוש היומית ב-Scout. נסו שוב מחר. ⏳</string>
+    <string name="scout_sign_in">יש להתחבר כדי לשוחח עם Scout. 🔐</string>
+    <string name="scout_ask_something">שאלו אותי משהו על מסלולים! 🥾</string>
+
+    <!-- VoiceScoutHelper.kt -->
+
+    <!-- DrawerMenuItem.kt -->
+    <string name="menu_map">מפה</string>
+
+    <!-- ProfileActivity.kt -->
+    <string name="profile_not_found">הפרופיל לא נמצא.</string>
+
+    <!-- ScoutChatScreen.kt -->
+    <string name="scout_input_hint">שאלו את Scout כל דבר…</string>
+    <string name="scout_quick_questions">שאלות מהירות:</string>
+    <string name="scout_clear_chat">ניקוי השיחה</string>
+    <string name="scout_online">מחובר</string>
+    <string name="scout_oops">אופס! משהו השתבש. נסו שוב. 😅</string>
+    <string name="scout_greeting">היי! 👋 אני Scout, השותף שלכם לדרך! אני יכול לעזור לכם למצוא מסלולים מדהימים, לבדוק מזג אוויר, לתת טיפים לבטיחות ולהסביר איך להשתמש באפליקציה. איזו הרפתקה אתם מתכננים היום? 🏔️</string>
+
+    <!-- TrailNavigationScreen.kt -->
+    <string name="nav_in_distance">בעוד %1$s %2$s</string>
+
+    <!-- AnimatedBottomNav.kt -->
+
+    <!-- GroupConnectionManager.kt -->
+    <string name="walkie_mic_busy">המיקרופון תפוס על ידי %1$s</string>
+    <string name="walkie_another_user">משתמש אחר</string>
+
+    <!-- HybridGroupConnectionManager.kt -->
+    <string name="walkie_no_connection_available">אין חיבור זמין</string>
+    <string name="walkie_connection_lost">החיבור אבד. בדקו את הגדרות הרשת.</string>
+
+    <!-- TransportCoordinator.kt -->
+    <string name="walkie_mode_text">מצב: %1$s</string>
+    <string name="walkie_range_none">אין חיבור</string>
+    <string name="walkie_range_local">טווח %1$s מ׳ (P2P מקומי)</string>
+    <string name="walkie_range_unlimited">טווח בלתי מוגבל (אינטרנט)</string>
+
+    <!-- Home / features -->
+    <string name="home_welcome_generic">ברוכים הבאים</string>
+    <string name="feat_waterfall">מפל</string>
+    <string name="feat_technical">טכני</string>
+    <string name="feat_4wd_only">רכב 4X4 בלבד</string>
+
+    <!-- Share / groups -->
+    <string name="share_trail_message">שיתפתי איתך את המסלול שלי באפליקציית PATHY! 🌍\n%1$s</string>
+    <string name="unnamed_user">ללא שם</string>
+
+    <!-- Plurals (reviews) -->
+    <plurals name="reviews_count">
+        <item quantity="one">ביקורת אחת</item>
+        <item quantity="two">שתי ביקורות</item>
+        <item quantity="other">%d ביקורות</item>
+    </plurals>
+
+    <!-- Units -->
+    <string name="unit_km_short">ק״מ</string>
+    <string name="unit_min_short">ד׳</string>
+    <string name="unit_min_per_km">ד׳/ק״מ</string>
+    <string name="unit_h">%1$s ש׳</string>
+
+    <!-- recording -->
+    <string name="rec_channel_name">הקלטת טיול</string>
+    <string name="rec_channel_desc">מוצג בזמן הקלטת טיול כדי שהמעקב ימשיך גם כשהמסך כבוי.</string>
+    <string name="rec_notification_title">מקליט את הטיול שלך</string>
+    <string name="rec_notification_paused">ההקלטה מושהית</string>
+    <string name="rec_notification_auto_paused">מושהה – הפסקת לנוע</string>
+    <string name="rec_notification_text">%1$s · %2$s</string>
+    <string name="rec_action_pause">השהה</string>
+    <string name="rec_action_resume">המשך</string>
+    <string name="rec_action_finish">סיום</string>
+    <string name="rec_auto_paused_label">הושהה אוטומטית</string>
+    <string name="rec_saved_on_phone">הטיול נשמר בטלפון ויועלה כשיהיה חיבור לאינטרנט.</string>
+    <string name="rec_sign_in_hint">לא התחברת. הטיול יישאר בטלפון עד שתתחבר.</string>
+
+    <!-- navigation -->
+    <string name="nav_bear_left">פנה מעט שמאלה</string>
+    <string name="nav_bear_right">פנה מעט ימינה</string>
+    <string name="nav_sharp_left">פנה שמאלה בחדות</string>
+    <string name="nav_sharp_right">פנה ימינה בחדות</string>
+    <string name="nav_follow_to_end">המשך בשביל – %1$s עד הסוף</string>
+    <string name="nav_off_route_title">יצאת מהשביל</string>
+    <string name="nav_off_route_detail">השביל במרחק %1$s – %2$s</string>
+    <string name="nav_back_on_route">חזרת לשביל</string>
+    <string name="nav_joined">אתה על השביל</string>
+    <string name="nav_remaining">נותרו %1$s</string>
+    <string name="nav_locating">מאתר את מיקומך…</string>
+    <string name="nav_record_start">התחל הקלטה</string>
+    <string name="nav_record_stop">עצור הקלטה</string>
+
+    <!-- activity -->
+    <string name="activity_export_gpx">שיתוף כ-GPX</string>
+    <string name="activity_export_failed">לא ניתן ליצור קובץ GPX.</string>
+    <string name="activity_share_title">שיתוף המסלול</string>
+    <string name="activity_delete">מחיקה</string>
+    <string name="activity_delete_title">למחוק את הפעילות?</string>
+    <string name="activity_delete_message">ההקלטה והמסלול שלה יימחקו. אי אפשר לבטל.</string>
+    <string name="activity_deleted">הפעילות נמחקה</string>
+    <string name="activity_delete_failed">לא ניתן למחוק את הפעילות.</string>
+    <string name="activity_pending_upload">ממתין להעלאה</string>
+    <string name="activity_no_route">לא נשמר מסלול לפעילות הזו.</string>
+    <string name="activity_stat_avg_speed">מהירות ממוצעת</string>
+    <string name="activity_stat_max_speed">מהירות מרבית</string>
+    <string name="activity_stat_calories">קלוריות</string>
+    <string name="activity_stat_elevation_chart">גובה</string>
+    <string name="unit_kcal">%1$s קק״ל</string>
+
+    <!-- offline -->
+    <string name="trail_offline_failed">לא ניתן להוריד את המפה. בדוק את החיבור ונסה שוב.</string>
+    <string name="trail_offline_hint">המפה סביב השביל הזה שמורה בטלפון שלך.</string>
+
+    <!-- gpx -->
+    <string name="gpx_import">ייבוא מסלול GPX</string>
+    <string name="gpx_import_failed">לא ניתן לקרוא את הקובץ כמסלול GPX.</string>
+    <string name="gpx_import_too_short">המסלול קצר מדי לניווט.</string>
+
+    <!-- sort -->
+    <string name="sort_recommended">מומלצים</string>
+
+    <!-- discovery -->
+    <string name="trail_chip_marked">שביל מסומן</string>
+    <string name="trail_net_international">מסלול בינלאומי</string>
+    <string name="trail_net_national">מסלול ארצי</string>
+    <string name="trail_net_regional">מסלול אזורי</string>
+    <string name="trail_net_local">מסלול מקומי</string>
+    <string name="trail_chip_seasonal">עונתי</string>
+    <string name="trail_chip_hard">קשה לעקוב</string>
+    <string name="trail_chip_check">דורש בדיקה</string>
+    <string name="trail_chip_outdated">ייתכן שהמידע ישן</string>
+    <string name="trail_updated">עודכן %1$s</string>
+    <string name="trail_verified">נבדק בשטח %1$s</string>
+    <string name="trail_marked_red">שביל מסומן באדום</string>
+    <string name="trail_marked_blue">שביל מסומן בכחול</string>
+    <string name="trail_marked_green">שביל מסומן בירוק</string>
+    <string name="trail_marked_black">שביל מסומן בשחור</string>
+    <string name="trail_marked_orange">שביל מסומן בכתום</string>
+    <string name="trail_marked_yellow">שביל מסומן בצהוב</string>
+    <string name="trail_marked_white">שביל מסומן בלבן</string>
+    <string name="trail_marked_purple">שביל מסומן בסגול</string>
+    <string name="trail_marked_brown">שביל מסומן בחום</string>
+    <string name="trail_marked_pink">שביל מסומן בוורוד</string>
+    <string name="trail_marked_grey">שביל מסומן באפור</string>
+    <string name="discover_search_hint">חפש כל מקום בעולם</string>
+    <string name="discover_search">חיפוש</string>
+    <string name="discover_near_me">לידי</string>
+    <string name="discover_exploring">חוקר: %1$s</string>
+    <string name="discover_no_place">לא נמצא מקום. נסה איות אחר.</string>
+    <string name="discover_widened">אין שבילים קרובים, לכן הוחב החיפוש ל-%1$s ק״מ.</string>
+    <string name="discover_hidden_closed">הוסתרו כי סגורים או פרטיים: %1$s</string>
+    <string name="discover_load_failed">לא ניתן לטעון שבילים. בדוק את החיבור.</string>
+    <string name="discover_no_trails_here">לא נמצאו שבילים כאן. נסה מקום אחר או עוד סוגי שבילים.</string>
+
+    <!-- discovery -->
+    <string name="discover_location_failed">לא הצלחנו לאתר את מיקומך. חפש מקום למעלה או נסה שוב.</string>
+
+    <!-- conditions -->
+    <string name="cond_title">מצב השביל</string>
+    <string name="cond_no_reports">אין דיווחים עדכניים ממטיילים.</string>
+    <string name="cond_open">דווח שפתוח וקל לעקוב %1$s</string>
+    <string name="cond_muddy">דווח שבוצי או קשה לעבור %1$s</string>
+    <string name="cond_blocked">דווח שחסום %1$s</string>
+    <string name="cond_closed">דווח שסגור %1$s</string>
+    <string name="cond_not_found">דווח שלא נמצא או לא מסומן %1$s</string>
+    <string name="cond_agree">%1$s מתוך %2$s דיווחים עדכניים מסכימים</string>
+    <string name="cond_report_button">דווח על מצב השביל</string>
+    <string name="cond_report_title">איך השביל היום?</string>
+    <string name="cond_opt_open">פתוח וקל לעקוב</string>
+    <string name="cond_opt_muddy">בוצי או קשה לעבור</string>
+    <string name="cond_opt_blocked">חסום (עץ שנפל, שיטפון, מפולת)</string>
+    <string name="cond_opt_closed">סגור (שער, שלט או רשות)</string>
+    <string name="cond_opt_missing">השביל לא נמצא או לא מסומן</string>
+    <string name="cond_note_hint">הוסף הערה (לא חובה)</string>
+    <string name="cond_send">שלח דיווח</string>
+    <string name="cond_thanks">תודה! הדיווח שלך עוזר למטיילים אחרים.</string>
+    <string name="cond_failed">לא ניתן לשלוח את הדיווח. נסה שוב.</string>
+    <string name="cond_sign_in">התחבר כדי לדווח</string>
+    <string name="cond_disclaimer">המידע מגיע מ-OpenStreetMap וממטיילים אחרים. בדוק תמיד שלטים ותנאים מקומיים.</string>
+
+    <!-- posts -->
+    <string name="post_as">מפרסם בשם %1$s</string>
+    <string name="post_trail_choose">בחר שביל</string>
+    <string name="post_trail_change">שנה</string>
+    <string name="post_text_hint">שתף את החוויה שלך…</string>
+    <string name="post_add_photo">הוסף תמונה</string>
+    <string name="post_remove_photo">הסר תמונה %1$s</string>
+    <string name="post_need_trail">בחר שביל כדי לפרסם</string>
+    <string name="post_need_text">כתוב משהו כדי לפרסם</string>
+    <string name="post_checking">בודק את הפוסט…</string>
+    <string name="post_counter">%1$s/%2$s</string>
+    <string name="post_comments_count">תגובות (%1$s)</string>
+    <string name="post_open_trail">פתח שביל: %1$s</string>
+    <string name="post_photo_of">תמונה %1$s מתוך %2$s</string>
+    <string name="post_like_count">לייק, %1$s לייקים</string>
+    <string name="post_comment_count_desc">תגובות, %1$s</string>
+    <string name="post_write_comment">כתוב תגובה</string>
+    <string name="post_send_comment">שלח תגובה</string>
+    <string name="post_no_comments">אין תגובות עדיין. היה הראשון.</string>
+    <string name="post_photos_added">%1$s מתוך %2$s תמונות</string>
+
+    <!-- discovery -->
+    <string name="discover_slow">שרתי המפות עמוסים. ממשיכים לחפש…</string>
+
+    <!-- discovery -->
+    <string name="trail_away">במרחק %1$s</string>
+</resources>

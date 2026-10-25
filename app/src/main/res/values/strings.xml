@@ -1,0 +1,1011 @@
+<resources>
+    <string name="settings">Settings</string>
+    <string name="select_language">Select language</string>
+    <string name="sign_out">Sign out</string>
+    <string name="back">Back</string>
+    <string name="settings_location_services">Location services</string>
+    <string name="common_enabled">Enabled</string>
+    <string name="common_disabled">Disabled</string>
+
+
+    <string name="app_name">PATHY</string>
+    <string name="home_welcome">Welcome, %1$s</string>
+    <string name="home_intro">Your next adventure starts here</string>
+    <string name="home_totals">All recorded activities</string>
+    <string name="home_sign_in">Sign in to see your activity statistics</string>
+    <string name="load_failed">Unable to load data. Please try again.</string>
+    <string name="retry">Try again</string>
+    <string name="home_distance">%1$.1f km</string>
+    <string name="home_empty">Your first recorded activity will appear here.</string>
+    <string name="home_track">Record an activity</string>
+    <string name="home_map">Open map</string>
+    <string name="home_discover">Discover nearby trails</string>
+    <string name="home_history">Activity history</string>
+    <string name="home_scout">Ask Scout</string>
+    <string name="home_profile">Profile</string>
+    <string name="weather_title">Weather near you</string>
+    <string name="weather_action">Show local weather</string>
+    <string name="weather_unavailable">Weather unavailable. Check sign-in, location and connection.</string>
+    <string name="weather_value">%1$.0f°C · wind %2$.0f km/h</string>
+    <string name="language_system">Device language</string>
+
+    <!-- AuthViewModel.kt -->
+    <string name="auth_reset_failed">Couldn\'t send the reset email.</string>
+    <string name="auth_enter_email_for_reset">Enter your email to get a password reset link.</string>
+    <string name="auth_save_user_failed">Couldn\'t save your profile: %1$s</string>
+    <string name="auth_sign_up_failed">Sign-up failed.</string>
+    <string name="auth_photo_upload_failed">Couldn\'t upload the photo: %1$s</string>
+    <string name="auth_google_failed">Google sign-in failed.</string>
+    <string name="auth_user_missing">Couldn\'t load your account after sign-in. Please try again.</string>
+    <string name="auth_sign_in_failed">Sign-in failed. Try again or check your details.</string>
+    <string name="error_network_check">Network error. Check your connection.</string>
+    <string name="auth_too_many_requests">Too many attempts. Please try again later.</string>
+    <string name="auth_user_disabled">This account has been disabled. Please contact support.</string>
+    <string name="auth_invalid_credentials">The email or password is incorrect.</string>
+    <string name="auth_email_unverified_link_sent">Your email isn\'t verified yet. We sent you a verification link.</string>
+    <string name="auth_fill_all_fields">Please fill in all fields.</string>
+
+    <!-- OnboardingScreen.kt -->
+    <string name="onboarding_get_started">Get started</string>
+    <string name="common_next">Next</string>
+    <string name="common_skip">Skip</string>
+    <string name="onboarding_progress_body">Record your routes, earn achievements and share your adventures with the community.</string>
+    <string name="onboarding_progress_title">Track your progress</string>
+    <string name="onboarding_friends_body">See your group on the map in real time and talk to each other with the built-in walkie-talkie.</string>
+    <string name="onboarding_friends_title">Adventure with friends</string>
+    <string name="onboarding_navigate_body">Turn-by-turn guidance, offline maps and elevation profiles keep you on course.</string>
+    <string name="onboarding_navigate_title">Navigate with confidence</string>
+    <string name="onboarding_discover_body">Explore millions of hiking, mountain-bike, cycling and off-road trails from around the world.</string>
+    <string name="onboarding_discover_title">Discover amazing trails</string>
+
+    <!-- SettingsScreen.kt -->
+    <string name="sign_out_confirm_message">Are you sure you want to sign out of your account?</string>
+    <string name="sign_out_confirm_title">Sign out?</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="settings_location_manual">Turn on location services in your device settings.</string>
+
+    <!-- SignInScreen.kt -->
+    <string name="common_just_a_moment">Just a moment…</string>
+    <string name="signin_new_user">Create a new account</string>
+    <string name="signin_with_google">Sign in with Google</string>
+    <string name="google_logo_desc">Google logo</string>
+    <string name="signin_title">Sign in</string>
+    <string name="signin_general_error">Sign-in error: %1$s</string>
+    <string name="signin_email_unverified">Your email isn\'t verified yet. Please verify it first.</string>
+    <string name="profile_load_error">Couldn\'t load your profile: %1$s</string>
+    <string name="signin_success">Signed in</string>
+    <string name="signin_invalid_identifier">Enter a valid email address or phone number.</string>
+    <string name="signin_forgot_password">Forgot password?</string>
+    <string name="reset_email_sent">Password reset email sent.</string>
+    <string name="signin_remember_me">Remember me</string>
+    <string name="field_password">Password</string>
+    <string name="field_email">Email</string>
+    <string name="error_generic_with_message">Error: %1$s</string>
+    <string name="error_network_retry">Network error. Please try again.</string>
+    <string name="signin_wrong_password">Incorrect password.</string>
+    <string name="signin_no_user">No account found with this email.</string>
+    <string name="profile_create_error">Couldn\'t create your profile: %1$s</string>
+    <string name="signin_google_success">Signed in with Google</string>
+
+    <!-- SignUpScreen.kt -->
+    <string name="common_ok">OK</string>
+    <string name="signup_verify_then_sign_in">Verify your email, then sign in.</string>
+    <string name="signup_verification_message">We sent a verification link to your email. Please verify before continuing.</string>
+    <string name="signup_verification_title">Verification required</string>
+    <string name="signup_create_account">Create account</string>
+    <string name="signup_email_taken">An account with this email already exists.</string>
+    <string name="signup_passwords_mismatch">Passwords don\'t match.</string>
+    <string name="error_invalid_email">Enter a valid email address.</string>
+    <string name="field_gender">Gender:</string>
+    <string name="field_phone_optional">Phone (optional)</string>
+    <string name="field_confirm_password">Confirm password</string>
+    <string name="field_full_name">Full name</string>
+    <string name="signup_title">Sign up</string>
+
+    <!-- Gender / settings -->
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="settings_version_label">Version %1$s</string>
+
+    <!-- EmergencySOSScreen.kt -->
+    <string name="sos_add_contact">Add contact</string>
+    <string name="sos_no_contacts_body">Add at least one contact for emergencies.</string>
+    <string name="sos_no_contacts_title">No emergency contacts</string>
+    <string name="common_call">Call</string>
+    <string name="sos_confirm_send">Send SOS</string>
+    <string name="sos_confirm_message">This sends an emergency alert with your current location to all your emergency contacts.</string>
+    <string name="sos_confirm_title">Trigger emergency SOS?</string>
+    <string name="common_add">Add</string>
+    <string name="sos_contacts_title">Emergency contacts</string>
+    <string name="sos_share_location">Share location</string>
+    <string name="sos_call_emergency">Call emergency services</string>
+    <string name="sos_quick_actions">Quick actions</string>
+    <string name="sos_info_line_sms">• Is sent by SMS, so it works without internet</string>
+    <string name="sos_info_line_call">• Lets you call emergency services with one tap\n</string>
+    <string name="sos_info_line_link">• Includes a Google Maps link to your position\n</string>
+    <string name="sos_info_line_contacts">• Sends your location to your emergency contacts\n</string>
+    <string name="sos_info_title">What happens when you trigger SOS?</string>
+    <string name="sos_tap_hint">Tap to send an emergency alert</string>
+    <string name="sos_hero_title">EMERGENCY SOS</string>
+    <string name="sos_title">Emergency SOS</string>
+
+    <!-- EmergencySOSActivity.kt -->
+    <string name="common_save">Save</string>
+    <string name="error_phone_invalid">Invalid phone number.</string>
+    <string name="error_name_required">Enter a name.</string>
+    <string name="field_phone">Phone number</string>
+    <string name="field_name">Name</string>
+    <string name="sos_contact_dialog_title">Emergency contact</string>
+    <string name="sos_share_failed">Couldn\'t share: %1$s</string>
+    <string name="sos_location_shared">Your location was sent to your contacts.</string>
+    <string name="sos_send_failed">Couldn\'t send: %1$s</string>
+    <string name="sos_sent">Emergency message sent.</string>
+    <string name="sos_add_contact_first">Add at least one emergency contact.</string>
+    <string name="sos_sms_permission_needed">SMS permission is needed to send emergency messages.</string>
+
+    <!-- EmergencySOS.kt -->
+    <string name="sos_msg_sharing_location">My current location: %1$s</string>
+    <string name="sos_location_unavailable">Location unavailable</string>
+    <string name="sos_msg_location_link">My location when I sent this SOS: %1$s</string>
+    <string name="sos_msg_time">\nTime: %1$s</string>
+    <string name="sos_msg_footer">\n\nSent from the PATHY app</string>
+    <string name="sos_msg_maps">\n\nGoogle Maps:</string>
+    <string name="sos_msg_accuracy">\nAccuracy: %1$s m</string>
+    <string name="sos_msg_longitude">\nLongitude: %1$s</string>
+    <string name="sos_msg_latitude">\nLatitude: %1$s</string>
+    <string name="sos_msg_location_header">\n\nLocation:</string>
+    <string name="sos_default_message">EMERGENCY! I need help. My location:</string>
+
+    <!-- BookmarksScreen.kt -->
+    <string name="bookmarks_empty_body">Start saving your favorite trails!</string>
+    <string name="bookmarks_empty_title">No bookmarks yet</string>
+    <string name="bookmarks_remove">Remove bookmark</string>
+    <string name="bookmark_saved_ago">Saved %1$s</string>
+    <string name="bookmarks_create_list">Create list</string>
+    <string name="bookmarks_toggle_view">Toggle view</string>
+    <string name="bookmarks_title">Bookmarks</string>
+
+    <!-- BookmarksActivity.kt -->
+    <string name="bookmarks_remove_failed">Couldn\'t remove it: %1$s</string>
+    <string name="trail_details_unavailable">No trail details to show.</string>
+    <string name="bookmarks_load_failed">Couldn\'t load your bookmarks: %1$s</string>
+    <string name="bookmarks_sign_in_required">Sign in to see your bookmarks.</string>
+
+    <!-- ActivityHistoryScreen.kt -->
+    <string name="history_try_other_filter">Try a different filter</string>
+    <string name="history_empty_body">Start tracking your first adventure!</string>
+    <string name="history_empty_title">No activities yet</string>
+    <string name="history_loading">Loading activities…</string>
+    <string name="history_filter">Filter</string>
+
+    <!-- ProfileScreen.kt -->
+    <string name="trail_load_failed">Couldn\'t load the trail.</string>
+    <string name="trail_not_found">Trail not found.</string>
+    <string name="trail_load_error">Error loading the trail.</string>
+    <string name="profile_user_details">User details</string>
+    <string name="profile_sos_button">🆘 Emergency (SOS)</string>
+    <string name="profile_bookmarks_button">🔖 Bookmarks</string>
+    <string name="profile_activity_history_button">📜 Activity history</string>
+    <string name="profile_record_activity_button">🏃 Record activity</string>
+    <string name="profile_user_points">User points</string>
+    <string name="profile_my_points">My points</string>
+    <string name="profile_image_desc">Profile picture</string>
+    <string name="profile_offline_trails_button">📁 Offline trails</string>
+    <string name="profile_load_failed_retry">Couldn\'t load the data. Try again later.</string>
+    <string name="profile_saved_trails_button">☁️ Saved trails</string>
+    <string name="profile_change_photo">Change photo</string>
+    <string name="profile_edit_desc">Edit profile</string>
+
+    <!-- EnhancedProfileScreen.kt -->
+    <string name="profile_highest_m">Highest (m)</string>
+    <string name="profile_longest_km">Longest (km)</string>
+    <string name="profile_best_streak">Best streak</string>
+    <string name="profile_day_streak">Day streak</string>
+    <string name="profile_streaks_records">Streaks &amp; records</string>
+    <string name="activity_mtb">Mountain biking</string>
+    <string name="activity_cycling">Cycling</string>
+    <string name="activity_running">Running</string>
+    <string name="activity_hiking">Hiking</string>
+    <string name="profile_activity_breakdown">Activity breakdown</string>
+    <string name="common_more">More options</string>
+    <string name="common_view_all">View all</string>
+    <string name="profile_achievements">Achievements</string>
+    <string name="profile_m_climbed">m climbed</string>
+    <string name="profile_km_total">km total</string>
+    <string name="profile_overview">Overview</string>
+    <string name="profile_level">Level %1$s</string>
+    <string name="profile_trails">Trails</string>
+    <string name="profile_following">Following</string>
+    <string name="profile_followers">Followers</string>
+    <string name="common_edit">Edit</string>
+
+    <!-- EditProfileScreen.kt -->
+    <string name="edit_profile_save">Save changes</string>
+    <string name="field_gender_plain">Gender</string>
+
+    <!-- AttendeesScreen.kt -->
+    <string name="attendees_title">Event attendees</string>
+
+    <!-- Plurals and relative time -->
+    <string name="time_ago_just_now">Just now</string>
+    <plurals name="time_ago_minutes">
+        <item quantity="one">%d minute ago</item>
+        <item quantity="other">%d minutes ago</item>
+    </plurals>
+    <plurals name="time_ago_hours">
+        <item quantity="one">%d hour ago</item>
+        <item quantity="other">%d hours ago</item>
+    </plurals>
+    <plurals name="time_ago_days">
+        <item quantity="one">%d day ago</item>
+        <item quantity="other">%d days ago</item>
+    </plurals>
+    <plurals name="time_ago_months">
+        <item quantity="one">%d month ago</item>
+        <item quantity="other">%d months ago</item>
+    </plurals>
+    <plurals name="saved_trails_count">
+        <item quantity="one">%d saved trail</item>
+        <item quantity="other">%d saved trails</item>
+    </plurals>
+    <plurals name="minutes_count">
+        <item quantity="one">%d minute</item>
+        <item quantity="other">%d minutes</item>
+    </plurals>
+    <plurals name="home_activity_count">
+        <item quantity="one">%d recorded activity</item>
+        <item quantity="other">%d recorded activities</item>
+    </plurals>
+
+    <!-- Units, filters -->
+    <string name="filter_all">All</string>
+    <string name="history_empty_filter">No activities in this category</string>
+    <string name="unit_km">%1$s km</string>
+    <string name="unit_m">%1$s m</string>
+    <string name="unit_kmh">%1$s km/h</string>
+    <string name="duration_hours_minutes">%1$sh %2$sm</string>
+    <string name="duration_minutes">%1$s min</string>
+
+    <!-- CommunityScreen.kt -->
+    <string name="error_slow_connection">Your internet connection is slow or unstable.</string>
+    <string name="community_new_event">New event</string>
+    <string name="community_new_post">New post</string>
+    <string name="trail_invalid">Invalid trail.</string>
+    <string name="common_loading">Loading…</string>
+    <string name="post_publishing">Publishing your post…</string>
+    <string name="post_published">Post published!</string>
+    <string name="community_title">Community</string>
+    <string name="images_upload_failed">Couldn\'t upload the photos: %1$s</string>
+    <string name="event_create_failed">Couldn\'t create the event: %1$s</string>
+    <string name="default_user_name">User</string>
+    <string name="post_upload_failed">Couldn\'t publish the post: %1$s</string>
+
+    <!-- CreatePostScreen.kt -->
+    <string name="post_discard_confirm">Discard this post?</string>
+    <string name="confirm_exit_title">Confirm exit</string>
+    <string name="common_continue">Continue</string>
+    <string name="common_discard">Discard</string>
+    <string name="post_publish_button">Publish post</string>
+    <string name="moderation_unavailable">Content check is unavailable right now – only the local filter is used.</string>
+    <string name="moderation_rephrase">Please rephrase – some words aren\'t appropriate.</string>
+    <string name="moderation_blocked">This content is offensive and was blocked.</string>
+    <string name="post_content_required">Write something for your post.</string>
+    <string name="error_select_trail">Select a trail.</string>
+    <string name="field_photos">Photos</string>
+    <string name="post_description_label">Post description</string>
+    <string name="select_trail">Select a trail</string>
+    <string name="trails_load_failed_retry">Couldn\'t load the trails. Try again later.</string>
+    <string name="field_trail">Trail</string>
+
+    <!-- CreateGroupScreen.kt -->
+    <string name="common_close">Close</string>
+    <string name="common_lets_go">Let\'s go 🚀</string>
+    <string name="group_saved">The group was saved</string>
+    <string name="group_saved_local">✅ The group was saved on this device</string>
+    <string name="group_created_synced">✨ The group was created and saved!</string>
+    <string name="group_save_button">Save group</string>
+    <string name="common_saving">Saving…</string>
+    <string name="error_location_unavailable_retry">Couldn\'t get your location — try again.</string>
+    <string name="error_location_permission">Location permission is not granted.</string>
+    <string name="group_name_required">Enter a group name.</string>
+    <string name="group_private">Private group</string>
+    <string name="group_public">Public group</string>
+    <string name="group_description_label">Group description</string>
+    <string name="group_name_label">Group name</string>
+    <string name="group_create_title">Create a new group</string>
+
+    <!-- FindNearbyGroupsScreen.kt -->
+    <string name="common_grant_permission">Grant permission</string>
+    <string name="groups_location_needed">Location permission is needed to find nearby groups.</string>
+    <string name="groups_join">Join</string>
+    <string name="groups_connect_offline">Connect offline (P2P)</string>
+    <string name="groups_distance">Distance: %1$s</string>
+    <string name="groups_no_location">No location</string>
+    <string name="groups_no_location_offline">No location (offline)</string>
+    <string name="groups_none_local">No local groups on this device</string>
+    <string name="groups_join_saved_offline">Join saved offline and will sync when you\'re online.</string>
+    <string name="groups_already_joined">You\'ve already joined this group.</string>
+    <string name="groups_joined">You\'ve joined the group!</string>
+    <string name="groups_sign_in_to_join">Sign in to join.</string>
+    <string name="groups_none_in_range">No groups found within %1$s km</string>
+    <string name="groups_waiting_location">Waiting for location…</string>
+    <string name="groups_tab_local">On this device (offline)</string>
+    <string name="groups_tab_nearby">Nearby</string>
+    <string name="groups_status_location_on">📡 Location active</string>
+    <string name="groups_status_locating">📡 Finding your location…</string>
+    <string name="groups_status_no_permission">🚫 Location permission is off</string>
+    <string name="common_refresh">Refresh</string>
+    <string name="groups_nearby_title">Nearby groups</string>
+    <string name="error_location_not_received">No location received.</string>
+    <string name="error_location_failed">Couldn\'t get your location.</string>
+
+    <!-- CreateEventScreen.kt -->
+    <string name="event_discard_confirm">Discard this event?</string>
+    <string name="event_pick_end_date">Choose end date</string>
+    <string name="event_pick_start_date">Choose start date</string>
+    <string name="event_create_button">Create event</string>
+    <string name="moderation_event_blocked">The event content is offensive and was blocked.</string>
+    <string name="error_end_time_required">Choose an end time.</string>
+    <string name="error_start_time_required">Choose a start time.</string>
+    <string name="error_end_date_required">Choose an end date.</string>
+    <string name="error_start_date_required">Choose a start date.</string>
+    <string name="error_location_required">Enter a location.</string>
+    <string name="error_description_required">Enter a description.</string>
+    <string name="error_title_required">Enter a title.</string>
+    <string name="event_datetimes_invalid">Enter valid dates and times.</string>
+    <string name="event_start_date_before_end">Start date must be before the end date.</string>
+    <string name="event_start_time_before_end">Start time must be earlier than end time.</string>
+    <string name="event_datetime_invalid">Enter a valid date and time.</string>
+    <string name="event_registration_open_q">Is registration open?</string>
+    <string name="event_registration_header">Event registration</string>
+    <string name="event_end_time">End time: %1$s</string>
+    <string name="event_start_time">Start time: %1$s</string>
+    <string name="event_times_header">Times</string>
+    <string name="event_end_date">End date: %1$s</string>
+    <string name="event_start_date">Start date: %1$s</string>
+    <string name="event_dates_header">Dates</string>
+    <string name="event_location_label">Event location</string>
+    <string name="field_description">Description</string>
+    <string name="event_title_label">Event title</string>
+
+    <!-- EventDetailsScreen.kt -->
+    <string name="event_pick_end_time">Choose end time</string>
+    <string name="event_pick_start_time">Choose start time</string>
+    <string name="event_registration_closed_short">Closed</string>
+    <string name="event_registration_open">Open</string>
+    <string name="event_field_registration">📌 Registration status</string>
+    <string name="event_field_trail">🥾 Trail</string>
+    <string name="event_field_location">📍 Location</string>
+    <string name="event_field_times">⏰ Times</string>
+    <string name="event_field_dates">📅 Dates</string>
+    <string name="event_field_description">🗒️ Description</string>
+    <string name="event_end_after_start_time">End time must be after the start time</string>
+    <string name="event_field_end_time">⏰ End time</string>
+    <string name="event_field_start_time">⏰ Start time</string>
+    <string name="event_end_after_start_date">End date must be after the start date</string>
+    <string name="event_field_end_date">📅 End date</string>
+    <string name="event_field_start_date">📅 Start date</string>
+    <string name="field_location">Location</string>
+    <string name="field_title">Title</string>
+    <string name="event_cancel_registration">Cancel registration</string>
+    <string name="event_cancel_failed">Can\'t cancel right now, try again.</string>
+    <string name="event_unregistered">Registration cancelled</string>
+    <string name="event_already_registered">✅ You\'re already registered</string>
+    <string name="event_registration_closed">Registration is closed</string>
+    <string name="event_register_cta">Register</string>
+    <string name="event_register_failed">Registration failed. Try again later.</string>
+    <string name="event_register_success">You\'re registered!</string>
+    <string name="event_delete_button">🗑️ Delete event</string>
+    <string name="event_deleted">Event deleted</string>
+    <string name="event_edit_button">✏️ Edit event</string>
+    <string name="event_save_changes">💾 Save changes</string>
+    <string name="event_updated">Event updated</string>
+    <string name="event_attendees_title">👥 Event attendees</string>
+
+    <!-- Plurals (events) -->
+    <plurals name="event_registered_count">
+        <item quantity="one">%d person has registered so far</item>
+        <item quantity="other">%d people have registered so far</item>
+    </plurals>
+
+    <!-- Misc -->
+    <string name="common_choose">Select</string>
+
+    <!-- SearchScreen.kt -->
+    <string name="filter_reset">🔄 Reset filters</string>
+    <string name="filter_min_elevation">⛰️ Minimum elevation gain: %1$s m</string>
+    <string name="filter_group_type">👥 Group type:</string>
+    <string name="filter_suitable_for">🏃‍♂️ Suitable for:</string>
+    <string name="tag_accessible">Accessible</string>
+    <string name="tag_extreme">Extreme section</string>
+    <string name="tag_viewpoint">Viewpoint</string>
+    <string name="tag_water">Water</string>
+    <string name="tag_forest">Forest</string>
+    <string name="filter_by_tags_header">🎯 Filter by tags</string>
+    <string name="filter_by_tags_title">Filter by tags</string>
+    <string name="filter_apply">Apply filters</string>
+    <string name="search_nearby_title">📍 Trails near you</string>
+    <string name="search_results_title">🔍 Your search results</string>
+    <string name="search_sort_button">⚙️ Sort: %1$s</string>
+    <string name="search_filter_button">🎯 Filter</string>
+    <string name="search_no_results_for">No results for “%1$s”</string>
+    <string name="trails_loading">Loading trails…</string>
+    <string name="search_history_title">🕘 Search history</string>
+    <string name="search_show_my_location">Show current location</string>
+    <string name="search_show_nearby">Show nearby trails</string>
+    <string name="common_search">Search</string>
+    <string name="search_failed">Search failed.</string>
+    <string name="search_no_results">No results found.</string>
+    <string name="search_clear">Clear search</string>
+    <string name="search_place_hint">Search for a place</string>
+
+    <!-- TrailDetailsScreen.kt -->
+    <string name="trail_saved_offline">Trail saved for offline use!</string>
+    <string name="trail_play_video">Play video</string>
+    <string name="share_chooser_title">Share via</string>
+    <string name="share_button">🔗 Share</string>
+    <string name="share_failed">Sharing failed. Try again.</string>
+    <string name="bookmark_add_button">Add to bookmarks</string>
+    <string name="bookmark_remove_button">Remove from bookmarks</string>
+    <string name="bookmark_removed">Removed from bookmarks</string>
+    <string name="bookmark_added">Added to bookmarks</string>
+    <string name="bookmarks_sign_in_to_save">Sign in to save bookmarks.</string>
+    <string name="trail_save_button">Save trail</string>
+    <string name="trail_save_error">Couldn\'t save the trail.</string>
+    <string name="error_not_signed_in">You\'re not signed in.</string>
+    <string name="trail_already_saved">This trail is already saved.</string>
+    <string name="trail_saved">Trail saved</string>
+    <string name="trail_download_button">⬇️ Download for offline</string>
+    <string name="trail_start_button">🚀 Start trail</string>
+    <string name="trail_location_unavailable">Location isn\'t available right now.</string>
+    <string name="trail_location_permission_needed">Allow location access to start the trail.</string>
+    <string name="common_options">Options</string>
+    <string name="trail_downloading_offline">Downloading trail for offline use</string>
+    <string name="stat_max_elevation">Max elevation</string>
+    <string name="stat_elevation_gain">Elevation gain</string>
+    <string name="trail_details_header">Trail details</string>
+    <string name="stat_difficulty">Difficulty</string>
+    <string name="stat_time">Time</string>
+    <string name="stat_length">Length</string>
+
+    <!-- TrailDiscoveryScreen.kt -->
+    <string name="adjust_filters">Try adjusting your filters</string>
+    <string name="trails_none_found">No trails found</string>
+    <string name="discovering_trails">Discovering trails…</string>
+    <string name="difficulty_extreme">Extreme</string>
+    <string name="difficulty_hard">Hard</string>
+    <string name="difficulty_moderate">Moderate</string>
+    <string name="difficulty_easy">Easy</string>
+    <string name="location_wait_or_check">Please wait or check location permissions</string>
+    <string name="location_getting">Getting your location…</string>
+    <string name="stat_duration">Duration</string>
+    <string name="stat_elevation">Elevation</string>
+    <string name="stat_distance">Distance</string>
+    <string name="unknown_location">Unknown location</string>
+    <string name="sort_by">Sort by</string>
+    <string name="min_elevation_gain">Min elevation gain: %1$s m</string>
+    <string name="max_distance">Max distance: %1$s km</string>
+    <string name="field_difficulty">Difficulty</string>
+    <string name="type_offroad_chip">🚙 Off-road</string>
+    <string name="type_cycling_chip">🚴 Cycling</string>
+    <string name="type_hiking_chip">🥾 Hiking</string>
+    <string name="common_filters">Filters</string>
+    <string name="discover_title">Discover trails</string>
+
+    <!-- OfflineTrailDetailsScreen.kt -->
+    <string name="trail_difficulty_line">📈 Difficulty: %1$s</string>
+    <string name="trail_rating_line">⭐ Rating: %1$s/5</string>
+    <string name="trail_time_line">⏱️ Time: %1$s min</string>
+    <string name="trail_length_line">🛣️ Length: %1$s m</string>
+
+    <!-- SavedTrailsScreen.kt -->
+    <string name="saved_trails_delete_confirm">Delete the selected trails?</string>
+    <string name="confirm_delete_title">Confirm deletion</string>
+    <string name="common_delete">Delete</string>
+    <string name="saved_trails_title">Saved trails</string>
+
+    <!-- CloudSavedTrailsScreen.kt -->
+    <string name="trail_distance_line">🛣 Distance: %1$s m</string>
+
+    <!-- MapResultScreen.kt -->
+    <string name="map_go_to_trail">🚀 Go to trail</string>
+    <string name="map_no_trail_selected">No trail selected.</string>
+    <string name="common_no">No</string>
+    <string name="common_yes">Yes</string>
+    <string name="map_is_hiking">🥾 Hiking trail:</string>
+    <string name="map_points_count">🧭 Number of points:</string>
+
+    <!-- TrailBottomSheet.kt -->
+    <string name="sheet_view_full_details">View full details</string>
+    <string name="sheet_start_navigation">Start navigation</string>
+    <string name="sheet_current_conditions">Current conditions</string>
+    <string name="sheet_features">Features</string>
+    <string name="sheet_surface">Surface</string>
+    <string name="sheet_trail_type">Trail category</string>
+    <string name="sheet_one_way">One-way</string>
+    <string name="sheet_loop">Loop</string>
+    <string name="sheet_route_type">Route type</string>
+    <string name="sheet_trail_info">Trail info</string>
+    <string name="sheet_about">About</string>
+
+    <!-- Sorting, tags, misc -->
+    <string name="sort_distance">Nearest first</string>
+    <string name="sort_length_desc">Longest first</string>
+    <string name="sort_length_asc">Shortest first</string>
+    <string name="sort_difficulty_asc">Easiest first</string>
+    <string name="sort_difficulty_desc">Hardest first</string>
+    <string name="sort_name">Name (A–Z)</string>
+    <string name="tag_walk">Walking</string>
+    <string name="tag_bike">Cycling</string>
+    <string name="tag_car">Car</string>
+    <string name="group_solo">Solo</string>
+    <string name="group_couple">Couple</string>
+    <string name="group_family">Family</string>
+    <string name="group_small_kids">Small children</string>
+    <string name="common_unavailable">Unavailable</string>
+    <string name="saved_trail_summary">Length: %1$s, time: %2$s</string>
+
+    <!-- Plurals (trails) -->
+    <plurals name="trails_found_count">
+        <item quantity="one">%d trail found</item>
+        <item quantity="other">%d trails found</item>
+    </plurals>
+    <plurals name="delete_trails_count">
+        <item quantity="one">Delete %d trail</item>
+        <item quantity="other">Delete %d trails</item>
+    </plurals>
+
+    <!-- NavigationScreen.kt -->
+    <string name="nav_suitable_for">The trail is suitable for:</string>
+    <string name="tag_chip_accessible">♿ Accessible</string>
+    <string name="tag_chip_extreme">⚠️ Extreme</string>
+    <string name="tag_chip_viewpoint">🔭 Viewpoint</string>
+    <string name="tag_chip_water">💧 Water</string>
+    <string name="tag_chip_forest">🌲 Forest</string>
+    <string name="nav_more_tags">More tags</string>
+    <string name="nav_difficulty_label">Difficulty level:</string>
+    <string name="nav_rate_trail">Rate the trail:</string>
+    <string name="field_trail_name">Trail name</string>
+    <string name="nav_mode_locked">You can\'t change the travel mode while navigating.</string>
+    <string name="nav_report_desc">Report</string>
+    <string name="nav_stop_button">Stop navigation</string>
+    <string name="nav_mic_desc">Microphone</string>
+    <string name="nav_mic_off">🔇 Microphone off</string>
+    <string name="nav_mic_on">🎙️ Microphone on</string>
+    <string name="nav_group_list_desc">Group list</string>
+    <string name="nav_group_screen_error">Couldn\'t open the group members screen.</string>
+    <string name="default_user_numbered">User %1$s</string>
+    <string name="nav_no_group">No group yet – create or join a group first.</string>
+    <string name="nav_confirm_and_save">Confirm and save</string>
+    <string name="trail_saved_success">Trail saved successfully!</string>
+    <string name="nav_no_connection_retry">No stable connection, try again later.</string>
+    <string name="nav_close">❌ Close</string>
+    <string name="nav_create_event">📅 Create an event</string>
+    <string name="nav_create_post">📝 Create a post</string>
+    <string name="nav_share_with_community">Want to share it with the community?</string>
+    <string name="nav_route_saved_title">✨ Route saved!</string>
+    <string name="nav_empty_route">Can\'t save a route without any movement.</string>
+    <string name="nav_stop_confirm_title">Stop navigation?</string>
+    <string name="nav_continue">Continue navigating</string>
+    <string name="nav_stop_and_exit">Stop and exit</string>
+    <string name="nav_stop_confirm_message">Are you sure you want to stop navigating?</string>
+    <string name="nav_unstable_connection">The connection is unstable, but we\'ll start navigating.</string>
+    <string name="nav_center_me_desc">Center on my location</string>
+    <string name="nav_change_view_desc">Change view</string>
+
+    <!-- TrailNavigationScreen.kt -->
+    <string name="nav_distance_to_start">Distance to the start: %1$s</string>
+    <string name="nav_continue_straight">Continue straight</string>
+    <string name="nav_arrived">You\'ve arrived!</string>
+    <string name="nav_go_to_start">Head to the start of the trail</string>
+
+    <!-- TrackingScreen.kt -->
+    <string name="tracking_finish">Finish</string>
+    <string name="tracking_resume">Resume</string>
+    <string name="tracking_pause">Pause</string>
+    <string name="tracking_start">Start recording</string>
+    <string name="stat_calories">Calories</string>
+    <string name="stat_avg_pace">Avg pace</string>
+    <string name="stat_speed">Speed</string>
+    <string name="tracking_paused">Paused</string>
+    <string name="tracking_recording">Recording</string>
+
+    <!-- TrackingActivity.kt -->
+    <string name="tracking_location_permission_needed">Allow location access to record an activity.</string>
+
+    <!-- NavigationUI.kt -->
+
+    <!-- ElevationProfile.kt -->
+    <string name="elev_min">Min</string>
+    <string name="elev_max">Max</string>
+    <string name="elev_loss">Loss</string>
+    <string name="elev_gain">Gain</string>
+
+    <!-- TrailNavigationActivity.kt -->
+    <string name="trail_data_unavailable">Trail data is unavailable.</string>
+    <string name="nav_location_permission_needed">Allow location access to navigate the trail.</string>
+
+    <!-- MainActivity.kt -->
+    <string name="map_style_outdoors">Outdoors</string>
+    <string name="map_style_light">Light</string>
+    <string name="map_style_dark">Dark</string>
+    <string name="map_style_satellite">Satellite</string>
+    <string name="map_style_standard">Standard</string>
+    <string name="map_style_title">Choose map style</string>
+    <string name="main_record_hike">Record my hike</string>
+    <string name="menu_desc">Menu</string>
+    <string name="location_services_off">Location services are off.</string>
+    <string name="conversion_error">Conversion error: %1$s</string>
+    <string name="map_location_permission_needed">Allow location access so the map can work.</string>
+
+    <!-- WalkieTalkieScreen.kt -->
+    <string name="walkie_participants">Participants (%1$s)</string>
+    <string name="walkie_stop">Stop</string>
+    <string name="walkie_start">Start talking</string>
+    <string name="walkie_enter_code">Enter a group code.</string>
+    <string name="walkie_join">Join</string>
+    <string name="walkie_host">Host</string>
+    <string name="walkie_mode_label">Mode:</string>
+    <string name="walkie_room_label">Group code / room</string>
+    <string name="walkie_username_label">Your name in the group</string>
+    <string name="walkie_title">Walkie-talkie</string>
+    <string name="walkie_permissions_needed">Audio and nearby-device permissions are required to start.</string>
+    <string name="error_generic">Something went wrong</string>
+    <string name="walkie_mode_connecting">⚠️ Connecting…</string>
+    <string name="walkie_mode_local">📡 Local P2P (up to %1$s m)</string>
+    <string name="walkie_mode_internet">🌐 Internet mode (unlimited range)</string>
+    <string name="walkie_connecting">Connecting…</string>
+
+    <!-- WalkieTalkieService.kt -->
+    <string name="walkie_channel_name">Walkie-talkie channel</string>
+    <string name="walkie_service_text">The voice service is active</string>
+    <string name="walkie_service_title">Walkie-talkie is running</string>
+
+    <!-- Walkie / tags -->
+    <string name="tag_offroad">Off-road vehicles</string>
+    <string name="walkie_current_speaker">Current speaker: %1$s</string>
+    <string name="walkie_no_speaker">— none —</string>
+
+    <!-- Utils.kt -->
+    <string name="group_create">Create group</string>
+    <string name="groups_find">Find groups</string>
+    <string name="nav_group_needs_group">To start group navigation, join an active group or create a new one.</string>
+    <string name="nav_mode_group">Group</string>
+    <string name="nav_mode_solo">Solo</string>
+    <string name="angle_set">Set</string>
+    <string name="angle_title">Find your angle</string>
+    <string name="shared_trail_message">%1$s shared a new trail with you!</string>
+    <string name="shared_trail_title">🚀 Shared trail</string>
+    <string name="trail_go_to">Go to trail</string>
+    <string name="unknown_user">Unknown user</string>
+    <string name="common_got_it">Got it</string>
+    <string name="location_needed_for_navigation">Turn on location services to start navigation.</string>
+    <string name="location_off_short">Location services are off</string>
+    <string name="common_maybe_later">Maybe later</string>
+    <string name="location_turn_on">Turn on location</string>
+    <string name="location_off_body">Turn on location services to enjoy the trails around you.</string>
+    <string name="location_off_title">Location services seem to be off</string>
+    <string name="saved_empty_body">Go for a hike and save a trail</string>
+    <string name="saved_empty_title">No saved trails yet!</string>
+    <string name="nav_turn_left">Turn left</string>
+    <string name="nav_turn_right">Turn right</string>
+    <string name="nav_turn_around">Turn around</string>
+    <string name="trail_upload_error">Couldn\'t save the trail: %1$s</string>
+    <string name="trail_link_save_error">Couldn\'t link the trail to your account: %1$s</string>
+    <string name="trail_in_place">Trail in %1$s</string>
+
+    <!-- Card.kt -->
+    <string name="card_points_and_label">%1$s points • %2$s</string>
+    <string name="trail_view_desc">Trail view</string>
+    <string name="trail_kind_offroad">Off-road route</string>
+    <string name="trail_kind_bike">Cycling route</string>
+    <string name="trail_kind_hiking">Hiking trail</string>
+    <string name="post_delete_confirm">Are you sure you want to delete this post? This can\'t be undone.</string>
+    <string name="common_send">Send</string>
+    <string name="comment_add_hint">Add a comment…</string>
+    <string name="comments_title">Comments</string>
+    <string name="event_register_button">Register for the event</string>
+    <string name="comment_add_label">Add a comment</string>
+    <string name="comment_desc">Comment</string>
+    <string name="like_desc">Like</string>
+    <string name="common_read_more">Read more</string>
+    <string name="common_show_less">Show less</string>
+    <string name="event_delete">Delete event</string>
+    <string name="post_delete">Delete post</string>
+
+    <!-- OutdoorWeatherService.kt -->
+    <string name="w_err_get">Unable to get weather data</string>
+    <string name="w_rec_dangerous">Stay safe – avoid outdoor activities. 🚨</string>
+    <string name="w_rec_poor">Not ideal, but manageable with precautions. ⚠️</string>
+    <string name="w_rec_fair">Okay for outdoor activities with proper preparation. 👌</string>
+    <string name="w_rec_good">Great day to get outside! ✨</string>
+    <string name="w_rec_excellent">Perfect conditions for outdoor activities! 🌟</string>
+    <string name="w_warn_dry">🏜️ Very dry – stay hydrated</string>
+    <string name="w_warn_humid">💧 Very humid – feels uncomfortable</string>
+    <string name="w_warn_thunderstorm">⚡ Thunderstorm – seek shelter immediately</string>
+    <string name="w_warn_light_precip">🌧️ Light rain/snow</string>
+    <string name="w_warn_heavy_precip">☔ Heavy precipitation – poor visibility</string>
+    <string name="w_warn_dangerous_wind">🚨 Dangerous winds – stay indoors</string>
+    <string name="w_warn_strong_wind">⚠️ Strong winds – exercise caution</string>
+    <string name="w_warn_windy">💨 Windy conditions</string>
+    <string name="w_warn_humidity_heat">💦 Humidity makes it feel hotter</string>
+    <string name="w_warn_wind_chill">🌬️ Wind chill makes it feel colder</string>
+    <string name="w_warn_dangerous_heat">🚨 Dangerous heat – avoid outdoor activity</string>
+    <string name="w_warn_very_hot">⚠️ Very hot – risk of heat exhaustion</string>
+    <string name="w_warn_hot">🔥 Hot – stay hydrated</string>
+    <string name="w_warn_very_cold">🥶 Very cold – dress warmly</string>
+    <string name="w_warn_extreme_cold">⚠️ Extremely cold – risk of frostbite</string>
+    <string name="w_err_fetch">Unable to fetch weather data</string>
+
+    <!-- WeatherIndicator.kt -->
+
+    <!-- ReportDialog.kt -->
+    <string name="report_points_awarded">🏅 +5 points!</string>
+    <string name="report_save_failed">Couldn\'t save the report.</string>
+    <string name="report_location_unavailable">Location isn\'t available, try again.</string>
+    <string name="report_select_category">Choose a category.</string>
+    <string name="report_description_hint">Description (optional)</string>
+
+    <!-- ReportDialogsAndSheets.kt -->
+    <string name="poi_short">Place</string>
+    <string name="poi_report_desc">Report a point of interest</string>
+    <string name="report_hazard_short">Hazard</string>
+    <string name="report_hazard_title">Report a hazard</string>
+    <string name="report_selected_toast">Selected: %1$s</string>
+    <string name="poi_title">Point of interest</string>
+    <string name="report_sent_toast">Report sent: %1$s</string>
+
+    <!-- ReportOptions.kt -->
+    <string name="poi_fuel">Fuel station</string>
+    <string name="poi_parking">Parking area</string>
+    <string name="poi_shade">Shaded area</string>
+    <string name="poi_camping">Camping spot</string>
+    <string name="poi_viewpoint">Viewpoint</string>
+    <string name="poi_spring">Spring</string>
+    <string name="report_flood">Flash flood</string>
+    <string name="report_rollover">Rollover risk</string>
+    <string name="report_blocked_road">Blocked road</string>
+    <string name="report_mud">Muddy terrain</string>
+    <string name="report_cliff">Dangerous cliff</string>
+    <string name="report_obstacle">Obstacle on the trail</string>
+
+    <!-- ImageUploader.kt -->
+    <string name="image_remove_desc">Remove photo</string>
+    <string name="image_pick_title">Select photos</string>
+    <string name="image_source_camera">Camera</string>
+    <string name="image_source_gallery">Gallery</string>
+    <string name="image_source_title">Choose a photo source</string>
+    <string name="image_replace_confirm">Are you sure you want to replace your profile picture?</string>
+    <string name="not_signed_in_upload">Sign in to upload images</string>
+
+    <!-- Utils -->
+    <string name="trail_unnamed">Unnamed trail</string>
+
+    <!-- ScoutAI.kt -->
+    <string name="scout_q_expert">Expert-level routes</string>
+    <string name="scout_q_hard">Challenging trails</string>
+    <string name="scout_q_moderate">Moderate difficulty hikes</string>
+    <string name="scout_q_easy">Easy trails for beginners</string>
+    <string name="scout_q_offroad">Off-road adventures</string>
+    <string name="scout_q_cycling">Cycling paths nearby</string>
+    <string name="scout_q_mtb_routes">Find MTB routes</string>
+    <string name="scout_q_hiking_trails">Show hiking trails</string>
+    <string name="scout_q_bring">What should I bring?</string>
+    <string name="scout_q_group">Find a group to join</string>
+    <string name="scout_q_navigation">How do I use navigation?</string>
+    <string name="scout_q_safety">Safety tips for hiking</string>
+    <string name="scout_q_mtb">Recommend MTB trails</string>
+    <string name="scout_q_easy_hikes">Show me easy hikes</string>
+    <string name="scout_q_weather">What\'s the weather like?</string>
+    <string name="scout_sug_nearby">Find trails nearby</string>
+    <string name="scout_sug_safety">Get safety tips</string>
+    <string name="scout_sug_weather">Check weather</string>
+    <string name="scout_sug_recommended">Show recommended trails</string>
+    <string name="scout_unavailable">Scout is unavailable right now. Please try again. 📱</string>
+    <string name="scout_unreadable">Scout couldn\'t read that message. Try rephrasing. ✍️</string>
+    <string name="scout_limit_reached">You reached today\'s Scout limit. Try again tomorrow. ⏳</string>
+    <string name="scout_sign_in">Sign in to chat with Scout. 🔐</string>
+    <string name="scout_ask_something">Ask me something about trails! 🥾</string>
+
+    <!-- VoiceScoutHelper.kt -->
+
+    <!-- DrawerMenuItem.kt -->
+    <string name="menu_map">Map</string>
+
+    <!-- ProfileActivity.kt -->
+    <string name="profile_not_found">Profile not found.</string>
+
+    <!-- ScoutChatScreen.kt -->
+    <string name="scout_input_hint">Ask Scout anything…</string>
+    <string name="scout_quick_questions">Quick questions:</string>
+    <string name="scout_clear_chat">Clear chat</string>
+    <string name="scout_online">Online</string>
+    <string name="scout_oops">Oops! Something went wrong. Please try again. 😅</string>
+    <string name="scout_greeting">Hey there! 👋 I\'m Scout, your trail companion! I can help you find amazing trails, check the weather, share safety tips and show you around the app. What adventure are you planning today? 🏔️</string>
+
+    <!-- TrailNavigationScreen.kt -->
+    <string name="nav_in_distance">In %1$s, %2$s</string>
+
+    <!-- AnimatedBottomNav.kt -->
+
+    <!-- GroupConnectionManager.kt -->
+    <string name="walkie_mic_busy">The microphone is busy, held by %1$s</string>
+    <string name="walkie_another_user">another user</string>
+
+    <!-- HybridGroupConnectionManager.kt -->
+    <string name="walkie_no_connection_available">No connection available</string>
+    <string name="walkie_connection_lost">Connection lost. Check your network settings.</string>
+
+    <!-- TransportCoordinator.kt -->
+    <string name="walkie_mode_text">Mode: %1$s</string>
+    <string name="walkie_range_none">No connection</string>
+    <string name="walkie_range_local">%1$s m range (Local P2P)</string>
+    <string name="walkie_range_unlimited">Unlimited range (Internet)</string>
+
+    <!-- Home / features -->
+    <string name="home_welcome_generic">Welcome</string>
+    <string name="feat_waterfall">Waterfall</string>
+    <string name="feat_technical">Technical</string>
+    <string name="feat_4wd_only">4WD only</string>
+
+    <!-- Share / groups -->
+    <string name="share_trail_message">I\'m sharing my trail with you on the PATHY app! 🌍\n%1$s</string>
+    <string name="unnamed_user">No name</string>
+
+    <!-- Plurals (reviews) -->
+    <plurals name="reviews_count">
+        <item quantity="one">%d review</item>
+        <item quantity="other">%d reviews</item>
+    </plurals>
+
+    <!-- Units -->
+    <string name="unit_km_short">km</string>
+    <string name="unit_min_short">min</string>
+    <string name="unit_min_per_km">min/km</string>
+    <string name="unit_h">%1$sh</string>
+
+    <!-- recording -->
+    <string name="rec_channel_name">Outing recording</string>
+    <string name="rec_channel_desc">Shown while an outing is recorded, so tracking continues with the screen off.</string>
+    <string name="rec_notification_title">Recording your outing</string>
+    <string name="rec_notification_paused">Recording paused</string>
+    <string name="rec_notification_auto_paused">Paused – you stopped moving</string>
+    <string name="rec_notification_text">%1$s · %2$s</string>
+    <string name="rec_action_pause">Pause</string>
+    <string name="rec_action_resume">Resume</string>
+    <string name="rec_action_finish">Finish</string>
+    <string name="rec_auto_paused_label">Auto-paused</string>
+    <string name="rec_saved_on_phone">Outing saved on your phone. It uploads when you are online.</string>
+    <string name="rec_sign_in_hint">You are not signed in. The outing stays on your phone until you sign in.</string>
+
+    <!-- navigation -->
+    <string name="nav_bear_left">Bear left</string>
+    <string name="nav_bear_right">Bear right</string>
+    <string name="nav_sharp_left">Sharp left</string>
+    <string name="nav_sharp_right">Sharp right</string>
+    <string name="nav_follow_to_end">Follow the trail – %1$s to the end</string>
+    <string name="nav_off_route_title">You left the trail</string>
+    <string name="nav_off_route_detail">The trail is %1$s away – %2$s</string>
+    <string name="nav_back_on_route">Back on the trail</string>
+    <string name="nav_joined">You are on the trail</string>
+    <string name="nav_remaining">%1$s left</string>
+    <string name="nav_locating">Finding your position…</string>
+    <string name="nav_record_start">Start recording</string>
+    <string name="nav_record_stop">Stop recording</string>
+
+    <!-- activity -->
+    <string name="activity_export_gpx">Share as GPX</string>
+    <string name="activity_export_failed">Couldn\'t create the GPX file.</string>
+    <string name="activity_share_title">Share route</string>
+    <string name="activity_delete">Delete</string>
+    <string name="activity_delete_title">Delete this activity?</string>
+    <string name="activity_delete_message">The recording and its route will be removed. This can\'t be undone.</string>
+    <string name="activity_deleted">Activity deleted</string>
+    <string name="activity_delete_failed">Couldn\'t delete the activity.</string>
+    <string name="activity_pending_upload">Waiting to upload</string>
+    <string name="activity_no_route">No route was saved for this activity.</string>
+    <string name="activity_stat_avg_speed">Avg speed</string>
+    <string name="activity_stat_max_speed">Max speed</string>
+    <string name="activity_stat_calories">Calories</string>
+    <string name="activity_stat_elevation_chart">Elevation</string>
+    <string name="unit_kcal">%1$s kcal</string>
+
+    <!-- offline -->
+    <string name="trail_offline_failed">Couldn\'t download the map. Check your connection and try again.</string>
+    <string name="trail_offline_hint">The map around this trail is saved on your phone.</string>
+
+    <!-- gpx -->
+    <string name="gpx_import">Import GPX route</string>
+    <string name="gpx_import_failed">That file couldn\'t be read as a GPX route.</string>
+    <string name="gpx_import_too_short">The route is too short to follow.</string>
+
+    <!-- sort -->
+    <string name="sort_recommended">Recommended</string>
+
+    <!-- discovery -->
+    <string name="trail_chip_marked">Marked trail</string>
+    <string name="trail_net_international">International route</string>
+    <string name="trail_net_national">National route</string>
+    <string name="trail_net_regional">Regional route</string>
+    <string name="trail_net_local">Local route</string>
+    <string name="trail_chip_seasonal">Seasonal</string>
+    <string name="trail_chip_hard">Hard to follow</string>
+    <string name="trail_chip_check">Needs checking</string>
+    <string name="trail_chip_outdated">Data may be old</string>
+    <string name="trail_updated">Updated %1$s</string>
+    <string name="trail_verified">Checked on site %1$s</string>
+    <string name="trail_marked_red">Red-marked trail</string>
+    <string name="trail_marked_blue">Blue-marked trail</string>
+    <string name="trail_marked_green">Green-marked trail</string>
+    <string name="trail_marked_black">Black-marked trail</string>
+    <string name="trail_marked_orange">Orange-marked trail</string>
+    <string name="trail_marked_yellow">Yellow-marked trail</string>
+    <string name="trail_marked_white">White-marked trail</string>
+    <string name="trail_marked_purple">Purple-marked trail</string>
+    <string name="trail_marked_brown">Brown-marked trail</string>
+    <string name="trail_marked_pink">Pink-marked trail</string>
+    <string name="trail_marked_grey">Grey-marked trail</string>
+    <string name="discover_search_hint">Search any place in the world</string>
+    <string name="discover_search">Search</string>
+    <string name="discover_near_me">Near me</string>
+    <string name="discover_exploring">Exploring: %1$s</string>
+    <string name="discover_no_place">No place found. Try another spelling.</string>
+    <string name="discover_widened">Nothing close by, so the search widened to %1$s km.</string>
+    <string name="discover_hidden_closed">Hidden because closed or private: %1$s</string>
+    <string name="discover_load_failed">Couldn\'t load trails. Check your connection.</string>
+    <string name="discover_no_trails_here">No trails found here. Try another place or more trail types.</string>
+
+    <!-- discovery -->
+    <string name="discover_location_failed">We couldn\'t find your location. Search for a place above, or try again.</string>
+
+    <!-- conditions -->
+    <string name="cond_title">Trail status</string>
+    <string name="cond_no_reports">No recent reports from hikers.</string>
+    <string name="cond_open">Reported open and easy to follow %1$s</string>
+    <string name="cond_muddy">Reported muddy or hard to pass %1$s</string>
+    <string name="cond_blocked">Reported blocked %1$s</string>
+    <string name="cond_closed">Reported closed %1$s</string>
+    <string name="cond_not_found">Reported missing or not marked %1$s</string>
+    <string name="cond_agree">%1$s of %2$s recent reports agree</string>
+    <string name="cond_report_button">Report trail condition</string>
+    <string name="cond_report_title">How is the trail today?</string>
+    <string name="cond_opt_open">Open and easy to follow</string>
+    <string name="cond_opt_muddy">Muddy or hard to pass</string>
+    <string name="cond_opt_blocked">Blocked (fallen tree, flood, landslide)</string>
+    <string name="cond_opt_closed">Closed (gate, sign or authority)</string>
+    <string name="cond_opt_missing">Trail not found or not marked</string>
+    <string name="cond_note_hint">Add a note (optional)</string>
+    <string name="cond_send">Send report</string>
+    <string name="cond_thanks">Thanks! Your report helps other hikers.</string>
+    <string name="cond_failed">Couldn\'t send the report. Try again.</string>
+    <string name="cond_sign_in">Sign in to report</string>
+    <string name="cond_disclaimer">Information comes from OpenStreetMap and other hikers. Always check local signs and conditions.</string>
+
+    <!-- posts -->
+    <string name="post_as">Posting as %1$s</string>
+    <string name="post_trail_choose">Choose a trail</string>
+    <string name="post_trail_change">Change</string>
+    <string name="post_text_hint">Share your experience…</string>
+    <string name="post_add_photo">Add photo</string>
+    <string name="post_remove_photo">Remove photo %1$s</string>
+    <string name="post_need_trail">Choose a trail to publish</string>
+    <string name="post_need_text">Write something to publish</string>
+    <string name="post_checking">Checking your post…</string>
+    <string name="post_counter">%1$s/%2$s</string>
+    <string name="post_comments_count">Comments (%1$s)</string>
+    <string name="post_open_trail">Open trail: %1$s</string>
+    <string name="post_photo_of">Photo %1$s of %2$s</string>
+    <string name="post_like_count">Like, %1$s likes</string>
+    <string name="post_comment_count_desc">Comments, %1$s</string>
+    <string name="post_write_comment">Write a comment</string>
+    <string name="post_send_comment">Send comment</string>
+    <string name="post_no_comments">No comments yet. Be the first.</string>
+    <string name="post_photos_added">%1$s of %2$s photos</string>
+
+    <!-- discovery -->
+    <string name="discover_slow">The map servers are busy. Still searching…</string>
+
+    <!-- discovery -->
+    <string name="trail_away">%1$s away</string>
+</resources>
+

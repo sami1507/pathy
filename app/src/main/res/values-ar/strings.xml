@@ -1,0 +1,1052 @@
+<resources>
+    <string name="app_name">PATHY</string>
+    <string name="settings">الإعدادات</string>
+    <string name="select_language">اختر اللغة</string>
+    <string name="sign_out">تسجيل الخروج</string>
+    <string name="back">رجوع</string>
+    <string name="settings_location_services">خدمات الموقع</string>
+    <string name="common_enabled">مفعّل</string>
+    <string name="common_disabled">معطّل</string>
+    <string name="home_welcome">مرحباً، %1$s</string>
+    <string name="home_intro">رحلتك القادمة تبدأ هنا</string>
+    <string name="home_totals">جميع الأنشطة المسجّلة</string>
+    <string name="home_sign_in">سجّل الدخول لعرض إحصاءاتك</string>
+    <string name="load_failed">تعذّر تحميل البيانات. حاول مجدداً.</string>
+    <string name="retry">إعادة المحاولة</string>
+    <string name="home_distance">%1$.1f كم</string>
+    <string name="home_empty">سيظهر نشاطك الأول هنا بعد تسجيله.</string>
+    <string name="home_track">تسجيل نشاط</string>
+    <string name="home_map">فتح الخريطة</string>
+    <string name="home_discover">اكتشاف مسارات قريبة</string>
+    <string name="home_history">سجل الأنشطة</string>
+    <string name="home_scout">اسأل Scout</string>
+    <string name="home_profile">الملف الشخصي</string>
+    <string name="weather_title">الطقس بالقرب منك</string>
+    <string name="weather_action">عرض الطقس المحلي</string>
+    <string name="weather_unavailable">الطقس غير متاح. تحقق من الدخول والموقع والاتصال.</string>
+    <string name="weather_value">%1$.0f°م · الرياح %2$.0f كم/س</string>
+    <string name="language_system">لغة الجهاز</string>
+
+    <!-- AuthViewModel.kt -->
+    <string name="auth_reset_failed">تعذّر إرسال رسالة إعادة التعيين.</string>
+    <string name="auth_enter_email_for_reset">أدخل بريدك الإلكتروني لتصلك رسالة إعادة تعيين كلمة المرور.</string>
+    <string name="auth_save_user_failed">تعذّر حفظ ملفك الشخصي: %1$s</string>
+    <string name="auth_sign_up_failed">فشل إنشاء الحساب.</string>
+    <string name="auth_photo_upload_failed">تعذّر رفع الصورة: %1$s</string>
+    <string name="auth_google_failed">فشل تسجيل الدخول عبر Google.</string>
+    <string name="auth_user_missing">تعذّر تحميل حسابك بعد تسجيل الدخول. حاول مجدداً.</string>
+    <string name="auth_sign_in_failed">فشل تسجيل الدخول. حاول مجدداً أو تحقق من بياناتك.</string>
+    <string name="error_network_check">خطأ في الشبكة. تحقق من اتصالك.</string>
+    <string name="auth_too_many_requests">محاولات كثيرة جداً. يرجى المحاولة لاحقاً.</string>
+    <string name="auth_user_disabled">تم تعطيل هذا الحساب. يرجى التواصل مع الدعم.</string>
+    <string name="auth_invalid_credentials">البريد الإلكتروني أو كلمة المرور غير صحيحة.</string>
+    <string name="auth_email_unverified_link_sent">لم يتم تأكيد بريدك الإلكتروني بعد. أرسلنا إليك رابط التأكيد.</string>
+    <string name="auth_fill_all_fields">يرجى ملء جميع الحقول.</string>
+
+    <!-- OnboardingScreen.kt -->
+    <string name="onboarding_get_started">ابدأ الآن</string>
+    <string name="common_next">التالي</string>
+    <string name="common_skip">تخطّي</string>
+    <string name="onboarding_progress_body">سجّل مساراتك واكسب الإنجازات وشارك مغامراتك مع المجتمع.</string>
+    <string name="onboarding_progress_title">تابع تقدّمك</string>
+    <string name="onboarding_friends_body">شاهد أفراد مجموعتك على الخريطة لحظة بلحظة وتحدّثوا عبر جهاز اللاسلكي المدمج.</string>
+    <string name="onboarding_friends_title">خض المغامرة مع أصدقائك</string>
+    <string name="onboarding_navigate_body">إرشادات منعطفاً بمنعطف وخرائط تعمل دون اتصال وملفات الارتفاع تبقيك على الطريق الصحيح.</string>
+    <string name="onboarding_navigate_title">تنقّل بثقة</string>
+    <string name="onboarding_discover_body">تصفّح ملايين مسارات المشي وركوب دراجات الجبال والدراجات والطرق الوعرة من مختلف أنحاء العالم.</string>
+    <string name="onboarding_discover_title">اكتشف مسارات رائعة</string>
+
+    <!-- SettingsScreen.kt -->
+    <string name="sign_out_confirm_message">هل أنت متأكد أنك تريد تسجيل الخروج من حسابك؟</string>
+    <string name="sign_out_confirm_title">تسجيل الخروج؟</string>
+    <string name="common_cancel">إلغاء</string>
+    <string name="settings_location_manual">فعّل خدمات الموقع من إعدادات الجهاز.</string>
+
+    <!-- SignInScreen.kt -->
+    <string name="common_just_a_moment">لحظة من فضلك…</string>
+    <string name="signin_new_user">إنشاء حساب جديد</string>
+    <string name="signin_with_google">تسجيل الدخول باستخدام Google</string>
+    <string name="google_logo_desc">شعار Google</string>
+    <string name="signin_title">تسجيل الدخول</string>
+    <string name="signin_general_error">حدث خطأ أثناء تسجيل الدخول: %1$s</string>
+    <string name="signin_email_unverified">لم يتم تأكيد بريدك الإلكتروني بعد. يرجى تأكيده أولاً.</string>
+    <string name="profile_load_error">تعذّر تحميل ملفك الشخصي: %1$s</string>
+    <string name="signin_success">تم تسجيل الدخول</string>
+    <string name="signin_invalid_identifier">أدخل بريداً إلكترونياً أو رقم هاتف صحيحاً.</string>
+    <string name="signin_forgot_password">هل نسيت كلمة المرور؟</string>
+    <string name="reset_email_sent">تم إرسال رسالة إعادة تعيين كلمة المرور.</string>
+    <string name="signin_remember_me">تذكّرني</string>
+    <string name="field_password">كلمة المرور</string>
+    <string name="field_email">البريد الإلكتروني</string>
+    <string name="error_generic_with_message">خطأ: %1$s</string>
+    <string name="error_network_retry">خطأ في الشبكة. حاول مجدداً.</string>
+    <string name="signin_wrong_password">كلمة المرور غير صحيحة.</string>
+    <string name="signin_no_user">لا يوجد حساب مرتبط بهذا البريد الإلكتروني.</string>
+    <string name="profile_create_error">تعذّر إنشاء ملفك الشخصي: %1$s</string>
+    <string name="signin_google_success">تم تسجيل الدخول عبر Google</string>
+
+    <!-- SignUpScreen.kt -->
+    <string name="common_ok">حسناً</string>
+    <string name="signup_verify_then_sign_in">أكّد بريدك الإلكتروني ثم سجّل الدخول.</string>
+    <string name="signup_verification_message">أرسلنا رابط التأكيد إلى بريدك الإلكتروني. يرجى التأكيد قبل المتابعة.</string>
+    <string name="signup_verification_title">التأكيد مطلوب</string>
+    <string name="signup_create_account">إنشاء الحساب</string>
+    <string name="signup_email_taken">يوجد حساب بهذا البريد الإلكتروني بالفعل.</string>
+    <string name="signup_passwords_mismatch">كلمتا المرور غير متطابقتين.</string>
+    <string name="error_invalid_email">أدخل بريداً إلكترونياً صحيحاً.</string>
+    <string name="field_gender">الجنس:</string>
+    <string name="field_phone_optional">الهاتف (اختياري)</string>
+    <string name="field_confirm_password">تأكيد كلمة المرور</string>
+    <string name="field_full_name">الاسم الكامل</string>
+    <string name="signup_title">إنشاء حساب</string>
+
+    <!-- Gender / settings -->
+    <string name="gender_male">ذكر</string>
+    <string name="gender_female">أنثى</string>
+    <string name="settings_version_label">الإصدار %1$s</string>
+
+    <!-- EmergencySOSScreen.kt -->
+    <string name="sos_add_contact">إضافة جهة اتصال</string>
+    <string name="sos_no_contacts_body">أضف جهة اتصال واحدة على الأقل لحالات الطوارئ.</string>
+    <string name="sos_no_contacts_title">لا توجد جهات اتصال طوارئ</string>
+    <string name="common_call">اتصال</string>
+    <string name="sos_confirm_send">إرسال SOS</string>
+    <string name="sos_confirm_message">سيتم إرسال تنبيه طوارئ مع موقعك الحالي إلى جميع جهات اتصال الطوارئ.</string>
+    <string name="sos_confirm_title">تفعيل نداء الطوارئ؟</string>
+    <string name="common_add">إضافة</string>
+    <string name="sos_contacts_title">جهات اتصال الطوارئ</string>
+    <string name="sos_share_location">مشاركة الموقع</string>
+    <string name="sos_call_emergency">الاتصال بالطوارئ</string>
+    <string name="sos_quick_actions">إجراءات سريعة</string>
+    <string name="sos_info_line_sms">• يُرسل برسالة SMS فيعمل دون إنترنت</string>
+    <string name="sos_info_line_call">• يتيح لك الاتصال بخدمات الطوارئ بنقرة واحدة\n</string>
+    <string name="sos_info_line_link">• يتضمن رابط خرائط Google إلى موقعك\n</string>
+    <string name="sos_info_line_contacts">• يرسل موقعك إلى جهات اتصال الطوارئ\n</string>
+    <string name="sos_info_title">ماذا يحدث عند تفعيل نداء الطوارئ؟</string>
+    <string name="sos_tap_hint">اضغط لإرسال تنبيه طوارئ</string>
+    <string name="sos_hero_title">نداء الطوارئ SOS</string>
+    <string name="sos_title">نداء الطوارئ SOS</string>
+
+    <!-- EmergencySOSActivity.kt -->
+    <string name="common_save">حفظ</string>
+    <string name="error_phone_invalid">رقم الهاتف غير صحيح.</string>
+    <string name="error_name_required">أدخل الاسم.</string>
+    <string name="field_phone">رقم الهاتف</string>
+    <string name="field_name">الاسم</string>
+    <string name="sos_contact_dialog_title">جهة اتصال طوارئ</string>
+    <string name="sos_share_failed">تعذّرت المشاركة: %1$s</string>
+    <string name="sos_location_shared">تم إرسال موقعك إلى جهات الاتصال.</string>
+    <string name="sos_send_failed">تعذّر الإرسال: %1$s</string>
+    <string name="sos_sent">تم إرسال رسالة الطوارئ.</string>
+    <string name="sos_add_contact_first">أضف جهة اتصال طوارئ واحدة على الأقل.</string>
+    <string name="sos_sms_permission_needed">مطلوب إذن الرسائل القصيرة لإرسال رسائل الطوارئ.</string>
+
+    <!-- EmergencySOS.kt -->
+    <string name="sos_msg_sharing_location">موقعي الحالي: %1$s</string>
+    <string name="sos_location_unavailable">الموقع غير متاح</string>
+    <string name="sos_msg_location_link">موقعي عند إرسال نداء الاستغاثة هذا: %1$s</string>
+    <string name="sos_msg_time">\nالوقت: %1$s</string>
+    <string name="sos_msg_footer">\n\nأُرسلت من تطبيق PATHY</string>
+    <string name="sos_msg_maps">\n\nخرائط Google:</string>
+    <string name="sos_msg_accuracy">\nدقة الموقع: %1$s م</string>
+    <string name="sos_msg_longitude">\nخط الطول: %1$s</string>
+    <string name="sos_msg_latitude">\nخط العرض: %1$s</string>
+    <string name="sos_msg_location_header">\n\nالموقع:</string>
+    <string name="sos_default_message">طوارئ! أحتاج إلى مساعدة. موقعي:</string>
+
+    <!-- BookmarksScreen.kt -->
+    <string name="bookmarks_empty_body">ابدأ بحفظ مساراتك المفضلة!</string>
+    <string name="bookmarks_empty_title">لا توجد مسارات مفضلة بعد</string>
+    <string name="bookmarks_remove">إزالة من المفضلة</string>
+    <string name="bookmark_saved_ago">تم الحفظ %1$s</string>
+    <string name="bookmarks_create_list">إنشاء قائمة</string>
+    <string name="bookmarks_toggle_view">تبديل العرض</string>
+    <string name="bookmarks_title">المفضلة</string>
+
+    <!-- BookmarksActivity.kt -->
+    <string name="bookmarks_remove_failed">تعذّرت الإزالة: %1$s</string>
+    <string name="trail_details_unavailable">لا توجد تفاصيل مسار للعرض.</string>
+    <string name="bookmarks_load_failed">تعذّر تحميل المفضلة: %1$s</string>
+    <string name="bookmarks_sign_in_required">سجّل الدخول لعرض مفضلتك.</string>
+
+    <!-- ActivityHistoryScreen.kt -->
+    <string name="history_try_other_filter">جرّب تصنيفاً آخر</string>
+    <string name="history_empty_body">ابدأ بتسجيل مغامرتك الأولى!</string>
+    <string name="history_empty_title">لا توجد أنشطة بعد</string>
+    <string name="history_loading">جارٍ تحميل الأنشطة…</string>
+    <string name="history_filter">تصفية</string>
+
+    <!-- ProfileScreen.kt -->
+    <string name="trail_load_failed">تعذّر تحميل المسار.</string>
+    <string name="trail_not_found">المسار غير موجود.</string>
+    <string name="trail_load_error">حدث خطأ أثناء تحميل المسار.</string>
+    <string name="profile_user_details">بيانات المستخدم</string>
+    <string name="profile_sos_button">🆘 الطوارئ (SOS)</string>
+    <string name="profile_bookmarks_button">🔖 المفضلة</string>
+    <string name="profile_activity_history_button">📜 سجل الأنشطة</string>
+    <string name="profile_record_activity_button">🏃 تسجيل نشاط</string>
+    <string name="profile_user_points">نقاط المستخدم</string>
+    <string name="profile_my_points">نقاطي</string>
+    <string name="profile_image_desc">الصورة الشخصية</string>
+    <string name="profile_offline_trails_button">📁 المسارات دون اتصال</string>
+    <string name="profile_load_failed_retry">تعذّر تحميل البيانات. حاول مرة أخرى لاحقاً.</string>
+    <string name="profile_saved_trails_button">☁️ المسارات المحفوظة</string>
+    <string name="profile_change_photo">تغيير الصورة</string>
+    <string name="profile_edit_desc">تعديل الملف الشخصي</string>
+
+    <!-- EnhancedProfileScreen.kt -->
+    <string name="profile_highest_m">الأعلى (م)</string>
+    <string name="profile_longest_km">الأطول (كم)</string>
+    <string name="profile_best_streak">أفضل سلسلة</string>
+    <string name="profile_day_streak">أيام متتالية</string>
+    <string name="profile_streaks_records">السلاسل والأرقام القياسية</string>
+    <string name="activity_mtb">دراجات الجبال</string>
+    <string name="activity_cycling">ركوب الدراجات</string>
+    <string name="activity_running">الجري</string>
+    <string name="activity_hiking">المشي</string>
+    <string name="profile_activity_breakdown">توزيع الأنشطة</string>
+    <string name="common_more">المزيد</string>
+    <string name="common_view_all">عرض الكل</string>
+    <string name="profile_achievements">الإنجازات</string>
+    <string name="profile_m_climbed">م صعود</string>
+    <string name="profile_km_total">كم إجمالاً</string>
+    <string name="profile_overview">نظرة عامة</string>
+    <string name="profile_level">المستوى %1$s</string>
+    <string name="profile_trails">المسارات</string>
+    <string name="profile_following">يتابع</string>
+    <string name="profile_followers">المتابعون</string>
+    <string name="common_edit">تعديل</string>
+
+    <!-- EditProfileScreen.kt -->
+    <string name="edit_profile_save">حفظ التغييرات</string>
+    <string name="field_gender_plain">الجنس</string>
+
+    <!-- AttendeesScreen.kt -->
+    <string name="attendees_title">المسجَّلون في الفعالية</string>
+
+    <!-- Plurals and relative time -->
+    <string name="time_ago_just_now">الآن</string>
+    <plurals name="time_ago_minutes">
+        <item quantity="zero">منذ %d دقيقة</item>
+        <item quantity="one">منذ دقيقة واحدة</item>
+        <item quantity="two">منذ دقيقتين</item>
+        <item quantity="few">منذ %d دقائق</item>
+        <item quantity="many">منذ %d دقيقة</item>
+        <item quantity="other">منذ %d دقيقة</item>
+    </plurals>
+    <plurals name="time_ago_hours">
+        <item quantity="zero">منذ %d ساعة</item>
+        <item quantity="one">منذ ساعة واحدة</item>
+        <item quantity="two">منذ ساعتين</item>
+        <item quantity="few">منذ %d ساعات</item>
+        <item quantity="many">منذ %d ساعة</item>
+        <item quantity="other">منذ %d ساعة</item>
+    </plurals>
+    <plurals name="time_ago_days">
+        <item quantity="zero">منذ %d يوم</item>
+        <item quantity="one">منذ يوم واحد</item>
+        <item quantity="two">منذ يومين</item>
+        <item quantity="few">منذ %d أيام</item>
+        <item quantity="many">منذ %d يوماً</item>
+        <item quantity="other">منذ %d يوم</item>
+    </plurals>
+    <plurals name="time_ago_months">
+        <item quantity="zero">منذ %d شهر</item>
+        <item quantity="one">منذ شهر واحد</item>
+        <item quantity="two">منذ شهرين</item>
+        <item quantity="few">منذ %d أشهر</item>
+        <item quantity="many">منذ %d شهراً</item>
+        <item quantity="other">منذ %d شهر</item>
+    </plurals>
+    <plurals name="saved_trails_count">
+        <item quantity="zero">لا توجد مسارات محفوظة</item>
+        <item quantity="one">مسار واحد محفوظ</item>
+        <item quantity="two">مساران محفوظان</item>
+        <item quantity="few">%d مسارات محفوظة</item>
+        <item quantity="many">%d مساراً محفوظاً</item>
+        <item quantity="other">%d مسار محفوظ</item>
+    </plurals>
+    <plurals name="minutes_count">
+        <item quantity="zero">%d دقيقة</item>
+        <item quantity="one">دقيقة واحدة</item>
+        <item quantity="two">دقيقتان</item>
+        <item quantity="few">%d دقائق</item>
+        <item quantity="many">%d دقيقة</item>
+        <item quantity="other">%d دقيقة</item>
+    </plurals>
+    <plurals name="home_activity_count">
+        <item quantity="zero">لا توجد أنشطة مسجّلة</item>
+        <item quantity="one">نشاط واحد مسجّل</item>
+        <item quantity="two">نشاطان مسجّلان</item>
+        <item quantity="few">%d أنشطة مسجّلة</item>
+        <item quantity="many">%d نشاطاً مسجّلاً</item>
+        <item quantity="other">%d نشاط مسجّل</item>
+    </plurals>
+
+    <!-- Units, filters -->
+    <string name="filter_all">الكل</string>
+    <string name="history_empty_filter">لا توجد أنشطة في هذا التصنيف</string>
+    <string name="unit_km">%1$s كم</string>
+    <string name="unit_m">%1$s م</string>
+    <string name="unit_kmh">%1$s كم/س</string>
+    <string name="duration_hours_minutes">%1$s س %2$s د</string>
+    <string name="duration_minutes">%1$s د</string>
+
+    <!-- CommunityScreen.kt -->
+    <string name="error_slow_connection">اتصالك بالإنترنت بطيء أو غير مستقر.</string>
+    <string name="community_new_event">فعالية جديدة</string>
+    <string name="community_new_post">منشور جديد</string>
+    <string name="trail_invalid">مسار غير صالح.</string>
+    <string name="common_loading">جارٍ التحميل…</string>
+    <string name="post_publishing">جارٍ نشر منشورك…</string>
+    <string name="post_published">تم نشر المنشور!</string>
+    <string name="community_title">المجتمع</string>
+    <string name="images_upload_failed">تعذّر رفع الصور: %1$s</string>
+    <string name="event_create_failed">تعذّر إنشاء الفعالية: %1$s</string>
+    <string name="default_user_name">مستخدم</string>
+    <string name="post_upload_failed">تعذّر نشر المنشور: %1$s</string>
+
+    <!-- CreatePostScreen.kt -->
+    <string name="post_discard_confirm">هل تريد إلغاء إنشاء المنشور؟</string>
+    <string name="confirm_exit_title">تأكيد الخروج</string>
+    <string name="common_continue">متابعة</string>
+    <string name="common_discard">تجاهل</string>
+    <string name="post_publish_button">نشر المنشور</string>
+    <string name="moderation_unavailable">فحص المحتوى غير متاح حالياً – يُستخدم الفلتر المحلي فقط.</string>
+    <string name="moderation_rephrase">يرجى إعادة الصياغة – وُجدت كلمات غير مناسبة.</string>
+    <string name="moderation_blocked">المحتوى مسيء وتم حظره.</string>
+    <string name="post_content_required">اكتب محتوى للمنشور.</string>
+    <string name="error_select_trail">اختر مساراً.</string>
+    <string name="field_photos">الصور</string>
+    <string name="post_description_label">وصف المنشور</string>
+    <string name="select_trail">اختر مساراً</string>
+    <string name="trails_load_failed_retry">تعذّر تحميل المسارات. حاول مرة أخرى لاحقاً.</string>
+    <string name="field_trail">المسار</string>
+
+    <!-- CreateGroupScreen.kt -->
+    <string name="common_close">إغلاق</string>
+    <string name="common_lets_go">هيا بنا 🚀</string>
+    <string name="group_saved">تم حفظ المجموعة</string>
+    <string name="group_saved_local">✅ تم حفظ المجموعة على هذا الجهاز</string>
+    <string name="group_created_synced">✨ تم إنشاء المجموعة وحفظها!</string>
+    <string name="group_save_button">حفظ المجموعة</string>
+    <string name="common_saving">جارٍ الحفظ…</string>
+    <string name="error_location_unavailable_retry">تعذّر تحديد موقعك — حاول مجدداً.</string>
+    <string name="error_location_permission">لم يتم منح إذن الموقع.</string>
+    <string name="group_name_required">أدخل اسم المجموعة.</string>
+    <string name="group_private">مجموعة خاصة</string>
+    <string name="group_public">مجموعة عامة</string>
+    <string name="group_description_label">وصف المجموعة</string>
+    <string name="group_name_label">اسم المجموعة</string>
+    <string name="group_create_title">إنشاء مجموعة جديدة</string>
+
+    <!-- FindNearbyGroupsScreen.kt -->
+    <string name="common_grant_permission">منح الإذن</string>
+    <string name="groups_location_needed">إذن الموقع مطلوب للعثور على المجموعات القريبة.</string>
+    <string name="groups_join">انضمام</string>
+    <string name="groups_connect_offline">اتصال دون إنترنت (P2P)</string>
+    <string name="groups_distance">المسافة: %1$s</string>
+    <string name="groups_no_location">بدون موقع</string>
+    <string name="groups_no_location_offline">بدون موقع (دون اتصال)</string>
+    <string name="groups_none_local">لا توجد مجموعات محلية على هذا الجهاز</string>
+    <string name="groups_join_saved_offline">تم حفظ الانضمام دون اتصال وسيُزامَن عند توفر الإنترنت.</string>
+    <string name="groups_already_joined">لقد انضممت إلى هذه المجموعة بالفعل.</string>
+    <string name="groups_joined">تم انضمامك إلى المجموعة!</string>
+    <string name="groups_sign_in_to_join">سجّل الدخول للانضمام.</string>
+    <string name="groups_none_in_range">لا توجد مجموعات ضمن %1$s كم</string>
+    <string name="groups_waiting_location">بانتظار الموقع…</string>
+    <string name="groups_tab_local">على هذا الجهاز (دون اتصال)</string>
+    <string name="groups_tab_nearby">القريبة</string>
+    <string name="groups_status_location_on">📡 الموقع نشط</string>
+    <string name="groups_status_locating">📡 جارٍ تحديد موقعك…</string>
+    <string name="groups_status_no_permission">🚫 إذن الموقع غير ممنوح</string>
+    <string name="common_refresh">تحديث</string>
+    <string name="groups_nearby_title">المجموعات القريبة</string>
+    <string name="error_location_not_received">لم يتم استلام الموقع.</string>
+    <string name="error_location_failed">تعذّر الحصول على موقعك.</string>
+
+    <!-- CreateEventScreen.kt -->
+    <string name="event_discard_confirm">هل تريد إلغاء إنشاء الفعالية؟</string>
+    <string name="event_pick_end_date">اختر تاريخ الانتهاء</string>
+    <string name="event_pick_start_date">اختر تاريخ البدء</string>
+    <string name="event_create_button">إنشاء الفعالية</string>
+    <string name="moderation_event_blocked">محتوى الفعالية مسيء وتم حظره.</string>
+    <string name="error_end_time_required">اختر وقت الانتهاء.</string>
+    <string name="error_start_time_required">اختر وقت البدء.</string>
+    <string name="error_end_date_required">اختر تاريخ الانتهاء.</string>
+    <string name="error_start_date_required">اختر تاريخ البدء.</string>
+    <string name="error_location_required">أدخل الموقع.</string>
+    <string name="error_description_required">أدخل الوصف.</string>
+    <string name="error_title_required">أدخل العنوان.</string>
+    <string name="event_datetimes_invalid">أدخل تواريخ وأوقاتاً صحيحة.</string>
+    <string name="event_start_date_before_end">يجب أن يكون تاريخ البدء قبل تاريخ الانتهاء.</string>
+    <string name="event_start_time_before_end">يجب أن يكون وقت البدء قبل وقت الانتهاء.</string>
+    <string name="event_datetime_invalid">أدخل تاريخاً ووقتاً صحيحين.</string>
+    <string name="event_registration_open_q">هل التسجيل مفتوح؟</string>
+    <string name="event_registration_header">التسجيل في الفعالية</string>
+    <string name="event_end_time">وقت الانتهاء: %1$s</string>
+    <string name="event_start_time">وقت البدء: %1$s</string>
+    <string name="event_times_header">الأوقات</string>
+    <string name="event_end_date">تاريخ الانتهاء: %1$s</string>
+    <string name="event_start_date">تاريخ البدء: %1$s</string>
+    <string name="event_dates_header">التواريخ</string>
+    <string name="event_location_label">موقع الفعالية</string>
+    <string name="field_description">الوصف</string>
+    <string name="event_title_label">عنوان الفعالية</string>
+
+    <!-- EventDetailsScreen.kt -->
+    <string name="event_pick_end_time">اختر وقت الانتهاء</string>
+    <string name="event_pick_start_time">اختر وقت البدء</string>
+    <string name="event_registration_closed_short">مغلق</string>
+    <string name="event_registration_open">مفتوح</string>
+    <string name="event_field_registration">📌 حالة التسجيل</string>
+    <string name="event_field_trail">🥾 المسار</string>
+    <string name="event_field_location">📍 الموقع</string>
+    <string name="event_field_times">⏰ الأوقات</string>
+    <string name="event_field_dates">📅 التواريخ</string>
+    <string name="event_field_description">🗒️ الوصف</string>
+    <string name="event_end_after_start_time">يجب أن يكون وقت الانتهاء بعد وقت البدء</string>
+    <string name="event_field_end_time">⏰ وقت الانتهاء</string>
+    <string name="event_field_start_time">⏰ وقت البدء</string>
+    <string name="event_end_after_start_date">يجب أن يكون تاريخ الانتهاء بعد تاريخ البدء</string>
+    <string name="event_field_end_date">📅 تاريخ الانتهاء</string>
+    <string name="event_field_start_date">📅 تاريخ البدء</string>
+    <string name="field_location">الموقع</string>
+    <string name="field_title">العنوان</string>
+    <string name="event_cancel_registration">إلغاء التسجيل</string>
+    <string name="event_cancel_failed">تعذّر الإلغاء حالياً، حاول مجدداً.</string>
+    <string name="event_unregistered">تم إلغاء التسجيل</string>
+    <string name="event_already_registered">✅ أنت مسجّل بالفعل في هذه الفعالية</string>
+    <string name="event_registration_closed">التسجيل مغلق</string>
+    <string name="event_register_cta">سجّل الآن</string>
+    <string name="event_register_failed">تعذّر التسجيل. حاول مرة أخرى لاحقاً.</string>
+    <string name="event_register_success">تم تسجيلك بنجاح!</string>
+    <string name="event_delete_button">🗑️ حذف الفعالية</string>
+    <string name="event_deleted">تم حذف الفعالية</string>
+    <string name="event_edit_button">✏️ تعديل الفعالية</string>
+    <string name="event_save_changes">💾 حفظ التغييرات</string>
+    <string name="event_updated">تم تحديث الفعالية</string>
+    <string name="event_attendees_title">👥 المشاركون في الفعالية</string>
+
+    <!-- Plurals (events) -->
+    <plurals name="event_registered_count">
+        <item quantity="zero">لم يسجّل أحد حتى الآن</item>
+        <item quantity="one">سجّل شخص واحد حتى الآن</item>
+        <item quantity="two">سجّل شخصان حتى الآن</item>
+        <item quantity="few">سجّل %d أشخاص حتى الآن</item>
+        <item quantity="many">سجّل %d شخصاً حتى الآن</item>
+        <item quantity="other">سجّل %d شخص حتى الآن</item>
+    </plurals>
+
+    <!-- Misc -->
+    <string name="common_choose">اختر</string>
+
+    <!-- SearchScreen.kt -->
+    <string name="filter_reset">🔄 إعادة ضبط التصفية</string>
+    <string name="filter_min_elevation">⛰️ الحد الأدنى للارتفاع المكتسب: %1$s م</string>
+    <string name="filter_group_type">👥 نوع المجموعة:</string>
+    <string name="filter_suitable_for">🏃‍♂️ مناسب لـ:</string>
+    <string name="tag_accessible">مهيّأ لذوي الإعاقة</string>
+    <string name="tag_extreme">مقطع شديد الصعوبة</string>
+    <string name="tag_viewpoint">إطلالة</string>
+    <string name="tag_water">مياه</string>
+    <string name="tag_forest">غابة</string>
+    <string name="filter_by_tags_header">🎯 التصفية حسب الوسوم</string>
+    <string name="filter_by_tags_title">التصفية حسب الوسوم</string>
+    <string name="filter_apply">تطبيق التصفية</string>
+    <string name="search_nearby_title">📍 مسارات قريبة منك</string>
+    <string name="search_results_title">🔍 نتائج بحثك</string>
+    <string name="search_sort_button">⚙️ الترتيب: %1$s</string>
+    <string name="search_filter_button">🎯 تصفية</string>
+    <string name="search_no_results_for">لا توجد نتائج لـ «%1$s»</string>
+    <string name="trails_loading">جارٍ تحميل المسارات…</string>
+    <string name="search_history_title">🕘 سجل البحث</string>
+    <string name="search_show_my_location">عرض الموقع الحالي</string>
+    <string name="search_show_nearby">عرض المسارات القريبة</string>
+    <string name="common_search">بحث</string>
+    <string name="search_failed">تعذّر إجراء البحث.</string>
+    <string name="search_no_results">لم يتم العثور على نتائج.</string>
+    <string name="search_clear">مسح البحث</string>
+    <string name="search_place_hint">ابحث عن مكان</string>
+
+    <!-- TrailDetailsScreen.kt -->
+    <string name="trail_saved_offline">تم حفظ المسار للاستخدام دون اتصال!</string>
+    <string name="trail_play_video">تشغيل الفيديو</string>
+    <string name="share_chooser_title">المشاركة عبر</string>
+    <string name="share_button">🔗 مشاركة</string>
+    <string name="share_failed">تعذّرت المشاركة. حاول مجدداً.</string>
+    <string name="bookmark_add_button">إضافة إلى المفضلة</string>
+    <string name="bookmark_remove_button">إزالة من المفضلة</string>
+    <string name="bookmark_removed">تمت الإزالة من المفضلة</string>
+    <string name="bookmark_added">تمت الإضافة إلى المفضلة</string>
+    <string name="bookmarks_sign_in_to_save">سجّل الدخول للحفظ في المفضلة.</string>
+    <string name="trail_save_button">حفظ المسار</string>
+    <string name="trail_save_error">تعذّر حفظ المسار.</string>
+    <string name="error_not_signed_in">لم تسجّل الدخول.</string>
+    <string name="trail_already_saved">هذا المسار محفوظ بالفعل.</string>
+    <string name="trail_saved">تم حفظ المسار</string>
+    <string name="trail_download_button">⬇️ تنزيل للاستخدام دون اتصال</string>
+    <string name="trail_start_button">🚀 ابدأ المسار</string>
+    <string name="trail_location_unavailable">الموقع غير متاح حالياً.</string>
+    <string name="trail_location_permission_needed">اسمح بالوصول إلى الموقع لبدء المسار.</string>
+    <string name="common_options">خيارات</string>
+    <string name="trail_downloading_offline">جارٍ تنزيل المسار للاستخدام دون اتصال</string>
+    <string name="stat_max_elevation">أقصى ارتفاع</string>
+    <string name="stat_elevation_gain">الارتفاع المكتسب</string>
+    <string name="trail_details_header">تفاصيل المسار</string>
+    <string name="stat_difficulty">الصعوبة</string>
+    <string name="stat_time">الوقت</string>
+    <string name="stat_length">الطول</string>
+
+    <!-- TrailDiscoveryScreen.kt -->
+    <string name="adjust_filters">جرّب تعديل عوامل التصفية</string>
+    <string name="trails_none_found">لم يتم العثور على مسارات</string>
+    <string name="discovering_trails">جارٍ اكتشاف المسارات…</string>
+    <string name="difficulty_extreme">شديد الصعوبة</string>
+    <string name="difficulty_hard">صعب</string>
+    <string name="difficulty_moderate">متوسط</string>
+    <string name="difficulty_easy">سهل</string>
+    <string name="location_wait_or_check">يرجى الانتظار أو التحقق من أذونات الموقع</string>
+    <string name="location_getting">جارٍ تحديد موقعك…</string>
+    <string name="stat_duration">المدة</string>
+    <string name="stat_elevation">الارتفاع</string>
+    <string name="stat_distance">المسافة</string>
+    <string name="unknown_location">موقع غير معروف</string>
+    <string name="sort_by">ترتيب حسب</string>
+    <string name="min_elevation_gain">أدنى ارتفاع مكتسب: %1$s م</string>
+    <string name="max_distance">أقصى مسافة: %1$s كم</string>
+    <string name="field_difficulty">الصعوبة</string>
+    <string name="type_offroad_chip">🚙 الطرق الوعرة</string>
+    <string name="type_cycling_chip">🚴 ركوب الدراجات</string>
+    <string name="type_hiking_chip">🥾 المشي</string>
+    <string name="common_filters">عوامل التصفية</string>
+    <string name="discover_title">اكتشف المسارات</string>
+
+    <!-- OfflineTrailDetailsScreen.kt -->
+    <string name="trail_difficulty_line">📈 الصعوبة: %1$s</string>
+    <string name="trail_rating_line">⭐ التقييم: %1$s/5</string>
+    <string name="trail_time_line">⏱️ الوقت: %1$s د</string>
+    <string name="trail_length_line">🛣️ الطول: %1$s م</string>
+
+    <!-- SavedTrailsScreen.kt -->
+    <string name="saved_trails_delete_confirm">هل تريد حذف المسارات المحددة؟</string>
+    <string name="confirm_delete_title">تأكيد الحذف</string>
+    <string name="common_delete">حذف</string>
+    <string name="saved_trails_title">المسارات المحفوظة</string>
+
+    <!-- CloudSavedTrailsScreen.kt -->
+    <string name="trail_distance_line">🛣 المسافة: %1$s م</string>
+
+    <!-- MapResultScreen.kt -->
+    <string name="map_go_to_trail">🚀 الانتقال إلى المسار</string>
+    <string name="map_no_trail_selected">لم يتم اختيار مسار.</string>
+    <string name="common_no">لا</string>
+    <string name="common_yes">نعم</string>
+    <string name="map_is_hiking">🥾 مسار مشي:</string>
+    <string name="map_points_count">🧭 عدد النقاط:</string>
+
+    <!-- TrailBottomSheet.kt -->
+    <string name="sheet_view_full_details">عرض التفاصيل الكاملة</string>
+    <string name="sheet_start_navigation">بدء التنقل</string>
+    <string name="sheet_current_conditions">الظروف الحالية</string>
+    <string name="sheet_features">المميزات</string>
+    <string name="sheet_surface">نوع السطح</string>
+    <string name="sheet_trail_type">فئة المسار</string>
+    <string name="sheet_one_way">باتجاه واحد</string>
+    <string name="sheet_loop">دائري</string>
+    <string name="sheet_route_type">نوع المسار</string>
+    <string name="sheet_trail_info">معلومات المسار</string>
+    <string name="sheet_about">نبذة</string>
+
+    <!-- Sorting, tags, misc -->
+    <string name="sort_distance">الأقرب أولاً</string>
+    <string name="sort_length_desc">الأطول أولاً</string>
+    <string name="sort_length_asc">الأقصر أولاً</string>
+    <string name="sort_difficulty_asc">الأسهل أولاً</string>
+    <string name="sort_difficulty_desc">الأصعب أولاً</string>
+    <string name="sort_name">الاسم (أ–ي)</string>
+    <string name="tag_walk">المشي</string>
+    <string name="tag_bike">ركوب الدراجات</string>
+    <string name="tag_car">سيارة</string>
+    <string name="group_solo">فرد</string>
+    <string name="group_couple">زوجان</string>
+    <string name="group_family">عائلة</string>
+    <string name="group_small_kids">أطفال صغار</string>
+    <string name="common_unavailable">غير متاح</string>
+    <string name="saved_trail_summary">الطول: %1$s، الوقت: %2$s</string>
+
+    <!-- Plurals (trails) -->
+    <plurals name="trails_found_count">
+        <item quantity="zero">لم يُعثر على مسارات</item>
+        <item quantity="one">تم العثور على مسار واحد</item>
+        <item quantity="two">تم العثور على مسارين</item>
+        <item quantity="few">تم العثور على %d مسارات</item>
+        <item quantity="many">تم العثور على %d مساراً</item>
+        <item quantity="other">تم العثور على %d مسار</item>
+    </plurals>
+    <plurals name="delete_trails_count">
+        <item quantity="zero">حذف %d مسار</item>
+        <item quantity="one">حذف مسار واحد</item>
+        <item quantity="two">حذف مسارين</item>
+        <item quantity="few">حذف %d مسارات</item>
+        <item quantity="many">حذف %d مساراً</item>
+        <item quantity="other">حذف %d مسار</item>
+    </plurals>
+
+    <!-- NavigationScreen.kt -->
+    <string name="nav_suitable_for">المسار مناسب لـ:</string>
+    <string name="tag_chip_accessible">♿ مهيّأ لذوي الإعاقة</string>
+    <string name="tag_chip_extreme">⚠️ شديد الصعوبة</string>
+    <string name="tag_chip_viewpoint">🔭 إطلالة</string>
+    <string name="tag_chip_water">💧 مياه</string>
+    <string name="tag_chip_forest">🌲 غابة</string>
+    <string name="nav_more_tags">وسوم إضافية</string>
+    <string name="nav_difficulty_label">مستوى الصعوبة:</string>
+    <string name="nav_rate_trail">قيّم المسار:</string>
+    <string name="field_trail_name">اسم المسار</string>
+    <string name="nav_mode_locked">لا يمكن تغيير وضع التنقل أثناء الملاحة.</string>
+    <string name="nav_report_desc">إبلاغ</string>
+    <string name="nav_stop_button">إيقاف التنقل</string>
+    <string name="nav_mic_desc">الميكروفون</string>
+    <string name="nav_mic_off">🔇 تم إيقاف الميكروفون</string>
+    <string name="nav_mic_on">🎙️ تم تشغيل الميكروفون</string>
+    <string name="nav_group_list_desc">قائمة المجموعة</string>
+    <string name="nav_group_screen_error">تعذّر فتح شاشة أعضاء المجموعة.</string>
+    <string name="default_user_numbered">مستخدم %1$s</string>
+    <string name="nav_no_group">لا توجد مجموعة – أنشئ مجموعة أو انضم إلى واحدة أولاً.</string>
+    <string name="nav_confirm_and_save">تأكيد وحفظ</string>
+    <string name="trail_saved_success">تم حفظ المسار بنجاح!</string>
+    <string name="nav_no_connection_retry">لا يوجد اتصال مستقر، حاول لاحقاً.</string>
+    <string name="nav_close">❌ إغلاق</string>
+    <string name="nav_create_event">📅 إنشاء فعالية</string>
+    <string name="nav_create_post">📝 إنشاء منشور</string>
+    <string name="nav_share_with_community">هل تريد مشاركته مع المجتمع؟</string>
+    <string name="nav_route_saved_title">✨ تم حفظ المسار!</string>
+    <string name="nav_empty_route">لا يمكن حفظ مسار دون حركة.</string>
+    <string name="nav_stop_confirm_title">إيقاف التنقل؟</string>
+    <string name="nav_continue">متابعة التنقل</string>
+    <string name="nav_stop_and_exit">إيقاف والخروج</string>
+    <string name="nav_stop_confirm_message">هل أنت متأكد أنك تريد إيقاف التنقل؟</string>
+    <string name="nav_unstable_connection">الاتصال غير مستقر، لكننا سنبدأ التنقل.</string>
+    <string name="nav_center_me_desc">توسيط الخريطة على موقعي</string>
+    <string name="nav_change_view_desc">تغيير العرض</string>
+
+    <!-- TrailNavigationScreen.kt -->
+    <string name="nav_distance_to_start">المسافة إلى نقطة البداية: %1$s</string>
+    <string name="nav_continue_straight">استمر بشكل مستقيم</string>
+    <string name="nav_arrived">لقد وصلت إلى الوجهة!</string>
+    <string name="nav_go_to_start">توجّه إلى بداية المسار</string>
+
+    <!-- TrackingScreen.kt -->
+    <string name="tracking_finish">إنهاء</string>
+    <string name="tracking_resume">استئناف</string>
+    <string name="tracking_pause">إيقاف مؤقت</string>
+    <string name="tracking_start">ابدأ التسجيل</string>
+    <string name="stat_calories">السعرات الحرارية</string>
+    <string name="stat_avg_pace">متوسط الوتيرة</string>
+    <string name="stat_speed">السرعة</string>
+    <string name="tracking_paused">متوقف مؤقتاً</string>
+    <string name="tracking_recording">جارٍ التسجيل</string>
+
+    <!-- TrackingActivity.kt -->
+    <string name="tracking_location_permission_needed">اسمح بالوصول إلى الموقع لتسجيل نشاط.</string>
+
+    <!-- NavigationUI.kt -->
+
+    <!-- ElevationProfile.kt -->
+    <string name="elev_min">الأدنى</string>
+    <string name="elev_max">الأعلى</string>
+    <string name="elev_loss">هبوط</string>
+    <string name="elev_gain">صعود</string>
+
+    <!-- TrailNavigationActivity.kt -->
+    <string name="trail_data_unavailable">بيانات المسار غير متاحة.</string>
+    <string name="nav_location_permission_needed">اسمح بالوصول إلى الموقع للتنقل في المسار.</string>
+
+    <!-- MainActivity.kt -->
+    <string name="map_style_outdoors">التضاريس</string>
+    <string name="map_style_light">فاتح</string>
+    <string name="map_style_dark">داكن</string>
+    <string name="map_style_satellite">قمر صناعي</string>
+    <string name="map_style_standard">قياسي</string>
+    <string name="map_style_title">اختر نمط الخريطة</string>
+    <string name="main_record_hike">سجّل رحلتي</string>
+    <string name="menu_desc">القائمة</string>
+    <string name="location_services_off">خدمات الموقع غير مفعّلة.</string>
+    <string name="conversion_error">خطأ في التحويل: %1$s</string>
+    <string name="map_location_permission_needed">اسمح بالوصول إلى الموقع ليعمل عرض الخريطة.</string>
+
+    <!-- WalkieTalkieScreen.kt -->
+    <string name="walkie_participants">المشاركون (%1$s)</string>
+    <string name="walkie_stop">إيقاف</string>
+    <string name="walkie_start">ابدأ التواصل</string>
+    <string name="walkie_enter_code">أدخل رمز المجموعة.</string>
+    <string name="walkie_join">انضمام</string>
+    <string name="walkie_host">مضيف</string>
+    <string name="walkie_mode_label">الوضع:</string>
+    <string name="walkie_room_label">رمز المجموعة / الغرفة</string>
+    <string name="walkie_username_label">اسمك في المجموعة</string>
+    <string name="walkie_title">اللاسلكي</string>
+    <string name="walkie_permissions_needed">مطلوب إذن الصوت والأجهزة القريبة للبدء.</string>
+    <string name="error_generic">حدث خطأ ما</string>
+    <string name="walkie_mode_connecting">⚠️ جارٍ الاتصال…</string>
+    <string name="walkie_mode_local">📡 اتصال محلي P2P (حتى %1$s م)</string>
+    <string name="walkie_mode_internet">🌐 وضع الإنترنت (مدى غير محدود)</string>
+    <string name="walkie_connecting">جارٍ الاتصال…</string>
+
+    <!-- WalkieTalkieService.kt -->
+    <string name="walkie_channel_name">قناة اللاسلكي</string>
+    <string name="walkie_service_text">خدمة الصوت نشطة</string>
+    <string name="walkie_service_title">اللاسلكي قيد التشغيل</string>
+
+    <!-- Walkie / tags -->
+    <string name="tag_offroad">مركبات الطرق الوعرة</string>
+    <string name="walkie_current_speaker">المتحدث الحالي: %1$s</string>
+    <string name="walkie_no_speaker">— لا أحد —</string>
+
+    <!-- Utils.kt -->
+    <string name="group_create">إنشاء مجموعة</string>
+    <string name="groups_find">ابحث عن مجموعات</string>
+    <string name="nav_group_needs_group">لبدء التنقل الجماعي، انضم إلى مجموعة نشطة أو أنشئ مجموعة جديدة.</string>
+    <string name="nav_mode_group">جماعي</string>
+    <string name="nav_mode_solo">فردي</string>
+    <string name="angle_set">تأكيد</string>
+    <string name="angle_title">اختر الزاوية المناسبة</string>
+    <string name="shared_trail_message">شارك %1$s معك مساراً جديداً!</string>
+    <string name="shared_trail_title">🚀 مسار مشترك</string>
+    <string name="trail_go_to">الانتقال إلى المسار</string>
+    <string name="unknown_user">مستخدم غير معروف</string>
+    <string name="common_got_it">فهمت</string>
+    <string name="location_needed_for_navigation">فعّل خدمات الموقع لبدء التنقل.</string>
+    <string name="location_off_short">خدمات الموقع متوقفة</string>
+    <string name="common_maybe_later">ربما لاحقاً</string>
+    <string name="location_turn_on">تفعيل الموقع</string>
+    <string name="location_off_body">فعّل خدمات الموقع لتستمتع بالمسارات من حولك.</string>
+    <string name="location_off_title">يبدو أن خدمات الموقع متوقفة</string>
+    <string name="saved_empty_body">اخرج في رحلة واحفظ مساراً</string>
+    <string name="saved_empty_title">لا توجد مسارات محفوظة!</string>
+    <string name="nav_turn_left">انعطف يساراً</string>
+    <string name="nav_turn_right">انعطف يميناً</string>
+    <string name="nav_turn_around">استدر للخلف</string>
+    <string name="trail_upload_error">تعذّر حفظ المسار: %1$s</string>
+    <string name="trail_link_save_error">تعذّر ربط المسار بحسابك: %1$s</string>
+    <string name="trail_in_place">مسار في %1$s</string>
+
+    <!-- Card.kt -->
+    <string name="card_points_and_label">%1$s نقطة • %2$s</string>
+    <string name="trail_view_desc">عرض المسار</string>
+    <string name="trail_kind_offroad">مسار وعر</string>
+    <string name="trail_kind_bike">مسار دراجات</string>
+    <string name="trail_kind_hiking">مسار مشي</string>
+    <string name="post_delete_confirm">هل أنت متأكد أنك تريد حذف هذا المنشور؟ لا يمكن التراجع عن هذا الإجراء.</string>
+    <string name="common_send">إرسال</string>
+    <string name="comment_add_hint">أضف تعليقاً…</string>
+    <string name="comments_title">التعليقات</string>
+    <string name="event_register_button">التسجيل في الفعالية</string>
+    <string name="comment_add_label">أضف تعليقاً</string>
+    <string name="comment_desc">تعليق</string>
+    <string name="like_desc">إعجاب</string>
+    <string name="common_read_more">اقرأ المزيد</string>
+    <string name="common_show_less">عرض أقل</string>
+    <string name="event_delete">حذف الفعالية</string>
+    <string name="post_delete">حذف المنشور</string>
+
+    <!-- OutdoorWeatherService.kt -->
+    <string name="w_err_get">تعذّر الحصول على بيانات الطقس</string>
+    <string name="w_rec_dangerous">حافظ على سلامتك – تجنّب الأنشطة الخارجية. 🚨</string>
+    <string name="w_rec_poor">غير مثالي، لكن يمكن التعامل معه باتخاذ الاحتياطات. ⚠️</string>
+    <string name="w_rec_fair">مناسب للأنشطة الخارجية مع الاستعداد الجيد. 👌</string>
+    <string name="w_rec_good">يوم رائع للخروج إلى الطبيعة! ✨</string>
+    <string name="w_rec_excellent">ظروف مثالية للأنشطة الخارجية! 🌟</string>
+    <string name="w_warn_dry">🏜️ جفاف شديد – حافظ على ترطيب جسمك</string>
+    <string name="w_warn_humid">💧 رطوبة عالية – قد تشعر بعدم الارتياح</string>
+    <string name="w_warn_thunderstorm">⚡ عاصفة رعدية – احتمِ فوراً</string>
+    <string name="w_warn_light_precip">🌧️ مطر أو ثلج خفيف</string>
+    <string name="w_warn_heavy_precip">☔ هطول غزير – الرؤية ضعيفة</string>
+    <string name="w_warn_dangerous_wind">🚨 رياح خطيرة – ابقَ في الداخل</string>
+    <string name="w_warn_strong_wind">⚠️ رياح قوية – توخَّ الحذر</string>
+    <string name="w_warn_windy">💨 رياح نشطة</string>
+    <string name="w_warn_humidity_heat">💦 الرطوبة تجعل الطقس يبدو أحرّ</string>
+    <string name="w_warn_wind_chill">🌬️ الرياح تجعل الطقس يبدو أبرد</string>
+    <string name="w_warn_dangerous_heat">🚨 حرارة خطيرة – تجنّب الأنشطة في الهواء الطلق</string>
+    <string name="w_warn_very_hot">⚠️ حرارة شديدة – خطر الإجهاد الحراري</string>
+    <string name="w_warn_hot">🔥 طقس حار – حافظ على ترطيب جسمك</string>
+    <string name="w_warn_very_cold">🥶 برد قارس – ارتدِ ملابس دافئة</string>
+    <string name="w_warn_extreme_cold">⚠️ برد شديد – خطر قضمة الصقيع</string>
+    <string name="w_err_fetch">تعذّر جلب بيانات الطقس</string>
+
+    <!-- WeatherIndicator.kt -->
+
+    <!-- ReportDialog.kt -->
+    <string name="report_points_awarded">🏅 +5 نقاط!</string>
+    <string name="report_save_failed">تعذّر حفظ البلاغ.</string>
+    <string name="report_location_unavailable">الموقع غير متاح، حاول مجدداً.</string>
+    <string name="report_select_category">اختر فئة.</string>
+    <string name="report_description_hint">الوصف (اختياري)</string>
+
+    <!-- ReportDialogsAndSheets.kt -->
+    <string name="poi_short">موقع</string>
+    <string name="poi_report_desc">الإبلاغ عن نقطة اهتمام</string>
+    <string name="report_hazard_short">خطر</string>
+    <string name="report_hazard_title">الإبلاغ عن خطر</string>
+    <string name="report_selected_toast">تم اختيار: %1$s</string>
+    <string name="poi_title">نقطة اهتمام</string>
+    <string name="report_sent_toast">تم إرسال البلاغ: %1$s</string>
+
+    <!-- ReportOptions.kt -->
+    <string name="poi_fuel">محطة وقود</string>
+    <string name="poi_parking">موقف سيارات</string>
+    <string name="poi_shade">منطقة ظليلة</string>
+    <string name="poi_camping">مكان للتخييم</string>
+    <string name="poi_viewpoint">نقطة إطلالة</string>
+    <string name="poi_spring">نبع ماء</string>
+    <string name="report_flood">سيول</string>
+    <string name="report_rollover">خطر الانقلاب</string>
+    <string name="report_blocked_road">طريق مغلق</string>
+    <string name="report_mud">أرض موحلة</string>
+    <string name="report_cliff">جرف خطر</string>
+    <string name="report_obstacle">عائق في الطريق</string>
+
+    <!-- ImageUploader.kt -->
+    <string name="image_remove_desc">إزالة الصورة</string>
+    <string name="image_pick_title">اختر الصور</string>
+    <string name="image_source_camera">الكاميرا</string>
+    <string name="image_source_gallery">المعرض</string>
+    <string name="image_source_title">اختر مصدر الصورة</string>
+    <string name="image_replace_confirm">هل أنت متأكد أنك تريد استبدال صورتك الشخصية؟</string>
+    <string name="not_signed_in_upload">سجّل الدخول لرفع الصور</string>
+
+    <!-- Utils -->
+    <string name="trail_unnamed">مسار بلا اسم</string>
+
+    <!-- ScoutAI.kt -->
+    <string name="scout_q_expert">مسارات للخبراء</string>
+    <string name="scout_q_hard">مسارات صعبة</string>
+    <string name="scout_q_moderate">رحلات مشي متوسطة الصعوبة</string>
+    <string name="scout_q_easy">مسارات سهلة للمبتدئين</string>
+    <string name="scout_q_offroad">مغامرات الطرق الوعرة</string>
+    <string name="scout_q_cycling">مسارات دراجات قريبة</string>
+    <string name="scout_q_mtb_routes">ابحث عن مسارات دراجات الجبال</string>
+    <string name="scout_q_hiking_trails">اعرض مسارات المشي</string>
+    <string name="scout_q_bring">ماذا يجب أن أحضر معي؟</string>
+    <string name="scout_q_group">ابحث عن مجموعة للانضمام</string>
+    <string name="scout_q_navigation">كيف أستخدم التنقل؟</string>
+    <string name="scout_q_safety">نصائح السلامة للمشي</string>
+    <string name="scout_q_mtb">اقترح مسارات لدراجات الجبال</string>
+    <string name="scout_q_easy_hikes">أرني رحلات مشي سهلة</string>
+    <string name="scout_q_weather">كيف سيكون الطقس؟</string>
+    <string name="scout_sug_nearby">ابحث عن مسارات قريبة</string>
+    <string name="scout_sug_safety">احصل على نصائح السلامة</string>
+    <string name="scout_sug_weather">تحقق من الطقس</string>
+    <string name="scout_sug_recommended">عرض المسارات الموصى بها</string>
+    <string name="scout_unavailable">Scout غير متاح حالياً. حاول مرة أخرى. 📱</string>
+    <string name="scout_unreadable">تعذّر على Scout فهم هذه الرسالة. جرّب إعادة الصياغة. ✍️</string>
+    <string name="scout_limit_reached">وصلت إلى حدّ استخدام Scout لهذا اليوم. حاول مجدداً غداً. ⏳</string>
+    <string name="scout_sign_in">سجّل الدخول للدردشة مع Scout. 🔐</string>
+    <string name="scout_ask_something">اسألني أي شيء عن المسارات! 🥾</string>
+
+    <!-- VoiceScoutHelper.kt -->
+
+    <!-- DrawerMenuItem.kt -->
+    <string name="menu_map">الخريطة</string>
+
+    <!-- ProfileActivity.kt -->
+    <string name="profile_not_found">الملف الشخصي غير موجود.</string>
+
+    <!-- ScoutChatScreen.kt -->
+    <string name="scout_input_hint">اسأل Scout عن أي شيء…</string>
+    <string name="scout_quick_questions">أسئلة سريعة:</string>
+    <string name="scout_clear_chat">مسح المحادثة</string>
+    <string name="scout_online">متصل</string>
+    <string name="scout_oops">عذراً! حدث خطأ ما. حاول مرة أخرى. 😅</string>
+    <string name="scout_greeting">أهلاً بك! 👋 أنا Scout، رفيقك في المسارات! يمكنني مساعدتك في العثور على مسارات رائعة ومعرفة الطقس وتقديم نصائح السلامة وشرح استخدام التطبيق. ما المغامرة التي تخطط لها اليوم؟ 🏔️</string>
+
+    <!-- TrailNavigationScreen.kt -->
+    <string name="nav_in_distance">بعد %1$s، %2$s</string>
+
+    <!-- AnimatedBottomNav.kt -->
+
+    <!-- GroupConnectionManager.kt -->
+    <string name="walkie_mic_busy">الميكروفون مشغول، يستخدمه %1$s</string>
+    <string name="walkie_another_user">مستخدم آخر</string>
+
+    <!-- HybridGroupConnectionManager.kt -->
+    <string name="walkie_no_connection_available">لا يوجد اتصال متاح</string>
+    <string name="walkie_connection_lost">انقطع الاتصال. تحقق من إعدادات الشبكة.</string>
+
+    <!-- TransportCoordinator.kt -->
+    <string name="walkie_mode_text">الوضع: %1$s</string>
+    <string name="walkie_range_none">لا يوجد اتصال</string>
+    <string name="walkie_range_local">مدى %1$s م (P2P محلي)</string>
+    <string name="walkie_range_unlimited">مدى غير محدود (الإنترنت)</string>
+
+    <!-- Home / features -->
+    <string name="home_welcome_generic">أهلاً بك</string>
+    <string name="feat_waterfall">شلال</string>
+    <string name="feat_technical">تقني</string>
+    <string name="feat_4wd_only">دفع رباعي فقط</string>
+
+    <!-- Share / groups -->
+    <string name="share_trail_message">شاركتك مساري عبر تطبيق PATHY! 🌍\n%1$s</string>
+    <string name="unnamed_user">بلا اسم</string>
+
+    <!-- Plurals (reviews) -->
+    <plurals name="reviews_count">
+        <item quantity="zero">لا توجد تقييمات</item>
+        <item quantity="one">تقييم واحد</item>
+        <item quantity="two">تقييمان</item>
+        <item quantity="few">%d تقييمات</item>
+        <item quantity="many">%d تقييماً</item>
+        <item quantity="other">%d تقييم</item>
+    </plurals>
+
+    <!-- Units -->
+    <string name="unit_km_short">كم</string>
+    <string name="unit_min_short">د</string>
+    <string name="unit_min_per_km">د/كم</string>
+    <string name="unit_h">%1$s س</string>
+
+    <!-- recording -->
+    <string name="rec_channel_name">تسجيل الرحلة</string>
+    <string name="rec_channel_desc">يظهر أثناء تسجيل رحلة ليستمر التتبع والشاشة مطفأة.</string>
+    <string name="rec_notification_title">جارٍ تسجيل رحلتك</string>
+    <string name="rec_notification_paused">التسجيل متوقف مؤقتًا</string>
+    <string name="rec_notification_auto_paused">إيقاف تلقائي – توقفتَ عن الحركة</string>
+    <string name="rec_notification_text">%1$s · %2$s</string>
+    <string name="rec_action_pause">إيقاف مؤقت</string>
+    <string name="rec_action_resume">متابعة</string>
+    <string name="rec_action_finish">إنهاء</string>
+    <string name="rec_auto_paused_label">إيقاف تلقائي</string>
+    <string name="rec_saved_on_phone">حُفظت الرحلة على هاتفك وسترفع عند توفر الإنترنت.</string>
+    <string name="rec_sign_in_hint">لم تسجّل الدخول. ستبقى الرحلة على هاتفك حتى تسجّل الدخول.</string>
+
+    <!-- navigation -->
+    <string name="nav_bear_left">انعطف قليلًا يسارًا</string>
+    <string name="nav_bear_right">انعطف قليلًا يمينًا</string>
+    <string name="nav_sharp_left">انعطف يسارًا بحدّة</string>
+    <string name="nav_sharp_right">انعطف يمينًا بحدّة</string>
+    <string name="nav_follow_to_end">تابع المسار – %1$s حتى النهاية</string>
+    <string name="nav_off_route_title">خرجتَ عن المسار</string>
+    <string name="nav_off_route_detail">المسار على بعد %1$s – %2$s</string>
+    <string name="nav_back_on_route">عدتَ إلى المسار</string>
+    <string name="nav_joined">أنتَ الآن على المسار</string>
+    <string name="nav_remaining">المتبقي %1$s</string>
+    <string name="nav_locating">جارٍ تحديد موقعك…</string>
+    <string name="nav_record_start">ابدأ التسجيل</string>
+    <string name="nav_record_stop">أوقف التسجيل</string>
+
+    <!-- activity -->
+    <string name="activity_export_gpx">مشاركة بصيغة GPX</string>
+    <string name="activity_export_failed">تعذّر إنشاء ملف GPX.</string>
+    <string name="activity_share_title">مشاركة المسار</string>
+    <string name="activity_delete">حذف</string>
+    <string name="activity_delete_title">حذف هذا النشاط؟</string>
+    <string name="activity_delete_message">سيُحذف التسجيل ومساره ولا يمكن التراجع.</string>
+    <string name="activity_deleted">تم حذف النشاط</string>
+    <string name="activity_delete_failed">تعذّر حذف النشاط.</string>
+    <string name="activity_pending_upload">بانتظار الرفع</string>
+    <string name="activity_no_route">لم يُحفظ مسار لهذا النشاط.</string>
+    <string name="activity_stat_avg_speed">متوسط السرعة</string>
+    <string name="activity_stat_max_speed">أقصى سرعة</string>
+    <string name="activity_stat_calories">السعرات</string>
+    <string name="activity_stat_elevation_chart">الارتفاع</string>
+    <string name="unit_kcal">%1$s ك.س</string>
+
+    <!-- offline -->
+    <string name="trail_offline_failed">تعذّر تنزيل الخريطة. تحقّق من الاتصال وحاول مجددًا.</string>
+    <string name="trail_offline_hint">خريطة هذا المسار محفوظة على هاتفك.</string>
+
+    <!-- gpx -->
+    <string name="gpx_import">استيراد مسار GPX</string>
+    <string name="gpx_import_failed">تعذّرت قراءة الملف كمسار GPX.</string>
+    <string name="gpx_import_too_short">المسار قصير جدًا لا يمكن اتباعه.</string>
+
+    <!-- sort -->
+    <string name="sort_recommended">الموصى بها</string>
+
+    <!-- discovery -->
+    <string name="trail_chip_marked">مسار معلَّم</string>
+    <string name="trail_net_international">مسار دولي</string>
+    <string name="trail_net_national">مسار وطني</string>
+    <string name="trail_net_regional">مسار إقليمي</string>
+    <string name="trail_net_local">مسار محلي</string>
+    <string name="trail_chip_seasonal">موسمي</string>
+    <string name="trail_chip_hard">يصعب تتبّعه</string>
+    <string name="trail_chip_check">يحتاج تحققًا</string>
+    <string name="trail_chip_outdated">قد تكون البيانات قديمة</string>
+    <string name="trail_updated">حُدِّث %1$s</string>
+    <string name="trail_verified">تم التحقق ميدانيًا %1$s</string>
+    <string name="trail_marked_red">مسار بعلامة حمراء</string>
+    <string name="trail_marked_blue">مسار بعلامة زرقاء</string>
+    <string name="trail_marked_green">مسار بعلامة خضراء</string>
+    <string name="trail_marked_black">مسار بعلامة سوداء</string>
+    <string name="trail_marked_orange">مسار بعلامة برتقالية</string>
+    <string name="trail_marked_yellow">مسار بعلامة صفراء</string>
+    <string name="trail_marked_white">مسار بعلامة بيضاء</string>
+    <string name="trail_marked_purple">مسار بعلامة بنفسجية</string>
+    <string name="trail_marked_brown">مسار بعلامة بنية</string>
+    <string name="trail_marked_pink">مسار بعلامة وردية</string>
+    <string name="trail_marked_grey">مسار بعلامة رمادية</string>
+    <string name="discover_search_hint">ابحث عن أي مكان في العالم</string>
+    <string name="discover_search">بحث</string>
+    <string name="discover_near_me">بالقرب مني</string>
+    <string name="discover_exploring">تستكشف: %1$s</string>
+    <string name="discover_no_place">لم يُعثر على المكان. جرّب كتابة أخرى.</string>
+    <string name="discover_widened">لا مسارات قريبة، لذا وُسّع البحث إلى %1$s كم.</string>
+    <string name="discover_hidden_closed">أُخفيت لأنها مغلقة أو خاصة: %1$s</string>
+    <string name="discover_load_failed">تعذّر تحميل المسارات. تحقّق من الاتصال.</string>
+    <string name="discover_no_trails_here">لم نجد مسارات هنا. جرّب مكانًا آخر أو أنواعًا أكثر.</string>
+
+    <!-- discovery -->
+    <string name="discover_location_failed">تعذّر تحديد موقعك. ابحث عن مكان بالأعلى أو حاول مجددًا.</string>
+
+    <!-- conditions -->
+    <string name="cond_title">حالة المسار</string>
+    <string name="cond_no_reports">لا توجد بلاغات حديثة من المتنزهين.</string>
+    <string name="cond_open">أُبلغ أنه مفتوح وسهل التتبّع %1$s</string>
+    <string name="cond_muddy">أُبلغ أنه موحل أو صعب العبور %1$s</string>
+    <string name="cond_blocked">أُبلغ أنه مسدود %1$s</string>
+    <string name="cond_closed">أُبلغ أنه مغلق %1$s</string>
+    <string name="cond_not_found">أُبلغ أنه غير موجود أو غير معلَّم %1$s</string>
+    <string name="cond_agree">%1$s من %2$s بلاغات حديثة متفقة</string>
+    <string name="cond_report_button">أبلغ عن حالة المسار</string>
+    <string name="cond_report_title">كيف حال المسار اليوم؟</string>
+    <string name="cond_opt_open">مفتوح وسهل التتبّع</string>
+    <string name="cond_opt_muddy">موحل أو صعب العبور</string>
+    <string name="cond_opt_blocked">مسدود (شجرة، فيضان، انهيار)</string>
+    <string name="cond_opt_closed">مغلق (بوابة أو لافتة أو جهة رسمية)</string>
+    <string name="cond_opt_missing">المسار غير موجود أو غير معلَّم</string>
+    <string name="cond_note_hint">أضف ملاحظة (اختياري)</string>
+    <string name="cond_send">إرسال البلاغ</string>
+    <string name="cond_thanks">شكرًا! بلاغك يساعد المتنزهين الآخرين.</string>
+    <string name="cond_failed">تعذّر إرسال البلاغ. حاول مجددًا.</string>
+    <string name="cond_sign_in">سجّل الدخول للإبلاغ</string>
+    <string name="cond_disclaimer">المعلومات من OpenStreetMap ومن متنزهين آخرين. تحقّق دائمًا من اللافتات والظروف المحلية.</string>
+
+    <!-- posts -->
+    <string name="post_as">النشر باسم %1$s</string>
+    <string name="post_trail_choose">اختر مساراً</string>
+    <string name="post_trail_change">تغيير</string>
+    <string name="post_text_hint">شارك تجربتك…</string>
+    <string name="post_add_photo">إضافة صورة</string>
+    <string name="post_remove_photo">إزالة الصورة %1$s</string>
+    <string name="post_need_trail">اختر مساراً للنشر</string>
+    <string name="post_need_text">اكتب شيئاً للنشر</string>
+    <string name="post_checking">جارٍ فحص منشورك…</string>
+    <string name="post_counter">%1$s/%2$s</string>
+    <string name="post_comments_count">التعليقات (%1$s)</string>
+    <string name="post_open_trail">فتح المسار: %1$s</string>
+    <string name="post_photo_of">صورة %1$s من %2$s</string>
+    <string name="post_like_count">إعجاب، %1$s إعجاب</string>
+    <string name="post_comment_count_desc">التعليقات، %1$s</string>
+    <string name="post_write_comment">اكتب تعليقًا</string>
+    <string name="post_send_comment">إرسال التعليق</string>
+    <string name="post_no_comments">لا توجد تعليقات بعد. كن أول من يعلّق.</string>
+    <string name="post_photos_added">%1$s من %2$s صور</string>
+
+    <!-- discovery -->
+    <string name="discover_slow">خوادم الخرائط مشغولة. ما زلنا نبحث…</string>
+
+    <!-- discovery -->
+    <string name="trail_away">على بعد %1$s</string>
+</resources>

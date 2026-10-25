@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Window and system bars: shown before Compose draws its first frame, so they must match the theme. -->
+    <color name="pathy_window_background">#FFF6FAF6</color>
+    <color name="pathy_status_bar">#FF14402A</color>
+    <color name="pathy_navigation_bar">#FFF6FAF6</color>
+</resources>
