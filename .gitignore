@@ -1,0 +1,40 @@
+# Build output and tooling caches
+*.iml
+.gradle/
+/build/
+build/
+/captures/
+.externalNativeBuild/
+.cxx/
+.kotlin/
+.firebase/
+.DS_Store
+*.apk
+*.aab
+hs_err_pid*.log
+*.hprof
+
+# IDE settings are personal
+.idea/
+.vscode/
+
+# Secrets and per-machine settings: never commit these
+local.properties
+*.keystore
+*.jks
+*.p12
+.env
+.env.*
+# Firebase client configuration is project-specific: copy google-services.json.example and fill it in
+google-services.json
+!google-services.json.example
+
+# Firebase emulators and Node
+functions/node_modules/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Scratch output
+build_errors.txt
+build_full.txt
