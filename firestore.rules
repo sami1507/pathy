@@ -1,0 +1,161 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- helpers ----------
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    // ---------- מסלולים ציבוריים ----------
+    match /trails/{trailId} {
+      allow read: if true;
+      allow create: if signedIn() && request.resource.data.createdByUid == request.auth.uid;
+    }
+
+    // ---------- פוסטים ----------
+    match /posts/{postId} {
+      allow read: if true;
+      allow create: if signedIn() && request.resource.data.userId == request.auth.uid;
+      allow update: if signedIn() && (
+          resource.data.userId == request.auth.uid ||
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(["likesCount", "likedBy"]) ||
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(["attendees"])
+        );
+      allow delete: if signedIn() && resource.data.userId == request.auth.uid;
+
+      // תגובות לפוסטים — הכותב נקבע לפי המשתמש המחובר
+      match /comments/{commentId} {
+        allow read: if true;
+        allow create: if signedIn() && request.resource.data.userId == request.auth.uid;
+        allow update, delete: if signedIn() && resource.data.userId == request.auth.uid;
+      }
+    }
+
+    // ---------- אירועים ----------
+    match /events/{eventId} {
+      allow read: if true;
+      allow create: if signedIn() && request.resource.data.createdByUid == request.auth.uid;
+      allow update: if signedIn() && (
+          resource.data.createdByUid == request.auth.uid ||
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(["likesCount", "likedBy"]) ||
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(["attendees"])
+        );
+      allow delete: if signedIn() && resource.data.createdByUid == request.auth.uid;
+
+      match /comments/{commentId} {
+        allow read: if true;
+        allow create: if signedIn() && request.resource.data.userId == request.auth.uid;
+        allow update, delete: if signedIn() && resource.data.userId == request.auth.uid;
+      }
+    }
+
+    // ---------- פרופיל משתמש (ציבורי) ----------
+    // שדות ציבוריים בלבד: שם, תמונה, מגדר, נקודות. אימייל וטלפון נשמרים ב-private/contact.
+    match /users/{userId} {
+      allow read: if true;
+      allow create: if signedIn() && request.auth.uid == userId;
+      // reportPoints is granted only by the submitReport function, so the owner cannot change it
+      allow update: if signedIn() && request.auth.uid == userId
+        && (!('reportPoints' in request.resource.data) && !('reportPoints' in resource.data)
+            || request.resource.data.reportPoints == resource.data.reportPoints);
+      allow delete: if signedIn() && request.auth.uid == userId;
+
+      // פרטים פרטיים (טלפון) — הבעלים בלבד. נכתב דרך Cloud Function saveContactInfo.
+      match /private/{docId} {
+        allow read: if signedIn() && request.auth.uid == userId;
+        allow write: if false;
+      }
+
+      // מועדפים, רשימות מותאמות ומסלולים שמורים — הבעלים בלבד
+      match /bookmarks/{trailId} {
+        allow read, write: if signedIn() && request.auth.uid == userId;
+      }
+      match /trails_user/{trailId} {
+        allow read, create, delete: if signedIn() && request.auth.uid == userId;
+      }
+      match /lists/{listId} {
+        allow read, write: if signedIn() && request.auth.uid == userId;
+        match /trails/{trailId} {
+          allow read, write: if signedIn() && request.auth.uid == userId;
+        }
+      }
+    }
+
+    // ---------- היסטוריית פעילויות (GPS) — הבעלים בלבד ----------
+    // A recorded outing is one document that also holds the route (an encoded line), so the rules
+    // check its shape and size: no one can store a gigabyte of junk or a negative distance.
+    function validActivity() {
+      let d = request.resource.data;
+      return d.userId == request.auth.uid
+        && d.keys().hasAll(['userId', 'activityType', 'startTime', 'duration', 'distance'])
+        && d.activityType is string && d.activityType.size() <= 32
+        && d.startTime is int
+        && d.duration is int && d.duration >= 0 && d.duration < 172800000
+        && d.distance is number && d.distance >= 0 && d.distance < 2000000
+        && (!('elevationGain' in d) || (d.elevationGain is number && d.elevationGain >= 0 && d.elevationGain < 100000))
+        && (!('calories' in d) || (d.calories is number && d.calories >= 0 && d.calories < 100000))
+        && (!('routeEncoded' in d) || (d.routeEncoded is string && d.routeEncoded.size() < 400000))
+        && (!('title' in d) || (d.title is string && d.title.size() <= 200))
+        && (!('notes' in d) || (d.notes is string && d.notes.size() <= 2000))
+        && (!('photos' in d) || (d.photos is list && d.photos.size() <= 20));
+    }
+
+    match /activities/{activityId} {
+      allow read, delete: if signedIn() && resource.data.userId == request.auth.uid;
+      allow create: if signedIn() && validActivity();
+      allow update: if signedIn()
+                    && resource.data.userId == request.auth.uid
+                    && validActivity();
+
+      // נקודות המסלול — לפי הבעלים של המסמך האב
+      match /route/{pointId} {
+        allow read, write: if signedIn()
+          && get(/databases/$(database)/documents/activities/$(activityId)).data.userId == request.auth.uid;
+      }
+    }
+
+    // ---------- קבוצות ----------
+    match /groups/{groupId} {
+      allow read: if signedIn();
+      allow create: if signedIn() && request.resource.data.createdBy == request.auth.uid;
+      // רק המנהל (createdBy הקיים) יכול לעדכן או למחוק — ולא ניתן לשנות את המנהל לעצמו
+      allow update: if signedIn()
+                    && resource.data.createdBy == request.auth.uid
+                    && request.resource.data.createdBy == request.auth.uid;
+      allow delete: if signedIn() && resource.data.createdBy == request.auth.uid;
+
+      // חברות: כל משתמש כותב רק את מסמך החברות של עצמו (המזהה = uid)
+      match /members/{memberId} {
+        allow read: if signedIn();
+        allow create, update, delete: if signedIn() && request.auth.uid == memberId;
+      }
+    }
+
+    // ---------- trail condition reports from hikers ----------
+    // One report per person and trail (the document id is the person's uid), so a newer report replaces
+    // the older one. Anyone may read them; only the signed-in author may write or delete their own.
+    match /trail_conditions/{trailId}/reports/{reportId} {
+      allow read: if true;
+      allow create, update: if signedIn()
+        && reportId == request.auth.uid
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.status in ['OPEN', 'MUDDY', 'BLOCKED', 'CLOSED', 'NOT_FOUND']
+        && request.resource.data.createdAt is int
+        && request.resource.data.createdAt > request.time.toMillis() - 600000
+        && request.resource.data.createdAt < request.time.toMillis() + 600000
+        && (!('note' in request.resource.data)
+            || (request.resource.data.note is string && request.resource.data.note.size() <= 200));
+      allow delete: if signedIn() && resource.data.userId == request.auth.uid;
+    }
+
+    // ---------- דיווחי מפה ----------
+    // נכתבים רק על ידי Cloud Function submitReport (שמעניקה גם את הנקודות). לא נקראים מהלקוח.
+    match /reports/{reportId} {
+      allow create, read, update, delete: if false;
+    }
+
+    // ברירת מחדל: כל מסמך או אוסף שלא הוגדר כאן — חסום.
+    // (ai_usage, auth_lookup_limits, phone_index נכתבים רק על ידי Cloud Functions.)
+  }
+}

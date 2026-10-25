@@ -1,0 +1,28 @@
+{
+  "rules": {
+    "walkie_groups": {
+      "$groupId": {
+        // Who is in the call: any signed-in user may see it, but each person writes only their own entry.
+        "users": {
+          ".read": "auth != null",
+          "$uid": {
+            ".write": "auth != null && auth.uid === $uid",
+            ".validate": "newData.hasChildren(['name', 'timestamp']) && newData.child('name').isString() && newData.child('name').val().length <= 40"
+          }
+        },
+        // Connection set-up messages: only the recipient reads them, and a message must really come
+        // from the account it names (so nobody can answer a call as someone else).
+        "signaling": {
+          "$target": {
+            ".read": "auth != null && auth.uid === $target",
+            ".write": "auth != null && auth.uid === $target",
+            "$messageId": {
+              ".write": "auth != null",
+              ".validate": "newData.hasChildren(['type', 'from', 'timestamp']) && newData.child('from').val() === auth.uid && newData.child('type').val().matches(/^(offer|answer|ice)$/)"
+            }
+          }
+        }
+      }
+    }
+  }
+}

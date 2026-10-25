@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting to Pathy App...</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const trailId = urlParams.get("trailId");
+      const sharedBy = urlParams.get("sharedBy");
+
+      const intentUrl = `intent://trail?trailId=${trailId}&sharedBy=${sharedBy}#Intent;scheme=pathy;package=com.example.pathy;end`;
+      window.location.replace(intentUrl);
+      setTimeout(() => {
+        alert("נראה שהאפליקציה לא מותקנת. נא לוודא שהתקנת את Pathy על המכשיר שלך.");
+      }, 3000);
+    });
+  </script>
+</head>
+<body>
+<p>פותח את אפליקציית Pathy...</p>
+</body>
+</html>
+
+
+<!--  setTimeout(() => {-->
+<!--  window.location.href = "https://play.google.com/store/apps/details?id=com.example.pathy";-->
+<!--  }, 3000);-->

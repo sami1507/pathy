@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.example.pathy",
+      "sha256_cert_fingerprints": [
+        "BC:99:5B:AE:A3:D6:24:95:BC:DC:D4:A9:18:D8:10:0E:65:7D:90:42:2E:43:26:C7:54:23:2C:48:80:1B:0F:8D"
+      ]
+    }
+  }
+]

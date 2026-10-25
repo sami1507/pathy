@@ -1,0 +1,62 @@
+rules_version = '2';
+
+// Storage layout (see app/src/main/java/com/example/pathy/data/StoragePaths.kt):
+//   profileImages/{uid}.jpg          profile picture, one per user
+//   post_images/{file}               community post images
+//   events/{file}                    event images
+//   users/{uid}/...                  trail photos and activity photos
+//
+// Every upload sets the custom metadata `ownerUid`; deletes are limited to that owner.
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isImage(maxMb) {
+      return request.resource.contentType.matches('image/.*')
+          && request.resource.size < maxMb * 1024 * 1024;
+    }
+
+    function newOwnedByCaller() {
+      return signedIn() && request.resource.metadata.ownerUid == request.auth.uid;
+    }
+
+    function ownedByCaller() {
+      return signedIn() && resource.metadata.ownerUid == request.auth.uid;
+    }
+
+    // Profile pictures: a user may only write their own file.
+    match /profileImages/{fileName} {
+      allow read: if true;
+      allow create, update: if signedIn()
+        && fileName == request.auth.uid + '.jpg'
+        && isImage(5)
+        && newOwnedByCaller();
+      allow delete: if signedIn() && fileName == request.auth.uid + '.jpg';
+    }
+
+    // Community post and event images: any signed-in user can upload, only the uploader can delete.
+    match /post_images/{fileName} {
+      allow read: if true;
+      allow create: if signedIn() && isImage(8) && newOwnedByCaller();
+      allow delete: if ownedByCaller();
+    }
+
+    match /events/{fileName} {
+      allow read: if true;
+      allow create: if signedIn() && isImage(8) && newOwnedByCaller();
+      allow delete: if ownedByCaller();
+    }
+
+    // Per-user trail and activity photos.
+    match /users/{uid}/{allPaths=**} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow create: if signedIn() && request.auth.uid == uid && isImage(8) && newOwnedByCaller();
+      allow delete: if signedIn() && request.auth.uid == uid;
+    }
+
+    // Everything else is denied by default.
+  }
+}
