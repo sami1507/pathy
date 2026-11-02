@@ -39,7 +39,7 @@ jobs:
         run: ./gradlew :core:test --console=plain
       - name: Upload test report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: core-test-report
           path: ~/pathy-build/core/reports
@@ -85,7 +85,7 @@ jobs:
         run: ./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug --console=plain
       - name: Upload reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: app-reports
           path: |
