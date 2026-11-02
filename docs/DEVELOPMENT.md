@@ -49,6 +49,18 @@ firebase deploy --only functions,firestore,storage,database
 ./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug
 ```
 
+## Automation
+
+| What | Where | When |
+|---|---|---|
+| Credential scan | `scripts/check-secrets.sh` | Every push and pull request (CI job `secrets`), and before every local commit once you run `scripts/install-hooks.sh` |
+| Core tests | `./gradlew :core:test` | Every push and pull request (CI job `core`), no secrets needed |
+| Cloud Functions check | `npm ci` and `node --check` in `functions/` | Every push and pull request (CI job `functions`) |
+| App tests, lint, build | `./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug` | CI job `app`, enabled by the repository variable `ANDROID_BUILD=true` plus the secrets `MAPBOX_DOWNLOADS_TOKEN`, `MAPBOX_PUBLIC_TOKEN`, `GOOGLE_SERVICES_JSON` |
+| Dependency updates | `.github/dependabot.yml` | Weekly (Gradle), monthly (npm, actions); at most 3 open pull requests |
+
+After cloning, run `scripts/install-hooks.sh` once so a credential can never be committed by accident.
+
 ## Languages
 
 English, Arabic and Hebrew. Add or change text in `app/src/main/res/values*/strings.xml`; a test fails if a key or placeholder is missing in one language. See [LOCALIZATION.md](LOCALIZATION.md).
