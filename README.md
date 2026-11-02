@@ -114,6 +114,10 @@ OpenStreetMap is edited by people, so no app can promise a trail is open today. 
 - Live location sharing between group members is not shipped: it needs rules that check group membership.
 - The recording service and trail discovery were exercised on an emulator. Offline map download, the walkie-talkie and the Firestore rule changes (deployed separately with `firebase deploy`) still need testing on real devices and accounts.
 
+## License
+
+The code is released under the [MIT License](LICENSE). The Rubik font is used under the SIL Open Font License (see `app/src/main/assets/licenses/Rubik-OFL.txt`). Trail data is © OpenStreetMap contributors, available under the [ODbL](https://www.openstreetmap.org/copyright).
+
 ## Status
 
 Actively developed by [@sami1507](https://github.com/sami1507). Feedback and issues are welcome.
