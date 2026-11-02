@@ -187,7 +187,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-swiperefresh:0.36.0")
     implementation("com.google.accompanist:accompanist-pager:0.36.0")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.36.0")
-    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("androidx.appcompat:appcompat:1.8.0")
     implementation("io.coil-kt:coil-compose:2.7.0")
     implementation("com.google.accompanist:accompanist-permissions:0.37.0")
 
@@ -206,20 +206,20 @@ dependencies {
     implementation("com.google.firebase:firebase-functions")
 
     // Encrypted local storage for sensitive values (emergency contacts)
-    implementation("androidx.security:security-crypto:1.0.0")
+    implementation("androidx.security:security-crypto:1.1.0")
 
     // DataStore & time
-    implementation("androidx.datastore:datastore-preferences:1.1.1")
+    implementation("androidx.datastore:datastore-preferences:1.3.0")
     implementation("com.jakewharton.threetenabp:threetenabp:1.4.7") // ✅ UPDATED
 
     // Room
-    implementation("androidx.room:room-runtime:2.7.1")
-    implementation("androidx.room:room-ktx:2.7.1")
-    kapt("androidx.room:room-compiler:2.7.1")
+    implementation("androidx.room:room-runtime:2.8.5")
+    implementation("androidx.room:room-ktx:2.8.5")
+    kapt("androidx.room:room-compiler:2.8.5")
     // Background upload of recorded outings once there is a connection
     // The domain logic lives in its own Android-free module
     implementation(project(":core"))
-    implementation("androidx.work:work-runtime-ktx:2.9.1")
+    implementation("androidx.work:work-runtime-ktx:2.12.0")
     // Reads the rotation stored in a photo, so a picture taken upright is not uploaded sideways
     implementation("androidx.exifinterface:exifinterface:1.3.7")
 
