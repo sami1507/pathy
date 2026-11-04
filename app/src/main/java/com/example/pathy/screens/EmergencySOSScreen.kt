@@ -4,9 +4,11 @@ import androidx.compose.ui.res.stringResource
 import com.example.pathy.R
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import com.example.pathy.ui.design.pathyTopBarColors
+import com.example.pathy.ui.design.rememberReducedMotion
 import com.example.pathy.ui.theme.PathyColors
 
 import androidx.compose.foundation.clickable
+import androidx.compose.ui.semantics.Role
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -51,9 +53,10 @@ fun EmergencySOSScreen(
 ) {
     var showSOSConfirmation by remember { mutableStateOf(false) }
     
-    // Pulsing animation for SOS button
+    // The SOS button pulses so it is easy to find, unless the person turned animations off.
+    val reduceMotion = rememberReducedMotion()
     val infiniteTransition = rememberInfiniteTransition(label = "sos_pulse")
-    val pulse by infiniteTransition.animateFloat(
+    val animatedPulse by infiniteTransition.animateFloat(
         initialValue = 1f,
         targetValue = 1.1f,
         animationSpec = infiniteRepeatable(
@@ -62,6 +65,7 @@ fun EmergencySOSScreen(
         ),
         label = "pulse"
     )
+    val pulse = if (reduceMotion) 1f else animatedPulse
     
     Scaffold(
         topBar = {
@@ -117,12 +121,12 @@ fun EmergencySOSScreen(
                                 modifier = Modifier
                                     .size(120.dp)
                                     .scale(pulse)
-                                    .clickable(onClick = { showSOSConfirmation = true })
+                                    .clickable(role = Role.Button, onClick = { showSOSConfirmation = true })
                             ) {
                                 Box(contentAlignment = Alignment.Center) {
                                     Icon(
                                         imageVector = Icons.Filled.Warning,
-                                        contentDescription = "SOS",
+                                        contentDescription = stringResource(R.string.sos_hero_title),
                                         tint = PathyColors.Error,
                                         modifier = Modifier.size(64.dp)
                                     )

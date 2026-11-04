@@ -10,6 +10,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import com.example.pathy.components.PathyButton
 import com.example.pathy.ui.design.MountainRange
 import com.example.pathy.ui.design.TopoBackground
+import com.example.pathy.ui.design.rememberReducedMotion
 import com.example.pathy.ui.theme.Fern400
 import com.example.pathy.ui.theme.Moss500
 import com.example.pathy.ui.theme.Sage300
@@ -143,7 +148,7 @@ fun OnboardingScreen(
                         Text(
                             text = stringResource(R.string.common_skip),
                             color = scheme.onSurfaceVariant,
-                            fontSize = 16.sp
+                            style = MaterialTheme.typography.titleSmall
                         )
                     }
                 }
@@ -166,7 +171,9 @@ fun OnboardingScreen(
                 verticalArrangement = Arrangement.spacedBy(PathyDimensions.SpaceL)
             ) {
                 // Dot indicators
+                val pageLabel = stringResource(R.string.onboarding_page_of, pagerState.currentPage + 1, pages.size)
                 Row(
+                    modifier = Modifier.semantics(mergeDescendants = true) { contentDescription = pageLabel },
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     repeat(pages.size) { index ->
@@ -189,7 +196,7 @@ fun OnboardingScreen(
                                     pagerState.animateScrollToPage(pagerState.currentPage - 1)
                                 }
                             },
-                            modifier = Modifier.weight(1f),
+                            modifier = Modifier.weight(1f).heightIn(min = 56.dp),
                             shape = RoundedCornerShape(PathyDimensions.RadiusL)
                         ) {
                             Icon(
@@ -214,7 +221,7 @@ fun OnboardingScreen(
                                 onComplete()
                             }
                         },
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(1f).heightIn(min = 56.dp),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = scheme.primary,
                             contentColor = scheme.onPrimary
@@ -223,7 +230,7 @@ fun OnboardingScreen(
                     ) {
                         Text(
                             text = if (pagerState.currentPage < pages.size - 1) stringResource(R.string.common_next) else stringResource(R.string.onboarding_get_started),
-                            fontSize = 16.sp,
+                            style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold
                         )
                         Spacer(modifier = Modifier.width(8.dp))
@@ -240,11 +247,11 @@ fun OnboardingScreen(
 
 @Composable
 fun OnboardingPageContent(page: OnboardingPage) {
-    val scale = remember { Animatable(0f) }
-    val alpha = remember { Animatable(0f) }
-    
+    val reduceMotion = rememberReducedMotion()
+    val scale = remember { Animatable(if (reduceMotion) 1f else 0f) }
+
     LaunchedEffect(Unit) {
-        launch {
+        if (!reduceMotion) {
             scale.animateTo(
                 1f,
                 animationSpec = spring(
@@ -253,17 +260,18 @@ fun OnboardingPageContent(page: OnboardingPage) {
                 )
             )
         }
-        launch {
-            alpha.animateTo(
-                1f,
-                animationSpec = tween(500)
-            )
-        }
     }
-    
+
+    BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+    // On a short screen or with a large font the illustration shrinks first, then the page scrolls.
+    val disc = (maxHeight * 0.30f).coerceIn(96.dp, 200.dp)
+    val ring = disc * 1.2f
+    val outerRing = disc * 1.4f
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
+            .heightIn(min = maxHeight)
+            .verticalScroll(rememberScrollState())
             .padding(horizontal = PathyDimensions.SpaceXL),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -271,23 +279,23 @@ fun OnboardingPageContent(page: OnboardingPage) {
         // Gradient disc with icon and two soft halo rings
         Box(
             modifier = Modifier
-                .size(280.dp)
+                .size(outerRing)
                 .scale(scale.value),
             contentAlignment = Alignment.Center
         ) {
             Box(
                 Modifier
-                    .size(280.dp)
+                    .size(outerRing)
                     .border(1.dp, page.gradient.first().copy(alpha = 0.14f), CircleShape)
             )
             Box(
                 Modifier
-                    .size(240.dp)
+                    .size(ring)
                     .border(1.dp, page.gradient.first().copy(alpha = 0.26f), CircleShape)
             )
             Box(
                 modifier = Modifier
-                    .size(200.dp)
+                    .size(disc)
                     .clip(CircleShape)
                     .background(Brush.linearGradient(page.gradient)),
                 contentAlignment = Alignment.Center
@@ -295,18 +303,18 @@ fun OnboardingPageContent(page: OnboardingPage) {
                 Icon(
                     imageVector = page.icon,
                     contentDescription = null,
-                    modifier = Modifier.size(100.dp),
+                    modifier = Modifier.size(disc / 2),
                     tint = Color.White
                 )
             }
         }
-        
+
         Spacer(modifier = Modifier.height(PathyDimensions.SpaceXL))
         
         // Title
         Text(
             text = stringResource(page.titleRes),
-            fontSize = 28.sp,
+            style = MaterialTheme.typography.headlineMedium,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onBackground,
             textAlign = TextAlign.Center,
@@ -318,14 +326,14 @@ fun OnboardingPageContent(page: OnboardingPage) {
         // Description
         Text(
             text = stringResource(page.descriptionRes),
-            fontSize = 16.sp,
+            style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
-            lineHeight = 24.sp,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = PathyDimensions.SpaceM)
         )
+    }
     }
 }
 
