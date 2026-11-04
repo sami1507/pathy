@@ -324,6 +324,7 @@ fun QuickActionCard(
 
 @Composable
 fun EmergencyContactCard(contact: EmergencyContact) {
+    val context = androidx.compose.ui.platform.LocalContext.current
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp)
@@ -374,7 +375,12 @@ fun EmergencyContactCard(contact: EmergencyContact) {
                 }
             }
             
-            IconButton(onClick = { /* Call contact */ }) {
+            // The dialer opens with the number filled in; no permission is needed and the user presses call
+            IconButton(onClick = {
+                context.startActivity(
+                    android.content.Intent(android.content.Intent.ACTION_DIAL, android.net.Uri.parse("tel:" + android.net.Uri.encode(contact.phoneNumber)))
+                )
+            }) {
                 Icon(Icons.Filled.Phone, stringResource(R.string.common_call))
             }
         }

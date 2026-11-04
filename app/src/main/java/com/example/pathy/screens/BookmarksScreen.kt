@@ -82,14 +82,6 @@ fun BookmarksScreen(
                     }
                 }
             )
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = { /* Create custom list */ },
-                containerColor = PathyColors.Primary
-            ) {
-                Icon(Icons.Filled.Add, stringResource(R.string.bookmarks_create_list), tint = Color.White)
-            }
         }
     ) { padding ->
         if (bookmarks.isEmpty()) {

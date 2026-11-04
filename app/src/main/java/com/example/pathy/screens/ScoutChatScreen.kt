@@ -82,15 +82,17 @@ fun ScoutChatScreen(
     
     val listState = rememberLazyListState()
     
+    fun welcome() = listOf(
+        ChatMessage(
+            role = "assistant",
+            content = context.getString(R.string.scout_greeting),
+            timestamp = System.currentTimeMillis()
+        )
+    )
+
     // Welcome message
     LaunchedEffect(Unit) {
-        messages = listOf(
-            ChatMessage(
-                role = "assistant",
-                content = context.getString(R.string.scout_greeting),
-                timestamp = System.currentTimeMillis()
-            )
-        )
+        messages = welcome()
     }
     
     // Auto-scroll to bottom when new message
@@ -102,7 +104,16 @@ fun ScoutChatScreen(
     
     Scaffold(
         topBar = {
-            ScoutTopBar(onBack)
+            ScoutTopBar(
+                onBack = onBack,
+                onClear = {
+                    messages = welcome()
+                    showQuickReplies = true
+                    messageText = ""
+                },
+                // A reply that is still on its way would land in the cleared chat
+                clearEnabled = !isTyping
+            )
         }
     ) { padding ->
         Column(
@@ -193,7 +204,7 @@ fun ScoutChatScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScoutTopBar(onBack: () -> Unit) {
+fun ScoutTopBar(onBack: () -> Unit, onClear: () -> Unit = {}, clearEnabled: Boolean = true) {
     TopAppBar(
         title = {
             Row(
@@ -249,7 +260,7 @@ fun ScoutTopBar(onBack: () -> Unit) {
             }
         },
         actions = {
-            IconButton(onClick = { /* Clear chat */ }) {
+            IconButton(onClick = onClear, enabled = clearEnabled) {
                 Icon(
                     imageVector = Icons.Filled.Delete,
                     contentDescription = stringResource(R.string.scout_clear_chat)

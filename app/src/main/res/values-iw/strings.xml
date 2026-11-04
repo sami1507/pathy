@@ -77,6 +77,8 @@
     <string name="reset_email_sent">נשלח אימייל לאיפוס הסיסמה.</string>
     <string name="signin_remember_me">זכרו אותי</string>
     <string name="field_password">סיסמה</string>
+    <string name="password_show">הצגת הסיסמה</string>
+    <string name="password_hide">הסתרת הסיסמה</string>
     <string name="field_email">אימייל</string>
     <string name="error_generic_with_message">שגיאה: %1$s</string>
     <string name="error_network_retry">שגיאת רשת. נסו שוב.</string>
@@ -159,7 +161,6 @@
     <string name="bookmarks_empty_title">עדיין אין מועדפים</string>
     <string name="bookmarks_remove">הסרה מהמועדפים</string>
     <string name="bookmark_saved_ago">נשמר %1$s</string>
-    <string name="bookmarks_create_list">יצירת רשימה</string>
     <string name="bookmarks_toggle_view">החלפת תצוגה</string>
     <string name="bookmarks_title">מועדפים</string>
 
@@ -174,7 +175,6 @@
     <string name="history_empty_body">התחילו להקליט את ההרפתקה הראשונה שלכם!</string>
     <string name="history_empty_title">עדיין אין פעילויות</string>
     <string name="history_loading">טוען פעילויות…</string>
-    <string name="history_filter">סינון</string>
 
     <!-- ProfileScreen.kt -->
     <string name="trail_load_failed">טעינת המסלול נכשלה.</string>
@@ -869,6 +869,9 @@
 
     <!-- Units -->
     <string name="unit_km_short">ק״מ</string>
+    <string name="unit_kmh_short">קמ״ש</string>
+    <string name="unit_m_short">מ׳</string>
+    <string name="unit_kcal_short">קק״ל</string>
     <string name="unit_min_short">ד׳</string>
     <string name="unit_min_per_km">ד׳/ק״מ</string>
     <string name="unit_h">%1$s ש׳</string>

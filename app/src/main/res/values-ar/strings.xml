@@ -77,6 +77,8 @@
     <string name="reset_email_sent">تم إرسال رسالة إعادة تعيين كلمة المرور.</string>
     <string name="signin_remember_me">تذكّرني</string>
     <string name="field_password">كلمة المرور</string>
+    <string name="password_show">إظهار كلمة المرور</string>
+    <string name="password_hide">إخفاء كلمة المرور</string>
     <string name="field_email">البريد الإلكتروني</string>
     <string name="error_generic_with_message">خطأ: %1$s</string>
     <string name="error_network_retry">خطأ في الشبكة. حاول مجدداً.</string>
@@ -159,7 +161,6 @@
     <string name="bookmarks_empty_title">لا توجد مسارات مفضلة بعد</string>
     <string name="bookmarks_remove">إزالة من المفضلة</string>
     <string name="bookmark_saved_ago">تم الحفظ %1$s</string>
-    <string name="bookmarks_create_list">إنشاء قائمة</string>
     <string name="bookmarks_toggle_view">تبديل العرض</string>
     <string name="bookmarks_title">المفضلة</string>
 
@@ -174,7 +175,6 @@
     <string name="history_empty_body">ابدأ بتسجيل مغامرتك الأولى!</string>
     <string name="history_empty_title">لا توجد أنشطة بعد</string>
     <string name="history_loading">جارٍ تحميل الأنشطة…</string>
-    <string name="history_filter">تصفية</string>
 
     <!-- ProfileScreen.kt -->
     <string name="trail_load_failed">تعذّر تحميل المسار.</string>
@@ -902,6 +902,9 @@
 
     <!-- Units -->
     <string name="unit_km_short">كم</string>
+    <string name="unit_kmh_short">كم/س</string>
+    <string name="unit_m_short">م</string>
+    <string name="unit_kcal_short">ك.س</string>
     <string name="unit_min_short">د</string>
     <string name="unit_min_per_km">د/كم</string>
     <string name="unit_h">%1$s س</string>

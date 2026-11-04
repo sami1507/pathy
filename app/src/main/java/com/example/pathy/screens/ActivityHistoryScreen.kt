@@ -121,11 +121,6 @@ fun ActivityHistoryScreen(
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(R.string.back))
                     }
-                },
-                actions = {
-                    IconButton(onClick = { /* Filter */ }) {
-                        Icon(Icons.Filled.FilterList, stringResource(R.string.history_filter))
-                    }
                 }
             )
         }
