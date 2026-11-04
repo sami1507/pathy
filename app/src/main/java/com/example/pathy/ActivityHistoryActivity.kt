@@ -1,28 +1,29 @@
 package com.example.pathy
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import com.example.pathy.data.DatabaseProvider
 import com.example.pathy.history.ActivityDetails
 import com.example.pathy.history.ActivityHistoryManager
 import com.example.pathy.history.LocalActivities
 import com.example.pathy.i18n.PathyActivity
+import com.example.pathy.screens.ActivityDetailsPlaceholder
 import com.example.pathy.screens.ActivityDetailsScreen
 import com.example.pathy.screens.ActivityHistoryScreen
 import com.example.pathy.tracking.RecordingRepository
@@ -56,37 +57,49 @@ class ActivityHistoryActivity : PathyActivity() {
                 }
 
                 val open = selected
-                if (open == null) {
-                    ActivityHistoryScreen(
-                        onBack = { finish() },
-                        onActivityClick = { selected = it },
-                        refreshKey = listVersion
-                    )
-                } else {
-                    BackHandler { selected = null }
-                    val current = details
-                    when {
-                        current != null -> ActivityDetailsScreen(
-                            details = current,
-                            onBack = { selected = null },
-                            onDelete = {
-                                val ok = delete(open)
-                                if (ok) {
-                                    Toast.makeText(this@ActivityHistoryActivity, getString(R.string.activity_deleted), Toast.LENGTH_SHORT).show()
-                                    listVersion++
-                                    selected = null
-                                }
-                                ok
-                            }
+                Box(Modifier.fillMaxSize()) {
+                    // The list stays composed under the detail view, so the filter and the scroll position
+                    // are still there when the user comes back. Screen readers skip it while it is covered.
+                    Box(
+                        Modifier
+                            .fillMaxSize()
+                            .then(if (open != null) Modifier.clearAndSetSemantics { } else Modifier)
+                    ) {
+                        ActivityHistoryScreen(
+                            onBack = { finish() },
+                            onActivityClick = { selected = it },
+                            onRecord = { startActivity(Intent(this@ActivityHistoryActivity, TrackingActivity::class.java)) },
+                            refreshKey = listVersion
                         )
-                        failed -> Box(Modifier.fillMaxSize(), Alignment.Center) {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text(stringResource(R.string.load_failed))
-                                TextButton(onClick = { retry++ }) { Text(stringResource(R.string.retry)) }
-                                TextButton(onClick = { selected = null }) { Text(stringResource(R.string.back)) }
+                    }
+                    if (open != null) {
+                        BackHandler { selected = null }
+                        val current = details
+                        Box(
+                            Modifier
+                                .fillMaxSize()
+                                .background(MaterialTheme.colorScheme.background)
+                                // Taps on the covered list must not get through.
+                                .pointerInput(Unit) { detectTapGestures { } }
+                        ) {
+                            if (current != null) {
+                                ActivityDetailsScreen(
+                                    details = current,
+                                    onBack = { selected = null },
+                                    onDelete = {
+                                        val ok = delete(open)
+                                        if (ok) {
+                                            Toast.makeText(this@ActivityHistoryActivity, getString(R.string.activity_deleted), Toast.LENGTH_SHORT).show()
+                                            listVersion++
+                                            selected = null
+                                        }
+                                        ok
+                                    }
+                                )
+                            } else {
+                                ActivityDetailsPlaceholder(failed = failed, onRetry = { retry++ }, onBack = { selected = null })
                             }
                         }
-                        else -> Box(Modifier.fillMaxSize(), Alignment.Center) { CircularProgressIndicator() }
                     }
                 }
             }

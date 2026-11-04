@@ -1,80 +1,114 @@
 package com.example.pathy.screens
 
-import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
-import com.example.pathy.i18n.activityFilterLabel
-import com.example.pathy.i18n.activityTypeLabel
-import androidx.compose.ui.res.stringResource
-import com.example.pathy.R
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import com.example.pathy.ui.design.pathyTopBarColors
-import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.DirectionsBike
+import androidx.compose.material.icons.automirrored.filled.DirectionsRun
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.CloudOff
+import androidx.compose.material.icons.filled.CloudUpload
+import androidx.compose.material.icons.filled.FilterList
+import androidx.compose.material.icons.filled.Hiking
+import androidx.compose.material.icons.filled.Schedule
+import androidx.compose.material.icons.filled.Straighten
+import androidx.compose.material.icons.filled.Terrain
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.platform.LocalContext
+import com.example.pathy.R
 import com.example.pathy.data.DatabaseProvider
 import com.example.pathy.history.ActivityHistoryManager
-import com.example.pathy.history.LocalActivities
-import com.example.pathy.tracking.RecordingRepository
 import com.example.pathy.history.ActivitySummary
-import com.google.firebase.auth.FirebaseAuth
+import com.example.pathy.history.LocalActivities
+import com.example.pathy.i18n.activityFilterLabel
+import com.example.pathy.i18n.activityTypeLabel
+import com.example.pathy.tracking.RecordingRepository
+import com.example.pathy.ui.design.NatureCard
+import com.example.pathy.ui.design.NatureEmptyState
+import com.example.pathy.ui.design.NatureLoadingState
+import com.example.pathy.ui.design.NatureStatTile
+import com.example.pathy.ui.design.NatureTag
+import com.example.pathy.ui.design.pathyTopBarColors
 import com.example.pathy.ui.theme.PathyColors
+import com.google.firebase.auth.FirebaseAuth
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
-private sealed class HistoryUiState {
+internal sealed class HistoryUiState {
     object Loading : HistoryUiState()
     object Empty : HistoryUiState()
     object Error : HistoryUiState()
     data class Content(val activities: List<ActivitySummary>) : HistoryUiState()
 }
 
-/**
- * 📜 ACTIVITY HISTORY SCREEN
- * 
- * Beautiful activity history with filters
- * - Timeline view
- * - Stats summaries
- * - Filter by type/date
- * - Better than Strava history!
- */
+private val historyFilters = listOf("All", "Hiking", "Running", "Cycling", "MTB")
 
-@OptIn(ExperimentalMaterial3Api::class)
+/**
+ * The user's recorded outings: cloud history plus anything still waiting on the phone, filtered by
+ * activity type. Loads the data, then hands it to [HistoryContent] to draw.
+ */
 @Composable
 fun ActivityHistoryScreen(
     onActivityClick: (String) -> Unit = {},
     onBack: () -> Unit = {},
+    onRecord: () -> Unit = {},
     /** Change this to reload the list (after something was deleted). */
     refreshKey: Int = 0
 ) {
     val context = LocalContext.current
-    var selectedFilter by remember { mutableStateOf("All") }
-    val filters = listOf("All", "Hiking", "Running", "Cycling", "MTB")
+    var selectedFilter by rememberSaveable { mutableStateOf("All") }
     var uiState by remember { mutableStateOf<HistoryUiState>(HistoryUiState.Loading) }
 
     var retry by remember { mutableStateOf(0) }
     LaunchedEffect(retry, refreshKey) {
-        uiState = HistoryUiState.Loading
+        // Keep showing the old list while it reloads, so coming back from one outing never flashes a spinner.
+        if (uiState !is HistoryUiState.Content) uiState = HistoryUiState.Loading
         // Outings still on the phone (recorded offline, or not uploaded yet) are listed too, so a
         // finished walk never seems to have vanished.
         val waiting = RecordingRepository(DatabaseProvider.getDatabase(context).recordingDao())
@@ -93,29 +127,33 @@ fun ActivityHistoryScreen(
         }
     }
 
-    val activities = (uiState as? HistoryUiState.Content)?.activities ?: emptyList()
+    HistoryContent(
+        state = uiState,
+        selectedFilter = selectedFilter,
+        onFilterSelected = { selectedFilter = it },
+        onActivityClick = onActivityClick,
+        onBack = onBack,
+        onRecord = onRecord,
+        onRetry = { retry++ }
+    )
+}
 
-    val filteredActivities = remember(activities, selectedFilter) {
-        if (selectedFilter == "All") {
-            activities
-        } else {
-            val targetType = when (selectedFilter.uppercase()) {
-                "MTB" -> "MOUNTAIN_BIKING"
-                else  -> selectedFilter.uppercase()
-            }
-            activities.filter { it.activityType.uppercase() == targetType }
-        }
-    }
-
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun HistoryContent(
+    state: HistoryUiState,
+    selectedFilter: String,
+    onFilterSelected: (String) -> Unit,
+    onActivityClick: (String) -> Unit,
+    onBack: () -> Unit,
+    onRecord: () -> Unit,
+    onRetry: () -> Unit
+) {
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             TopAppBar(
-                title = {
-                    Text(
-                        text = stringResource(R.string.home_history),
-                        fontWeight = FontWeight.Bold
-                    )
-                },
+                title = { Text(text = stringResource(R.string.home_history)) },
                 colors = pathyTopBarColors(),
                 navigationIcon = {
                     IconButton(onClick = onBack) {
@@ -125,73 +163,115 @@ fun ActivityHistoryScreen(
             )
         }
     ) { padding ->
-        when (uiState) {
-            is HistoryUiState.Loading -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        CircularProgressIndicator(color = PathyColors.Primary)
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Text(stringResource(R.string.history_loading), fontSize = 14.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                    }
-                }
+        val modifier = Modifier.fillMaxSize().padding(padding)
+        when (state) {
+            HistoryUiState.Loading -> Box(modifier, contentAlignment = Alignment.Center) {
+                NatureLoadingState(stringResource(R.string.history_loading))
             }
-            is HistoryUiState.Error -> {
-                Column(Modifier.fillMaxSize().padding(padding), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
-                    Text(androidx.compose.ui.res.stringResource(com.example.pathy.R.string.load_failed))
-                    TextButton(onClick = { retry++ }) { Text(androidx.compose.ui.res.stringResource(com.example.pathy.R.string.retry)) }
-                }
+            HistoryUiState.Error -> Box(modifier, contentAlignment = Alignment.Center) {
+                NatureEmptyState(
+                    icon = Icons.Filled.CloudOff,
+                    title = stringResource(R.string.load_failed),
+                    message = stringResource(R.string.error_network_check),
+                    actionLabel = stringResource(R.string.retry),
+                    onAction = onRetry,
+                    isError = true
+                )
             }
-            is HistoryUiState.Empty -> {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding),
-                    contentAlignment = Alignment.Center
-                ) {
-                    EmptyHistoryState()
-                }
+            HistoryUiState.Empty -> Box(modifier, contentAlignment = Alignment.Center) {
+                NatureEmptyState(
+                    icon = Icons.AutoMirrored.Filled.DirectionsRun,
+                    title = stringResource(R.string.history_empty_title),
+                    message = stringResource(R.string.history_empty_body),
+                    actionLabel = stringResource(R.string.profile_record_activity_button),
+                    onAction = onRecord
+                )
             }
-            is HistoryUiState.Content -> {
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(padding),
-                    contentPadding = PaddingValues(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    item {
-                        FilterChips(
-                            filters = filters,
-                            selectedFilter = selectedFilter,
-                            onFilterSelected = { selectedFilter = it }
-                        )
-                    }
-                    item {
-                        Text(
-                            text = androidx.compose.ui.res.stringResource(com.example.pathy.R.string.home_history),
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier.padding(vertical = 8.dp)
-                        )
-                    }
-                    items(filteredActivities) { activity ->
-                        ActivityHistoryCard(
-                            activity = activity,
-                            onClick = { onActivityClick(activity.id) }
-                        )
-                    }
-                    if (filteredActivities.isEmpty()) {
-                        item { EmptyFilterState(selectedFilter) }
-                    }
-                }
+            is HistoryUiState.Content -> HistoryList(
+                activities = state.activities,
+                selectedFilter = selectedFilter,
+                onFilterSelected = onFilterSelected,
+                onActivityClick = onActivityClick,
+                modifier = modifier
+            )
+        }
+    }
+}
+
+@Composable
+private fun HistoryList(
+    activities: List<ActivitySummary>,
+    selectedFilter: String,
+    onFilterSelected: (String) -> Unit,
+    onActivityClick: (String) -> Unit,
+    modifier: Modifier
+) {
+    val shown = remember(activities, selectedFilter) {
+        if (selectedFilter == "All") {
+            activities
+        } else {
+            val target = if (selectedFilter.uppercase() == "MTB") "MOUNTAIN_BIKING" else selectedFilter.uppercase()
+            activities.filter { it.activityType.uppercase() == target }
+        }
+    }
+    LazyColumn(
+        modifier = modifier,
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        item {
+            FilterChips(
+                filters = historyFilters,
+                selectedFilter = selectedFilter,
+                onFilterSelected = onFilterSelected
+            )
+        }
+        if (shown.isEmpty()) {
+            item {
+                NatureEmptyState(
+                    icon = Icons.Filled.FilterList,
+                    title = stringResource(R.string.history_empty_filter),
+                    message = stringResource(R.string.history_try_other_filter),
+                    actionLabel = activityFilterLabel("All"),
+                    onAction = { onFilterSelected("All") }
+                )
+            }
+        } else {
+            item { HistoryTotals(shown) }
+            items(shown, key = { it.id }) { activity ->
+                ActivityHistoryCard(activity = activity, onClick = { onActivityClick(activity.id) })
             }
         }
+    }
+}
+
+/** Count, distance and time of what is listed, so the list answers "how much have I done?" at a glance. */
+@Composable
+private fun HistoryTotals(activities: List<ActivitySummary>) {
+    val km = activities.sumOf { it.distance.toDouble() } / 1000.0
+    val millis = activities.sumOf { it.duration }
+    Row(
+        modifier = Modifier.fillMaxWidth().height(IntrinsicSize.Min),
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
+    ) {
+        NatureStatTile(
+            icon = Icons.Filled.Hiking,
+            value = NumberFormat.getIntegerInstance().format(activities.size),
+            label = stringResource(R.string.history_stat_activities),
+            modifier = Modifier.weight(1f).fillMaxHeight()
+        )
+        NatureStatTile(
+            icon = Icons.Filled.Straighten,
+            value = stringResource(R.string.unit_km, "%.1f".format(km)),
+            label = stringResource(R.string.stat_distance),
+            modifier = Modifier.weight(1f).fillMaxHeight()
+        )
+        NatureStatTile(
+            icon = Icons.Filled.Schedule,
+            value = formatDuration(millis),
+            label = stringResource(R.string.stat_duration),
+            modifier = Modifier.weight(1f).fillMaxHeight()
+        )
     }
 }
 
@@ -212,6 +292,11 @@ fun FilterChips(
                 selected = filter == selectedFilter,
                 onClick = { onFilterSelected(filter) },
                 label = { Text(activityFilterLabel(filter)) },
+                colors = FilterChipDefaults.filterChipColors(
+                    selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                    selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    selectedLeadingIconColor = MaterialTheme.colorScheme.onPrimaryContainer
+                ),
                 leadingIcon = if (filter == selectedFilter) {
                     { Icon(Icons.Filled.Check, null, Modifier.size(18.dp)) }
                 } else null
@@ -220,88 +305,67 @@ fun FilterChips(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun ActivityHistoryCard(
     activity: ActivitySummary,
     onClick: () -> Unit
 ) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onClick),
-        shape = RoundedCornerShape(20.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-    ) {
+    val tint = getActivityColor(activity.activityType)
+    NatureCard(onClick = onClick) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            // Activity icon
-            Surface(
-                shape = CircleShape,
-                color = getActivityColor(activity.activityType).copy(alpha = 0.2f),
-                modifier = Modifier.size(56.dp)
+            Box(
+                modifier = Modifier.size(56.dp).clip(CircleShape).background(tint.copy(alpha = 0.16f)),
+                contentAlignment = Alignment.Center
             ) {
-                Box(contentAlignment = Alignment.Center) {
-                    Icon(
-                        imageVector = getActivityIcon(activity.activityType),
-                        contentDescription = null,
-                        tint = getActivityColor(activity.activityType),
-                        modifier = Modifier.size(28.dp)
-                    )
-                }
+                Icon(
+                    imageVector = getActivityIcon(activity.activityType),
+                    contentDescription = null,
+                    tint = tint,
+                    modifier = Modifier.size(28.dp)
+                )
             }
-            
-            // Activity info
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
+
+            Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(
                     text = activityTypeLabel(activity.activityType),
-                    fontSize = 16.sp,
+                    style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                
                 Text(
                     text = formatActivityDate(activity.startTime),
-                    fontSize = 13.sp,
+                    style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
-                
                 if (activity.pendingUpload) {
-                    Text(
-                        text = stringResource(R.string.activity_pending_upload),
-                        fontSize = 12.sp,
-                        color = PathyColors.Warning
+                    NatureTag(
+                        label = stringResource(R.string.activity_pending_upload),
+                        color = PathyColors.Warning,
+                        icon = Icons.Filled.CloudUpload
                     )
                 }
-
-                Spacer(modifier = Modifier.height(8.dp))
-                
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(16.dp)
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                    modifier = Modifier.padding(top = 4.dp)
                 ) {
                     StatChip(
                         icon = Icons.Filled.Straighten,
                         value = stringResource(R.string.unit_km, (activity.distance / 1000).format(2))
                     )
-                    
-                    StatChip(
-                        icon = Icons.Filled.Schedule,
-                        value = formatDuration(activity.duration)
-                    )
-                    
+                    StatChip(icon = Icons.Filled.Schedule, value = formatDuration(activity.duration))
                     StatChip(
                         icon = Icons.Filled.Terrain,
                         value = stringResource(R.string.unit_m, activity.elevationGain.toInt())
                     )
                 }
             }
-            
-            // Chevron
+
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                 contentDescription = null,
@@ -320,80 +384,49 @@ fun StatChip(icon: ImageVector, value: String) {
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = PathyColors.Primary,
-            modifier = Modifier.size(14.dp)
+            tint = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.size(16.dp)
         )
         Text(
             text = value,
-            fontSize = 12.sp,
+            style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 }
 
+/** Shown over the list while one outing loads, or when it could not be loaded. */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EmptyHistoryState() {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(48.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Icon(
-            imageVector = Icons.Filled.DirectionsRun,
-            contentDescription = null,
-            modifier = Modifier.size(80.dp),
-            tint = Color.Gray.copy(alpha = 0.5f)
-        )
-        
-        Spacer(modifier = Modifier.height(16.dp))
-        
-        Text(
-            text = stringResource(R.string.history_empty_title),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-        
-        Text(
-            text = stringResource(R.string.history_empty_body),
-            fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(top = 8.dp)
-        )
-    }
-}
-
-@Composable
-fun EmptyFilterState(filter: String) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(48.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Icon(
-            imageVector = Icons.Filled.FilterList,
-            contentDescription = null,
-            modifier = Modifier.size(80.dp),
-            tint = Color.Gray.copy(alpha = 0.5f)
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Text(
-            text = stringResource(R.string.history_empty_filter),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-
-        Text(
-            text = stringResource(R.string.history_try_other_filter),
-            fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(top = 8.dp)
-        )
+fun ActivityDetailsPlaceholder(failed: Boolean, onRetry: () -> Unit, onBack: () -> Unit) {
+    Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
+        topBar = {
+            TopAppBar(
+                title = { Text(stringResource(R.string.home_history)) },
+                colors = pathyTopBarColors(),
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(R.string.back))
+                    }
+                }
+            )
+        }
+    ) { padding ->
+        Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
+            if (failed) {
+                NatureEmptyState(
+                    icon = Icons.Filled.CloudOff,
+                    title = stringResource(R.string.load_failed),
+                    message = stringResource(R.string.error_network_check),
+                    actionLabel = stringResource(R.string.retry),
+                    onAction = onRetry,
+                    isError = true
+                )
+            } else {
+                NatureLoadingState(stringResource(R.string.history_loading))
+            }
+        }
     }
 }
 
@@ -401,9 +434,8 @@ fun EmptyFilterState(filter: String) {
 
 private fun getActivityIcon(type: String): ImageVector {
     return when (type.uppercase()) {
-        "RUNNING" -> Icons.Filled.DirectionsRun
-        "CYCLING" -> Icons.Filled.DirectionsBike
-        "MOUNTAIN_BIKING", "MTB" -> Icons.Filled.DirectionsBike
+        "RUNNING" -> Icons.AutoMirrored.Filled.DirectionsRun
+        "CYCLING", "MOUNTAIN_BIKING", "MTB" -> Icons.AutoMirrored.Filled.DirectionsBike
         else -> Icons.Filled.Hiking
     }
 }
