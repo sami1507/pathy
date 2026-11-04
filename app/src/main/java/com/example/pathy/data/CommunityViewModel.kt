@@ -3,6 +3,7 @@ package com.example.pathy.data
 import androidx.lifecycle.ViewModel
 import com.example.pathy.CommunityEvent
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -32,18 +33,34 @@ class CommunityViewModel : ViewModel() {
         _deletingEventId.value = eventId
     }
 
+    /** True when the last attempt to read the feed failed, so the screen can offer a retry instead of "nothing here". */
+    private val _loadFailed = MutableStateFlow(false)
+    val loadFailed: StateFlow<Boolean> = _loadFailed
+
+    private var postsListener: ListenerRegistration? = null
+    private var eventsListener: ListenerRegistration? = null
+
+    /** Reads posts and events again. The old listeners are dropped first, so refreshing never stacks them up. */
+    fun refresh() {
+        listenToPosts()
+        listenToEvents()
+    }
+
     fun listenToPosts() {
-        _posts.value = emptyList()
-        FirebaseFirestore.getInstance()
+        postsListener?.remove()
+        _isLoading.value = true
+        postsListener = FirebaseFirestore.getInstance()
             .collection("posts")
             .orderBy("timestamp", Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
+                    _loadFailed.value = true
                     _isLoading.value = false
                     return@addSnapshotListener
                 }
 
                 if (snapshot != null) {
+                    _loadFailed.value = false
                     val updatedPosts = snapshot.documents.mapNotNull {
                         val post = it.toObject(Post::class.java)?.copy(postId = it.id)
                         post?.takeIf {
@@ -59,12 +76,15 @@ class CommunityViewModel : ViewModel() {
             }
     }
     fun listenToEvents() {
-        _events.value = emptyList()
-        FirebaseFirestore.getInstance()
+        eventsListener?.remove()
+        eventsListener = FirebaseFirestore.getInstance()
             .collection("events")
             .orderBy("createdAt", Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, error ->
-                if (error != null) return@addSnapshotListener
+                if (error != null) {
+                    _loadFailed.value = true
+                    return@addSnapshotListener
+                }
 
                 if (snapshot != null) {
                     val updatedEvents = snapshot.documents.mapNotNull { doc ->
@@ -88,5 +108,10 @@ class CommunityViewModel : ViewModel() {
                 }
             }
         _combinedItems.value = combined
+    }
+
+    override fun onCleared() {
+        postsListener?.remove()
+        eventsListener?.remove()
     }
 }
