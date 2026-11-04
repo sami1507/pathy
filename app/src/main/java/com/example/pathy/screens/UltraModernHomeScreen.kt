@@ -21,23 +21,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.clickable
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pathy.ui.components.*
+import com.example.pathy.ui.design.MountainRange
+import com.example.pathy.ui.design.NatureActionTile
+import com.example.pathy.ui.design.NatureCard
+import com.example.pathy.ui.design.NaturePrimaryAction
+import com.example.pathy.ui.design.NatureTag
+import com.example.pathy.ui.design.TopoBackground
+import com.example.pathy.ui.theme.Forest800
+import com.example.pathy.ui.theme.Moss600
 import java.util.*
 import androidx.compose.ui.res.stringResource
 import com.example.pathy.R
 
 /**
- * 🌟 ULTRA-MODERN HOME SCREEN
- * 
- * STUNNING new design with:
- * - Glass morphism effects
- * - Animated gradients
- * - Premium feel
- * - Smooth animations
- * - BETTER THAN ALL COMPETITORS!
+ * Home: a forest hero with the greeting and a profile button, the user's totals on a card that
+ * overlaps the hero, one big "record" action, the weather, and four shortcuts.
  */
 
 @Composable
@@ -58,47 +65,148 @@ fun UltraModernHomeScreen(
     onRetry: () -> Unit = {},
     weatherContent: @Composable () -> Unit = {}
 ) {
-    androidx.compose.material3.Surface(modifier = Modifier.fillMaxSize()) {
+    val gutter = Modifier.padding(horizontal = 20.dp)
+    androidx.compose.material3.Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
         LazyColumn(
-            modifier = Modifier.fillMaxSize().safeDrawingPadding(),
-            contentPadding = PaddingValues(20.dp),
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(bottom = 24.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                com.example.pathy.ui.design.MountainHero(
+                HomeHero(
                     title = if (userName.isNullOrBlank()) stringResource(R.string.home_welcome_generic) else stringResource(R.string.home_welcome, userName.isolateBidi()),
-                    subtitle = stringResource(R.string.home_intro)
+                    subtitle = stringResource(R.string.home_intro),
+                    initial = userName?.trim()?.firstOrNull()?.uppercaseChar()?.toString(),
+                    onViewProfile = onViewProfile
                 )
             }
             item {
-                Card(modifier = Modifier.fillMaxWidth()) {
-                    Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        Text(stringResource(R.string.home_totals), style = MaterialTheme.typography.titleMedium)
-                        when {
-                            !signedIn -> Text(stringResource(R.string.home_sign_in))
-                            statsLoading -> CircularProgressIndicator()
-                            statsError -> {
-                                Text(stringResource(R.string.load_failed))
-                                TextButton(onClick = onRetry) { Text(stringResource(R.string.retry)) }
+                // The totals card rides up over the hero's lower edge.
+                NatureCard(modifier = gutter.overlapAbove(36.dp), contentPadding = PaddingValues(20.dp)) {
+                    Text(
+                        stringResource(R.string.home_totals),
+                        style = MaterialTheme.typography.labelLarge,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Spacer(Modifier.height(8.dp))
+                    when {
+                        !signedIn -> Text(stringResource(R.string.home_sign_in), style = MaterialTheme.typography.bodyLarge)
+                        statsLoading -> CircularProgressIndicator(modifier = Modifier.size(28.dp), strokeWidth = 3.dp)
+                        statsError -> {
+                            Text(stringResource(R.string.load_failed), style = MaterialTheme.typography.bodyLarge)
+                            TextButton(onClick = onRetry) { Text(stringResource(R.string.retry)) }
+                        }
+                        else -> {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Column(Modifier.weight(1f)) {
+                                    Text(
+                                        stringResource(R.string.home_distance, totalDistance / 1000),
+                                        style = MaterialTheme.typography.displaySmall,
+                                        color = MaterialTheme.colorScheme.primary
+                                    )
+                                    Text(
+                                        pluralStringResource(R.plurals.home_activity_count, totalActivities, totalActivities),
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                                NatureTag(
+                                    // Formatted with the app language's digits, like the distance beside it
+                                    label = stringResource(R.string.profile_level, java.text.NumberFormat.getIntegerInstance().format(currentLevel)),
+                                    color = PathyColors.Primary,
+                                    icon = Icons.Filled.Terrain
+                                )
                             }
-                            else -> {
-                                Text(stringResource(R.string.home_distance, totalDistance / 1000), style = MaterialTheme.typography.headlineSmall)
-                                Text(pluralStringResource(R.plurals.home_activity_count, totalActivities, totalActivities))
-                                if (totalActivities == 0) Text(stringResource(R.string.home_empty))
+                            if (totalActivities == 0) {
+                                Spacer(Modifier.height(8.dp))
+                                Text(
+                                    stringResource(R.string.home_empty),
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
                             }
                         }
                     }
                 }
             }
-            item { Button(onClick = onStartTracking, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.home_track)) } }
-            item { OutlinedButton(onClick = onOpenMap, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.home_map)) } }
-            item { OutlinedButton(onClick = onDiscoverTrails, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.home_discover)) } }
-            item { weatherContent() }
-            item { OutlinedButton(onClick = onViewHistory, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.home_history)) } }
-            item { OutlinedButton(onClick = onOpenScout, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.home_scout)) } }
-            item { OutlinedButton(onClick = onViewProfile, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.home_profile)) } }
+            item {
+                NaturePrimaryAction(
+                    label = stringResource(R.string.home_track),
+                    icon = Icons.Filled.FiberManualRecord,
+                    onClick = onStartTracking,
+                    iconTint = PathyColors.Error,
+                    modifier = gutter
+                )
+            }
+            item { Box(gutter) { weatherContent() } }
+            item {
+                Column(gutter, verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Row(Modifier.height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        NatureActionTile(stringResource(R.string.home_map), Icons.Filled.Map, onOpenMap, Modifier.weight(1f).fillMaxHeight())
+                        NatureActionTile(stringResource(R.string.home_discover), Icons.Filled.Explore, onDiscoverTrails, Modifier.weight(1f).fillMaxHeight())
+                    }
+                    Row(Modifier.height(IntrinsicSize.Min), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                        NatureActionTile(stringResource(R.string.home_history), Icons.Filled.History, onViewHistory, Modifier.weight(1f).fillMaxHeight())
+                        NatureActionTile(stringResource(R.string.home_scout), Icons.Filled.SmartToy, onOpenScout, Modifier.weight(1f).fillMaxHeight())
+                    }
+                }
+            }
         }
     }
+}
+
+/** Forest gradient with contour lines and mountains, the greeting, and the profile button. */
+@Composable
+private fun HomeHero(
+    title: String,
+    subtitle: String,
+    initial: String?,
+    onViewProfile: () -> Unit
+) {
+    val profileLabel = stringResource(R.string.home_profile)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(bottomStart = 32.dp, bottomEnd = 32.dp))
+            .background(Brush.verticalGradient(listOf(Forest800, Moss600)))
+    ) {
+        TopoBackground(modifier = Modifier.matchParentSize(), alpha = 0.10f)
+        MountainRange(modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth().height(120.dp))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .statusBarsPadding()
+                .padding(start = 20.dp, end = 20.dp, top = 24.dp, bottom = 64.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                Text(text = title, style = MaterialTheme.typography.headlineMedium, color = Color.White)
+                Text(text = subtitle, style = MaterialTheme.typography.bodyLarge, color = Color.White.copy(alpha = 0.88f))
+            }
+            Box(
+                modifier = Modifier
+                    .size(48.dp)
+                    .clip(CircleShape)
+                    .background(Color.White.copy(alpha = 0.18f))
+                    .clickable(onClickLabel = profileLabel, role = Role.Button, onClick = onViewProfile)
+                    .semantics { contentDescription = profileLabel },
+                contentAlignment = Alignment.Center
+            ) {
+                if (initial != null) {
+                    Text(text = initial, style = MaterialTheme.typography.titleLarge, color = Color.White, fontWeight = FontWeight.Bold)
+                } else {
+                    Icon(Icons.Filled.Person, contentDescription = null, tint = Color.White)
+                }
+            }
+        }
+    }
+}
+
+/** Pulls an item up over the one above it: the item keeps its look, but takes [amount] less room. */
+private fun Modifier.overlapAbove(amount: androidx.compose.ui.unit.Dp): Modifier = layout { measurable, constraints ->
+    val placeable = measurable.measure(constraints)
+    val pull = amount.roundToPx().coerceAtMost(placeable.height)
+    layout(placeable.width, placeable.height - pull) { placeable.placeRelative(0, -pull) }
 }
 
 // ============================================

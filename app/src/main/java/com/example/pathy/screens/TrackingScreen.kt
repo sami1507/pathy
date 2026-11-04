@@ -32,13 +32,8 @@ import kotlinx.coroutines.delay
 import java.util.concurrent.TimeUnit
 
 /**
- * 🏃 TRACKING SCREEN
- * 
- * Beautiful real-time activity tracking
- * - Live stats display
- * - Recording controls
- * - Map view
- * - Better than AllTrails + Strava combined!
+ * Recording screen: live stats on a forest backdrop and the start, pause, resume and finish controls.
+ * The live map is drawn by the recording activity, not here.
  */
 
 @Composable
@@ -113,7 +108,7 @@ fun TrackingTopBar(
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp),
-        color = Color.White,
+        color = MaterialTheme.colorScheme.surface,
         shadowElevation = 8.dp
     ) {
         Row(
@@ -127,10 +122,10 @@ fun TrackingTopBar(
                 Icon(
                     imageVector = Icons.Filled.Close,
                     contentDescription = stringResource(R.string.common_close),
-                    tint = PathyColors.TextPrimary
+                    tint = MaterialTheme.colorScheme.onSurface
                 )
             }
-            
+
             // Recording indicator
             if (recordingState is RecordingState.Recording) {
                 Row(
@@ -172,14 +167,8 @@ fun TrackingTopBar(
                 }
             }
             
-            // Settings
-            IconButton(onClick = { /* Settings */ }) {
-                Icon(
-                    imageVector = Icons.Filled.Settings,
-                    contentDescription = stringResource(R.string.settings),
-                    tint = PathyColors.TextPrimary
-                )
-            }
+            // Same width as the close button, so the recording label stays centred
+            Spacer(Modifier.size(48.dp))
         }
     }
 }
@@ -215,7 +204,7 @@ fun StatsGrid(stats: ActivityStats) {
         ) {
             SmallStatCard(
                 value = "${stats.currentSpeed.toInt()}",
-                unit = "km/h",
+                unit = stringResource(R.string.unit_kmh_short),
                 label = stringResource(R.string.stat_speed),
                 icon = Icons.Filled.Speed,
                 color = PathyColors.Accent,
@@ -224,7 +213,7 @@ fun StatsGrid(stats: ActivityStats) {
             
             SmallStatCard(
                 value = "${stats.elevationGain.toInt()}",
-                unit = "m",
+                unit = stringResource(R.string.unit_m_short),
                 label = stringResource(R.string.stat_elevation),
                 icon = Icons.Filled.Terrain,
                 color = PathyColors.Berry,
@@ -247,7 +236,7 @@ fun StatsGrid(stats: ActivityStats) {
             
             SmallStatCard(
                 value = "${stats.calories}",
-                unit = "cal",
+                unit = stringResource(R.string.unit_kcal_short),
                 label = stringResource(R.string.stat_calories),
                 icon = Icons.Filled.LocalFireDepartment,
                 color = PathyColors.Berry,
@@ -323,7 +312,7 @@ fun SmallStatCard(
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier.height(120.dp),
+        modifier = modifier.heightIn(min = 120.dp),
         shape = RoundedCornerShape(20.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         // A solid light card: a faint tint of the number's colour over the green background was unreadable.
@@ -333,9 +322,9 @@ fun SmallStatCard(
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(16.dp),
-            verticalArrangement = Arrangement.SpaceBetween
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Icon(
                 imageVector = icon,
@@ -383,7 +372,7 @@ fun BottomControlPanel(
 ) {
     Surface(
         modifier = modifier.fillMaxWidth(),
-        color = Color.White,
+        color = MaterialTheme.colorScheme.surface,
         shadowElevation = 16.dp,
         shape = RoundedCornerShape(topStart = 32.dp, topEnd = 32.dp)
     ) {

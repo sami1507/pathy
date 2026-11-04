@@ -15,11 +15,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -35,11 +38,13 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.pathy.ui.theme.Bark700
+import com.example.pathy.ui.theme.Forest700
 import com.example.pathy.ui.theme.Forest800
 import com.example.pathy.ui.theme.Fern400
 import com.example.pathy.ui.theme.Moss500
@@ -227,7 +232,7 @@ fun NatureStatTile(
         modifier = modifier
             .clip(RoundedCornerShape(20.dp))
             .background(MaterialTheme.colorScheme.surface)
-            .border(1.dp, PathyColors.CardBorder, RoundedCornerShape(20.dp))
+            .border(1.dp, MaterialTheme.colorScheme.outlineVariant, RoundedCornerShape(20.dp))
             .padding(horizontal = 14.dp, vertical = 14.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
@@ -297,12 +302,91 @@ fun NatureCard(
             .fillMaxWidth()
             .shadow(elevation = 2.dp, shape = shape, clip = false)
             .clip(shape)
-            .then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier),
+            .then(if (onClick != null) Modifier.clickable(role = Role.Button, onClick = onClick) else Modifier),
         shape = shape,
         color = MaterialTheme.colorScheme.surface,
-        border = BorderStroke(1.dp, PathyColors.CardBorder)
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
     ) {
         Column(modifier = Modifier.padding(contentPadding), content = content)
+    }
+}
+
+/**
+ * The one main thing to do on a screen: a wide forest-green button with a round icon.
+ * Use it once per screen; secondary actions are [NatureActionTile]s.
+ */
+@Composable
+fun NaturePrimaryAction(
+    label: String,
+    icon: ImageVector,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    iconTint: Color = Moss600
+) {
+    val shape = RoundedCornerShape(24.dp)
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .heightIn(min = 72.dp)
+            .shadow(elevation = 6.dp, shape = shape, clip = false)
+            .clip(shape)
+            .background(Brush.horizontalGradient(listOf(Forest700, Moss600)))
+            .clickable(role = Role.Button, onClick = onClick)
+            .padding(horizontal = 20.dp, vertical = 14.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Box(
+            modifier = Modifier.size(44.dp).clip(CircleShape).background(Color.White),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(imageVector = icon, contentDescription = null, tint = iconTint, modifier = Modifier.size(26.dp))
+        }
+        Text(
+            text = label,
+            style = MaterialTheme.typography.titleMedium,
+            color = Color.White,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.weight(1f)
+        )
+        Icon(
+            imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+            contentDescription = null,
+            tint = Color.White.copy(alpha = 0.9f)
+        )
+    }
+}
+
+/** Card with a tinted round icon above a short label. Two or three of these sit in a row. */
+@Composable
+fun NatureActionTile(
+    label: String,
+    icon: ImageVector,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    NatureCard(modifier = modifier, onClick = onClick, contentPadding = PaddingValues(16.dp)) {
+        Box(
+            modifier = Modifier
+                .size(44.dp)
+                .clip(CircleShape)
+                .background(MaterialTheme.colorScheme.primaryContainer),
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                modifier = Modifier.size(24.dp)
+            )
+        }
+        Spacer(modifier = Modifier.height(12.dp))
+        Text(
+            text = label,
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.onSurface,
+            fontWeight = FontWeight.SemiBold
+        )
     }
 }
 

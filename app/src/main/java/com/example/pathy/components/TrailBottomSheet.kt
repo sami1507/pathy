@@ -129,7 +129,7 @@ fun TrailQuickStats(trail: EnhancedTrailData) {
         QuickStatItem(
             icon = Icons.Filled.Terrain,
             value = trail.elevationGain?.toString() ?: "–",
-            unit = if (trail.elevationGain != null) "m" else "",
+            unit = if (trail.elevationGain != null) stringResource(R.string.unit_m_short) else "",
             label = stringResource(R.string.stat_elevation)
         )
         

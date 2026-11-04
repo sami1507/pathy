@@ -27,8 +27,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import com.example.pathy.ui.design.MountainHero
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberAsyncImagePainter
 import com.example.pathy.R
@@ -71,36 +75,34 @@ fun SignUpScreen(
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
+    var showPassword by remember { mutableStateOf(false) }
+    val passwordTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation()
+    val showPasswordToggle: @Composable () -> Unit = {
+        IconButton(onClick = { showPassword = !showPassword }) {
+            Icon(
+                imageVector = if (showPassword) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
+                contentDescription = stringResource(if (showPassword) R.string.password_hide else R.string.password_show)
+            )
+        }
+    }
+
     Scaffold(
-        topBar = {
-            Surface(
-                color = PathyColors.AppBar,
-                tonalElevation = 4.dp,
-                shadowElevation = 6.dp
-            ) {
-                Box(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = stringResource(R.string.signup_title),
-                        style = MaterialTheme.typography.titleLarge.copy(
-                            color = Color.White
-                        )
-                    )
-                }
-            }
-        },
         containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
         Column(
             modifier = Modifier
                 .padding(padding)
+                .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(24.dp)
-                .fillMaxSize(),
+                .imePadding()
+        ) {
+        MountainHero(
+            title = stringResource(R.string.signup_title),
+            eyebrow = stringResource(R.string.app_name),
+            modifier = Modifier.padding(bottom = 8.dp)
+        )
+        Column(
+            modifier = Modifier.padding(24.dp).fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -128,37 +130,32 @@ fun SignUpScreen(
                 value = name,
                 onValueChange = { name = it },
                 label = { Text(stringResource(R.string.field_full_name)) },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = PathyColors.Primary,
-                    unfocusedBorderColor = MaterialTheme.colorScheme.surface
-                )
+                shape = RoundedCornerShape(14.dp)
             )
 
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
                 label = { Text(stringResource(R.string.field_email)) },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = PathyColors.Primary,
-                    unfocusedBorderColor = MaterialTheme.colorScheme.surface
-                )
+                shape = RoundedCornerShape(14.dp)
             )
 
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
                 label = { Text(stringResource(R.string.field_password)) },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                singleLine = true,
+                visualTransformation = passwordTransformation,
+                trailingIcon = showPasswordToggle,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Next),
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = PathyColors.Primary,
-                    unfocusedBorderColor = MaterialTheme.colorScheme.surface
-                )
+                shape = RoundedCornerShape(14.dp)
             )
 
             OutlinedTextField(
@@ -169,13 +166,12 @@ fun SignUpScreen(
                 },
                 label = { Text(stringResource(R.string.field_confirm_password)) },
                 isError = passwordError != null,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                singleLine = true,
+                visualTransformation = passwordTransformation,
+                trailingIcon = showPasswordToggle,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Next),
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = PathyColors.Primary,
-                    unfocusedBorderColor = MaterialTheme.colorScheme.surface
-                )
+                shape = RoundedCornerShape(14.dp)
             )
 
             if (passwordError != null) {
@@ -190,12 +186,10 @@ fun SignUpScreen(
                 value = phone,
                 onValueChange = { phone = it },
                 label = { Text(stringResource(R.string.field_phone_optional)) },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = PathyColors.Primary,
-                    unfocusedBorderColor = MaterialTheme.colorScheme.surface
-                )
+                shape = RoundedCornerShape(14.dp)
             )
 
             Text(stringResource(R.string.field_gender), style = MaterialTheme.typography.titleMedium)
@@ -263,16 +257,18 @@ fun SignUpScreen(
                         }
                     )
                 },
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp),
+                enabled = !isLoading,
+                modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
+                shape = RoundedCornerShape(16.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = PathyColors.Primary)
             ) {
-                Text(stringResource(R.string.signup_create_account), color = Color.White)
+                Text(stringResource(R.string.signup_create_account), color = Color.White, style = MaterialTheme.typography.titleMedium)
             }
 
             if (isLoading) {
                 CircularProgressIndicator()
             }
+        }
         }
     }
 

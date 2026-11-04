@@ -9,8 +9,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -19,7 +25,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pathy.LoginPreferences
@@ -28,6 +37,7 @@ import com.example.pathy.data.AuthViewModel
 import com.example.pathy.SignUpActivity
 import com.example.pathy.data.ProfileRepository.loadAndSaveProfileFromFirestore
 import com.example.pathy.data.resolveEmailFromInput
+import com.example.pathy.ui.design.MountainHero
 import com.example.pathy.ui.theme.PathyColors
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -134,229 +144,217 @@ fun SignInScreen(
         }
     }
 
-    Scaffold(
-        topBar = {
-            Surface(
-                color = PathyColors.AppBar,
-                tonalElevation = 4.dp,
-                shadowElevation = 6.dp
-            ) {
-                Box(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = stringResource(R.string.signin_title),
-                        style = MaterialTheme.typography.titleLarge.copy(
-                            color = Color.White
-                        )
-                    )
+    SignInForm(
+        email = email,
+        onEmailChange = { email = it },
+        password = password,
+        onPasswordChange = { password = it },
+        keepSignedIn = keepSignedIn,
+        onKeepSignedInChange = { keepSignedIn = it },
+        isLoading = isLoading,
+        onForgotPassword = {
+            authViewModel.forgotPassword(
+                email = email,
+                onSuccess = { showToast(context.getString(R.string.reset_email_sent)) },
+                onError = { showToast(it) }
+            )
+        },
+        onSignIn = {
+            coroutineScope.launch {
+                isLoading = true
+
+                val resolvedEmail = resolveEmailFromInput(email.trim())
+                if (resolvedEmail == null) {
+                    isLoading = false
+                    showToast(context.getString(R.string.signin_invalid_identifier))
+                    return@launch
                 }
+
+                authViewModel.signInWithEmail(
+                    email = resolvedEmail,
+                    password = password,
+                    onSuccess = {
+                        coroutineScope.launch {
+                            isLoading = false
+                            val auth = FirebaseAuth.getInstance()
+                            try {
+                                auth.currentUser?.reload()?.await()
+                                val refreshedUser = auth.currentUser
+
+                                if (refreshedUser != null && refreshedUser.isEmailVerified) {
+                                    authViewModel.ensureUserProfileExists(
+                                        user = refreshedUser,
+                                        onComplete = {
+                                            coroutineScope.launch {
+                                                try {
+                                                    loadAndSaveProfileFromFirestore(context)
+                                                    loginPrefs.setKeepSignedIn(keepSignedIn)
+                                                    showToast(context.getString(R.string.signin_success))
+                                                    onSuccessLogin()
+                                                } catch (e: Exception) {
+                                                    showToast(context.getString(R.string.profile_load_error, e.message))
+                                                }
+                                            }
+                                        },
+                                        onError = {
+                                            showToast(context.getString(R.string.profile_load_error, it.message))
+                                        }
+                                    )
+                                } else {
+                                    auth.signOut()
+                                    showToast(context.getString(R.string.signin_email_unverified))
+                                }
+                            } catch (e: Exception) {
+                                showToast(context.getString(R.string.signin_general_error, e.message))
+                                auth.signOut()
+                            }
+                        }
+                    },
+                    onError = {
+                        isLoading = false
+                        showToast(it)
+                    }
+                )
             }
         },
-        containerColor = MaterialTheme.colorScheme.background
-    ) { padding ->
+        onGoogleSignIn = {
+            isLoading = true
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken("916819227228-7b0t3tsvcklpilkmp5hjgr0ieu6ktet1.apps.googleusercontent.com")
+                .requestEmail()
+                .build()
+
+            val googleSignInClient = GoogleSignIn.getClient(context, gso)
+
+            googleSignInClient.signOut().addOnCompleteListener {
+                googleSignInLauncher.launch(googleSignInClient.signInIntent)
+            }
+        },
+        onCreateAccount = {
+            context.startActivity(Intent(context, SignUpActivity::class.java))
+        }
+    )
+}
+
+/** The sign-in screen without any account logic, so it can be drawn and tested on its own. */
+@Composable
+fun SignInForm(
+    email: String,
+    onEmailChange: (String) -> Unit,
+    password: String,
+    onPasswordChange: (String) -> Unit,
+    keepSignedIn: Boolean,
+    onKeepSignedInChange: (Boolean) -> Unit,
+    isLoading: Boolean,
+    onForgotPassword: () -> Unit,
+    onSignIn: () -> Unit,
+    onGoogleSignIn: () -> Unit,
+    onCreateAccount: () -> Unit
+) {
+    var showPassword by remember { mutableStateOf(false) }
+    val fieldShape = RoundedCornerShape(14.dp)
+    val buttonShape = RoundedCornerShape(16.dp)
+
+    Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         Column(
             modifier = Modifier
-                .padding(padding)
+                .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(24.dp)
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .imePadding()
         ) {
-
-            @Composable
-            fun cardField(label: String, content: @Composable () -> Unit) {
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                    elevation = CardDefaults.cardElevation(4.dp)
-                ) {
-                    Column(Modifier.padding(8.dp)) {
-                        Text(
-                            label,
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
-                        )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        content()
-                    }
-                }
-                Spacer(modifier = Modifier.height(12.dp))
-            }
-
-            cardField(stringResource(R.string.field_email)) {
+            MountainHero(
+                title = stringResource(R.string.signin_title),
+                eyebrow = stringResource(R.string.app_name),
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+            Column(
+                modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
                 OutlinedTextField(
                     value = email,
-                    onValueChange = { email = it },
+                    onValueChange = onEmailChange,
                     modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = PathyColors.Primary,
-                        unfocusedBorderColor = MaterialTheme.colorScheme.surface
-                    )
+                    label = { Text(stringResource(R.string.field_email)) },
+                    leadingIcon = { Icon(Icons.Filled.Email, contentDescription = null) },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Next),
+                    shape = fieldShape
                 )
-            }
 
-            cardField(stringResource(R.string.field_password)) {
                 OutlinedTextField(
                     value = password,
-                    onValueChange = { password = it },
+                    onValueChange = onPasswordChange,
                     modifier = Modifier.fillMaxWidth(),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = PathyColors.Primary,
-                        unfocusedBorderColor = MaterialTheme.colorScheme.surface
-                    )
-                )
-            }
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Checkbox(
-                        checked = keepSignedIn,
-                        onCheckedChange = { keepSignedIn = it },
-                        colors = CheckboxDefaults.colors(checkedColor = PathyColors.Primary)
-                    )
-                    Text(stringResource(R.string.signin_remember_me))
-                }
-
-                TextButton(onClick = {
-                    authViewModel.forgotPassword(
-                        email = email,
-                        onSuccess = { showToast(context.getString(R.string.reset_email_sent)) },
-                        onError = { showToast(it) }
-                    )
-                }) {
-                    Text(stringResource(R.string.signin_forgot_password), color = PathyColors.Secondary)
-                }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-
-            Button(
-                onClick = {
-                    coroutineScope.launch {
-                        isLoading = true
-
-                        val resolvedEmail = resolveEmailFromInput(email.trim())
-                        if (resolvedEmail == null) {
-                            isLoading = false
-                            showToast(context.getString(R.string.signin_invalid_identifier))
-                            return@launch
+                    label = { Text(stringResource(R.string.field_password)) },
+                    leadingIcon = { Icon(Icons.Filled.Lock, contentDescription = null) },
+                    trailingIcon = {
+                        IconButton(onClick = { showPassword = !showPassword }) {
+                            Icon(
+                                imageVector = if (showPassword) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
+                                contentDescription = stringResource(if (showPassword) R.string.password_hide else R.string.password_show)
+                            )
                         }
-
-                        authViewModel.signInWithEmail(
-                            email = resolvedEmail,
-                            password = password,
-                            onSuccess = {
-                                coroutineScope.launch {
-                                    isLoading = false
-                                    val auth = FirebaseAuth.getInstance()
-                                    try {
-                                        auth.currentUser?.reload()?.await()
-                                        val refreshedUser = auth.currentUser
-
-                                        if (refreshedUser != null && refreshedUser.isEmailVerified) {
-                                            authViewModel.ensureUserProfileExists(
-                                                user = refreshedUser,
-                                                onComplete = {
-                                                    coroutineScope.launch {
-                                                        try {
-                                                            loadAndSaveProfileFromFirestore(context)
-                                                            loginPrefs.setKeepSignedIn(keepSignedIn)
-                                                            showToast(context.getString(R.string.signin_success))
-                                                            onSuccessLogin()
-                                                        } catch (e: Exception) {
-                                                            showToast(context.getString(R.string.profile_load_error, e.message))
-                                                        }
-                                                    }
-                                                },
-                                                onError = {
-                                                    showToast(context.getString(R.string.profile_load_error, it.message))
-                                                }
-                                            )
-                                        } else {
-                                            auth.signOut()
-                                            showToast(context.getString(R.string.signin_email_unverified))
-                                        }
-                                    } catch (e: Exception) {
-                                        showToast(context.getString(R.string.signin_general_error, e.message))
-                                        auth.signOut()
-                                    }
-                                }
-                            },
-                            onError = {
-                                isLoading = false
-                                showToast(it)
-                            }
-                        )
-                    }
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                shape = RoundedCornerShape(16.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = PathyColors.Primary)
-            ) {
-                Text(stringResource(R.string.signin_title), color = Color.White)
-            }
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Button(
-                onClick = {
-                    isLoading = true
-                    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                        .requestIdToken("916819227228-7b0t3tsvcklpilkmp5hjgr0ieu6ktet1.apps.googleusercontent.com")
-                        .requestEmail()
-                        .build()
-
-                    val googleSignInClient = GoogleSignIn.getClient(context, gso)
-
-                    googleSignInClient.signOut().addOnCompleteListener {
-                        googleSignInLauncher.launch(googleSignInClient.signInIntent)
-                    }
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                shape = RoundedCornerShape(16.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = PathyColors.SecondaryDark)
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_google),
-                    contentDescription = stringResource(R.string.google_logo_desc),
-                    modifier = Modifier.size(20.dp),
-                    tint = Color.Unspecified
+                    },
+                    singleLine = true,
+                    visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Done),
+                    keyboardActions = KeyboardActions(onDone = { onSignIn() }),
+                    shape = fieldShape
                 )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(stringResource(R.string.signin_with_google), color = Color.White)
-            }
 
-            Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(1f)) {
+                        Checkbox(
+                            checked = keepSignedIn,
+                            onCheckedChange = onKeepSignedInChange,
+                            colors = CheckboxDefaults.colors(checkedColor = PathyColors.Primary)
+                        )
+                        Text(stringResource(R.string.signin_remember_me), style = MaterialTheme.typography.bodyMedium)
+                    }
+                    TextButton(onClick = onForgotPassword) {
+                        Text(stringResource(R.string.signin_forgot_password), color = MaterialTheme.colorScheme.primary)
+                    }
+                }
 
-            Button(
-                onClick = {
-                    val intent = Intent(context, SignUpActivity::class.java)
-                    context.startActivity(intent)
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                shape = RoundedCornerShape(16.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = PathyColors.Secondary)
-            ) {
-                Text(stringResource(R.string.signin_new_user), color = Color.White)
+                Button(
+                    onClick = onSignIn,
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
+                    shape = buttonShape,
+                    colors = ButtonDefaults.buttonColors(containerColor = PathyColors.Primary)
+                ) {
+                    Text(stringResource(R.string.signin_title), color = Color.White, style = MaterialTheme.typography.titleMedium)
+                }
+
+                OutlinedButton(
+                    onClick = onGoogleSignIn,
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp),
+                    shape = buttonShape
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_google),
+                        contentDescription = stringResource(R.string.google_logo_desc),
+                        modifier = Modifier.size(20.dp),
+                        tint = Color.Unspecified
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(stringResource(R.string.signin_with_google), style = MaterialTheme.typography.titleMedium)
+                }
+
+                TextButton(
+                    onClick = onCreateAccount,
+                    modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)
+                ) {
+                    Text(
+                        stringResource(R.string.signin_new_user),
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
             }
         }
 
@@ -365,6 +363,7 @@ fun SignInScreen(
         }
     }
 }
+
 @Composable
 fun CoolLoadingOverlay(text: String) {
     Box(
@@ -389,4 +388,3 @@ fun CoolLoadingOverlay(text: String) {
         }
     }
 }
-

@@ -16,29 +16,39 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.semantics.Role
+import com.example.pathy.ui.design.NatureCard
+import com.example.pathy.ui.design.NatureTag
+import com.example.pathy.ui.design.pathyTopBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -65,6 +75,7 @@ import com.example.pathy.ui.theme.PathyColors
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(onBack: () -> Unit) {
     val context = LocalContext.current
@@ -109,19 +120,15 @@ fun SettingsScreen(onBack: () -> Unit) {
 
     Scaffold(
         topBar = {
-            Surface(
-                color = PathyColors.AppBar,
-                tonalElevation = 4.dp
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(stringResource(R.string.settings), style = MaterialTheme.typography.titleLarge.copy(color = Color.White))
+            TopAppBar(
+                title = { Text(stringResource(R.string.settings), fontWeight = FontWeight.Bold) },
+                colors = pathyTopBarColors(),
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(R.string.back))
+                    }
                 }
-            }
+            )
         },
         containerColor = MaterialTheme.colorScheme.background
     ) { padding ->
@@ -130,17 +137,12 @@ fun SettingsScreen(onBack: () -> Unit) {
                 .padding(padding)
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
 
-            Card(
-                shape = RoundedCornerShape(16.dp),
-                elevation = CardDefaults.cardElevation(4.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
-            ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    Text(stringResource(R.string.select_language), style = MaterialTheme.typography.titleMedium)
-                    Spacer(modifier = Modifier.height(8.dp))
+            NatureCard {
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    SettingTitle(icon = Icons.Filled.Language, title = stringResource(R.string.select_language))
                     LanguageDropdown(
                         selectedLanguage = selectedLanguage,
                         languages = languages,
@@ -156,41 +158,30 @@ fun SettingsScreen(onBack: () -> Unit) {
                 }
             }
 
-            Card(
-                shape = RoundedCornerShape(16.dp),
-                elevation = CardDefaults.cardElevation(4.dp),
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                modifier = Modifier.clickable(
-                    enabled = !locationPermissionGranted,
-                    onClick = {
-                        permissionLauncher.launch(android.Manifest.permission.ACCESS_FINE_LOCATION)
-                    }
-                )
+            NatureCard(
+                onClick = if (locationPermissionGranted) null else {
+                    { permissionLauncher.launch(android.Manifest.permission.ACCESS_FINE_LOCATION) }
+                }
             ) {
                 Row(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    Icon(
-                        imageVector = if (locationEnabled) Icons.Filled.LocationOn else Icons.Filled.LocationOff,
-                        contentDescription = null,
-                        tint = if (locationEnabled) PathyColors.Primary else PathyColors.Error,
-                        modifier = Modifier.padding(end = 12.dp)
-                    )
+                    SettingIcon(if (locationEnabled) Icons.Filled.LocationOn else Icons.Filled.LocationOff, error = !locationEnabled)
                     Text(
                         text = stringResource(R.string.settings_location_services),
                         modifier = Modifier.weight(1f),
-                        style = MaterialTheme.typography.bodyLarge
+                        style = MaterialTheme.typography.titleMedium
                     )
-                    Text(
-                        text = if (locationEnabled) stringResource(R.string.common_enabled) else stringResource(R.string.common_disabled),
-                        style = MaterialTheme.typography.bodyMedium
+                    NatureTag(
+                        label = if (locationEnabled) stringResource(R.string.common_enabled) else stringResource(R.string.common_disabled),
+                        color = if (locationEnabled) PathyColors.Primary else PathyColors.Error
                     )
                 }
             }
 
+            Spacer(Modifier.height(4.dp))
             LogoutButtonWithDialog(
                 onLogoutConfirmed = {
                     logout(context)
@@ -202,22 +193,31 @@ fun SettingsScreen(onBack: () -> Unit) {
             Text(
                 text = stringResource(R.string.settings_version_label, BuildConfig.VERSION_NAME),
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-
-            OutlinedButton(
-                onClick = onBack,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(48.dp),
-                shape = RoundedCornerShape(16.dp),
-                colors = ButtonDefaults.outlinedButtonColors(
-                    contentColor = PathyColors.Primary
-                )
-            ) {
-                Text(stringResource(R.string.back))
-            }
         }
+    }
+}
+
+/** Round tinted icon at the start of a settings row. */
+@Composable
+private fun SettingIcon(icon: ImageVector, error: Boolean = false) {
+    val container = if (error) MaterialTheme.colorScheme.errorContainer else MaterialTheme.colorScheme.primaryContainer
+    val content = if (error) MaterialTheme.colorScheme.onErrorContainer else MaterialTheme.colorScheme.onPrimaryContainer
+    Box(
+        modifier = Modifier.size(44.dp).clip(CircleShape).background(container),
+        contentAlignment = Alignment.Center
+    ) {
+        Icon(icon, contentDescription = null, tint = content, modifier = Modifier.size(24.dp))
+    }
+}
+
+@Composable
+private fun SettingTitle(icon: ImageVector, title: String) {
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+        SettingIcon(icon)
+        Text(text = title, style = MaterialTheme.typography.titleMedium)
     }
 }
 
@@ -229,49 +229,43 @@ fun LanguageDropdown(
 ) {
     var expanded by remember { mutableStateOf(false) }
 
-    Card(
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Column(Modifier.padding(16.dp)) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(12.dp))
-                    .border(1.dp, PathyColors.ProgressBar, RoundedCornerShape(12.dp))
-                    .clickable { expanded = true }
-                    .padding(horizontal = 16.dp, vertical = 12.dp)
+    Column(Modifier.fillMaxWidth()) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(min = 48.dp)
+                .clip(RoundedCornerShape(14.dp))
+                .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(14.dp))
+                .clickable(role = Role.DropdownList) { expanded = true }
+                .padding(horizontal = 16.dp, vertical = 12.dp),
+            contentAlignment = Alignment.CenterStart
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = languages[selectedLanguage] ?: "",
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                    Icon(Icons.Filled.ArrowDropDown, contentDescription = null)
-                }
+                Text(
+                    text = languages[selectedLanguage] ?: "",
+                    style = MaterialTheme.typography.bodyLarge
+                )
+                Icon(Icons.Filled.ArrowDropDown, contentDescription = null)
             }
+        }
 
-            DropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(MaterialTheme.colorScheme.surface)
-            ) {
-                languages.forEach { (code, label) ->
-                    DropdownMenuItem(
-                        text = { Text(label) },
-                        onClick = {
-                            onSelect(code)
-                            expanded = false
-                        }
-                    )
-                }
+        DropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false },
+            modifier = Modifier.background(MaterialTheme.colorScheme.surface)
+        ) {
+            languages.forEach { (code, label) ->
+                DropdownMenuItem(
+                    text = { Text(label) },
+                    onClick = {
+                        onSelect(code)
+                        expanded = false
+                    }
+                )
             }
         }
     }
@@ -281,17 +275,17 @@ fun LanguageDropdown(
 fun LogoutButtonWithDialog(onLogoutConfirmed: () -> Unit) {
     var showDialog by remember { mutableStateOf(false) }
 
-    Button(
+    OutlinedButton(
         onClick = { showDialog = true },
         modifier = Modifier
             .fillMaxWidth()
-            .height(50.dp),
+            .heightIn(min = 52.dp),
         shape = RoundedCornerShape(16.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant,
-            contentColor = PathyColors.Error
-        )
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.error),
+        colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.error)
     ) {
+        Icon(Icons.AutoMirrored.Filled.Logout, contentDescription = null, modifier = Modifier.size(20.dp))
+        Spacer(Modifier.width(8.dp))
         Text(stringResource(R.string.sign_out), style = MaterialTheme.typography.titleMedium)
     }
 
