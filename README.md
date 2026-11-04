@@ -16,7 +16,11 @@
 |---|---|---|---|
 | <img src="docs/screenshots/home.png" width="200"> | <img src="docs/screenshots/trail-cards-ar.png" width="200"> | <img src="docs/screenshots/post-card-ar.png" width="200"> | <img src="docs/screenshots/post-composer-he.png" width="200"> |
 
-*The first four are from a real Android 17 emulator, the last four are rendered by the project's own screenshot tests.*
+| Home in Arabic | Sign in | Sign in in Arabic | Settings, dark theme |
+|---|---|---|---|
+| <img src="docs/screenshots/home-ar.png" width="200"> | <img src="docs/screenshots/signin-en.png" width="200"> | <img src="docs/screenshots/signin-ar.png" width="200"> | <img src="docs/screenshots/settings-dark.png" width="200"> |
+
+*The first four are from a real Android 17 emulator, the rest are rendered by the project's own screenshot tests.*
 
 ## What it does
 
