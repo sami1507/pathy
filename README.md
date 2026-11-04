@@ -8,9 +8,9 @@
 ![Android](https://img.shields.io/badge/Android-8.0%2B-3DDC84?logo=android&logoColor=white)
 ![Languages](https://img.shields.io/badge/languages-EN%20%C2%B7%20AR%20%C2%B7%20HE-2E7D32)
 
-| Discover (live OpenStreetMap data) | Recording, restored after the app was killed | Notification while recording | History, saved offline |
+| Discover (live OpenStreetMap data) | Recording, restored after the app was killed | Notification while recording | History, one outing waiting to upload |
 |---|---|---|---|
-| <img src="docs/screenshots/discover-en.png" width="200"> | <img src="docs/screenshots/recording-restored.png" width="200"> | <img src="docs/screenshots/recording-notification.png" width="200"> | <img src="docs/screenshots/history-offline.png" width="200"> |
+| <img src="docs/screenshots/discover-en.png" width="200"> | <img src="docs/screenshots/recording-restored.png" width="200"> | <img src="docs/screenshots/recording-notification.png" width="200"> | <img src="docs/screenshots/history-list-en.png" width="200"> |
 
 | Home | Trails in Arabic (right-to-left) | A post in Arabic | Composer in Hebrew |
 |---|---|---|---|
@@ -20,7 +20,11 @@
 |---|---|---|---|
 | <img src="docs/screenshots/home-ar.png" width="200"> | <img src="docs/screenshots/signin-en.png" width="200"> | <img src="docs/screenshots/signin-ar.png" width="200"> | <img src="docs/screenshots/settings-dark.png" width="200"> |
 
-*The first four are from a real Android 17 emulator, the rest are rendered by the project's own screenshot tests.*
+| Profile | Community | Saved trails, dark theme | Welcome |
+|---|---|---|---|
+| <img src="docs/screenshots/profile-en.png" width="200"> | <img src="docs/screenshots/community-feed-en.png" width="200"> | <img src="docs/screenshots/bookmarks-dark.png" width="200"> | <img src="docs/screenshots/onboarding-en.png" width="200"> |
+
+*The first three are from a real Android 17 emulator, the rest are rendered by the project's own screenshot tests.*
 
 ## What it does
 
