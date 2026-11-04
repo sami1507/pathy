@@ -47,6 +47,7 @@
 
     <!-- OnboardingScreen.kt -->
     <string name="onboarding_get_started">Get started</string>
+    <string name="onboarding_page_of">Page %1$d of %2$d</string>
     <string name="common_next">Next</string>
     <string name="common_skip">Skip</string>
     <string name="onboarding_progress_body">Record your routes, earn achievements and share your adventures with the community.</string>
@@ -162,14 +163,13 @@
     <string name="bookmarks_empty_body">Start saving your favorite trails!</string>
     <string name="bookmarks_empty_title">No bookmarks yet</string>
     <string name="bookmarks_remove">Remove bookmark</string>
+    <string name="common_undo">Undo</string>
     <string name="bookmark_saved_ago">Saved %1$s</string>
-    <string name="bookmarks_toggle_view">Toggle view</string>
     <string name="bookmarks_title">Bookmarks</string>
 
     <!-- BookmarksActivity.kt -->
     <string name="bookmarks_remove_failed">Couldn\'t remove it: %1$s</string>
     <string name="trail_details_unavailable">No trail details to show.</string>
-    <string name="bookmarks_load_failed">Couldn\'t load your bookmarks: %1$s</string>
     <string name="bookmarks_sign_in_required">Sign in to see your bookmarks.</string>
 
     <!-- ActivityHistoryScreen.kt -->
@@ -177,23 +177,28 @@
     <string name="history_empty_body">Start tracking your first adventure!</string>
     <string name="history_empty_title">No activities yet</string>
     <string name="history_loading">Loading activities…</string>
+    <string name="history_stat_activities">Activities</string>
 
     <!-- ProfileScreen.kt -->
     <string name="trail_load_failed">Couldn\'t load the trail.</string>
     <string name="trail_not_found">Trail not found.</string>
     <string name="trail_load_error">Error loading the trail.</string>
     <string name="profile_user_details">User details</string>
-    <string name="profile_sos_button">🆘 Emergency (SOS)</string>
-    <string name="profile_bookmarks_button">🔖 Bookmarks</string>
-    <string name="profile_activity_history_button">📜 Activity history</string>
-    <string name="profile_record_activity_button">🏃 Record activity</string>
+    <string name="profile_sos_button">Emergency (SOS)</string>
+    <string name="profile_bookmarks_button">Bookmarks</string>
+    <string name="profile_activity_history_button">Activity history</string>
+    <string name="profile_record_activity_button">Record activity</string>
     <string name="profile_user_points">User points</string>
     <string name="profile_my_points">My points</string>
     <string name="profile_image_desc">Profile picture</string>
-    <string name="profile_offline_trails_button">📁 Offline trails</string>
+    <string name="profile_offline_trails_button">Offline trails</string>
     <string name="profile_load_failed_retry">Couldn\'t load the data. Try again later.</string>
-    <string name="profile_saved_trails_button">☁️ Saved trails</string>
+    <string name="profile_saved_trails_button">Saved trails</string>
     <string name="profile_change_photo">Change photo</string>
+    <string name="profile_points_count">Points: %1$s</string>
+    <string name="profile_posts_title">Posts &amp; events</string>
+    <string name="profile_posts_empty_mine">Nothing shared yet. Posts and events you create appear here.</string>
+    <string name="profile_posts_empty_other">No posts or events yet.</string>
     <string name="profile_edit_desc">Edit profile</string>
 
     <!-- EnhancedProfileScreen.kt -->
@@ -275,6 +280,12 @@
     <string name="post_publishing">Publishing your post…</string>
     <string name="post_published">Post published!</string>
     <string name="community_title">Community</string>
+    <string name="community_empty_title">No posts yet</string>
+    <string name="community_empty_message">Be the first to share a trail, a photo or a group hike.</string>
+    <string name="community_error_title">Couldn\'t load the community</string>
+    <string name="community_error_message">Check your connection and try again.</string>
+    <string name="community_publishing">Publishing…</string>
+    <string name="community_published">Published!</string>
     <string name="images_upload_failed">Couldn\'t upload the photos: %1$s</string>
     <string name="event_create_failed">Couldn\'t create the event: %1$s</string>
     <string name="default_user_name">User</string>

@@ -45,6 +45,7 @@
 
     <!-- OnboardingScreen.kt -->
     <string name="onboarding_get_started">בואו נתחיל</string>
+    <string name="onboarding_page_of">עמוד %1$d מתוך %2$d</string>
     <string name="common_next">הבא</string>
     <string name="common_skip">דילוג</string>
     <string name="onboarding_progress_body">הקליטו את המסלולים שלכם, צברו הישגים ושתפו את ההרפתקאות עם הקהילה.</string>
@@ -160,14 +161,13 @@
     <string name="bookmarks_empty_body">התחילו לשמור את המסלולים האהובים עליכם!</string>
     <string name="bookmarks_empty_title">עדיין אין מועדפים</string>
     <string name="bookmarks_remove">הסרה מהמועדפים</string>
+    <string name="common_undo">ביטול</string>
     <string name="bookmark_saved_ago">נשמר %1$s</string>
-    <string name="bookmarks_toggle_view">החלפת תצוגה</string>
     <string name="bookmarks_title">מועדפים</string>
 
     <!-- BookmarksActivity.kt -->
     <string name="bookmarks_remove_failed">ההסרה נכשלה: %1$s</string>
     <string name="trail_details_unavailable">אין פרטי מסלול להצגה.</string>
-    <string name="bookmarks_load_failed">טעינת המועדפים נכשלה: %1$s</string>
     <string name="bookmarks_sign_in_required">יש להתחבר כדי לראות את המועדפים.</string>
 
     <!-- ActivityHistoryScreen.kt -->
@@ -175,23 +175,28 @@
     <string name="history_empty_body">התחילו להקליט את ההרפתקה הראשונה שלכם!</string>
     <string name="history_empty_title">עדיין אין פעילויות</string>
     <string name="history_loading">טוען פעילויות…</string>
+    <string name="history_stat_activities">פעילויות</string>
 
     <!-- ProfileScreen.kt -->
     <string name="trail_load_failed">טעינת המסלול נכשלה.</string>
     <string name="trail_not_found">המסלול לא נמצא.</string>
     <string name="trail_load_error">שגיאה בטעינת המסלול.</string>
     <string name="profile_user_details">פרטי משתמש</string>
-    <string name="profile_sos_button">🆘 חירום (SOS)</string>
-    <string name="profile_bookmarks_button">🔖 מועדפים</string>
-    <string name="profile_activity_history_button">📜 היסטוריית פעילויות</string>
-    <string name="profile_record_activity_button">🏃 הקלטת פעילות</string>
+    <string name="profile_sos_button">חירום (SOS)</string>
+    <string name="profile_bookmarks_button">מועדפים</string>
+    <string name="profile_activity_history_button">היסטוריית פעילויות</string>
+    <string name="profile_record_activity_button">הקלטת פעילות</string>
     <string name="profile_user_points">נקודות המשתמש</string>
     <string name="profile_my_points">הנקודות שלי</string>
     <string name="profile_image_desc">תמונת פרופיל</string>
-    <string name="profile_offline_trails_button">📁 מסלולי אופליין</string>
+    <string name="profile_offline_trails_button">מסלולי אופליין</string>
     <string name="profile_load_failed_retry">טעינת הנתונים נכשלה, נסו שוב מאוחר יותר.</string>
-    <string name="profile_saved_trails_button">☁️ מסלולים שמורים</string>
+    <string name="profile_saved_trails_button">מסלולים שמורים</string>
     <string name="profile_change_photo">החלפת תמונה</string>
+    <string name="profile_points_count">נקודות: %1$s</string>
+    <string name="profile_posts_title">פוסטים ואירועים</string>
+    <string name="profile_posts_empty_mine">עדיין לא שיתפת כלום. פוסטים ואירועים שתיצור יופיעו כאן.</string>
+    <string name="profile_posts_empty_other">אין עדיין פוסטים או אירועים.</string>
     <string name="profile_edit_desc">עריכת פרופיל</string>
 
     <!-- EnhancedProfileScreen.kt -->
@@ -280,6 +285,12 @@
     <string name="post_publishing">מפרסמים את הפוסט שלך…</string>
     <string name="post_published">הפוסט פורסם!</string>
     <string name="community_title">קהילה</string>
+    <string name="community_empty_title">אין עדיין פוסטים</string>
+    <string name="community_empty_message">היו הראשונים לשתף מסלול, תמונה או טיול קבוצתי.</string>
+    <string name="community_error_title">לא ניתן לטעון את הקהילה</string>
+    <string name="community_error_message">בדקו את החיבור ונסו שוב.</string>
+    <string name="community_publishing">מפרסם…</string>
+    <string name="community_published">פורסם!</string>
     <string name="images_upload_failed">העלאת התמונות נכשלה: %1$s</string>
     <string name="event_create_failed">יצירת האירוע נכשלה: %1$s</string>
     <string name="default_user_name">משתמש</string>

@@ -1,55 +1,73 @@
 package com.example.pathy.screens
 
-import com.example.pathy.i18n.relativeTimeAgo
-import androidx.compose.ui.res.pluralStringResource
-import androidx.compose.ui.res.stringResource
-import com.example.pathy.R
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.List as ListIcon
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.filled.BookmarkBorder
+import androidx.compose.material.icons.filled.CloudOff
+import androidx.compose.material.icons.filled.Hiking
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.example.pathy.R
 import com.example.pathy.bookmarks.Bookmark
+import com.example.pathy.i18n.relativeTimeAgo
+import com.example.pathy.ui.design.NatureCard
+import com.example.pathy.ui.design.NatureEmptyState
+import com.example.pathy.ui.design.NatureLoadingState
 import com.example.pathy.ui.design.pathyTopBarColors
 import com.example.pathy.ui.design.pathyTopBarSubtitleColor
-import com.example.pathy.ui.theme.PathyColors
 
 /**
- * 🔖 BOOKMARKS SCREEN
- * 
- * Beautiful bookmarks/favorites
- * - Grid/List view
- * - Custom lists
- * - Quick actions
- * - Better than AllTrails favorites!
+ * The signed-in user's saved trails. Draws the list, the first load, the empty list (with a way to
+ * start saving) and a failed load (with a retry). Removing a bookmark is reported through
+ * [onRemoveBookmark]; the route shows the undo message in [snackbarHost].
  */
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookmarksScreen(
     bookmarks: List<Bookmark>,
     onBookmarkClick: (String) -> Unit = {},
     onRemoveBookmark: (String) -> Unit = {},
-    onBack: () -> Unit = {}
+    onBack: () -> Unit = {},
+    isLoading: Boolean = false,
+    loadFailed: Boolean = false,
+    onRetry: () -> Unit = {},
+    onDiscover: () -> Unit = {},
+    snackbarHost: SnackbarHostState = remember { SnackbarHostState() }
 ) {
-    var viewMode by remember { mutableStateOf(ViewMode.GRID) }
-    
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
+        snackbarHost = { SnackbarHost(snackbarHost) },
         topBar = {
             TopAppBar(
                 title = {
@@ -58,11 +76,13 @@ fun BookmarksScreen(
                             text = stringResource(R.string.bookmarks_title),
                             fontWeight = FontWeight.Bold
                         )
-                        Text(
-                            text = pluralStringResource(R.plurals.saved_trails_count, bookmarks.size, bookmarks.size),
-                            fontSize = 12.sp,
-                            color = pathyTopBarSubtitleColor()
-                        )
+                        if (bookmarks.isNotEmpty()) {
+                            Text(
+                                text = pluralStringResource(R.plurals.saved_trails_count, bookmarks.size, bookmarks.size),
+                                style = MaterialTheme.typography.labelMedium,
+                                color = pathyTopBarSubtitleColor()
+                            )
+                        }
                     }
                 },
                 colors = pathyTopBarColors(),
@@ -70,37 +90,40 @@ fun BookmarksScreen(
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(R.string.back))
                     }
-                },
-                actions = {
-                    IconButton(onClick = {
-                        viewMode = if (viewMode == ViewMode.GRID) ViewMode.LIST else ViewMode.GRID
-                    }) {
-                        Icon(
-                            if (viewMode == ViewMode.GRID) Icons.AutoMirrored.Filled.ListIcon else Icons.Filled.GridView,
-                            stringResource(R.string.bookmarks_toggle_view)
-                        )
-                    }
                 }
             )
         }
     ) { padding ->
-        if (bookmarks.isEmpty()) {
-            EmptyBookmarksState(modifier = Modifier.padding(padding))
-        } else {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(padding),
+        val modifier = Modifier.fillMaxSize().padding(padding)
+        when {
+            bookmarks.isNotEmpty() -> LazyColumn(
+                modifier = modifier,
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                items(bookmarks) { bookmark ->
+                items(bookmarks, key = { it.trailId }) { bookmark ->
                     BookmarkCard(
                         bookmark = bookmark,
                         onClick = { onBookmarkClick(bookmark.trailId) },
                         onRemove = { onRemoveBookmark(bookmark.trailId) }
                     )
                 }
+            }
+            isLoading -> Box(modifier, contentAlignment = Alignment.Center) {
+                NatureLoadingState(stringResource(R.string.common_loading))
+            }
+            loadFailed -> Box(modifier, contentAlignment = Alignment.Center) {
+                NatureEmptyState(
+                    icon = Icons.Filled.CloudOff,
+                    title = stringResource(R.string.load_failed),
+                    message = stringResource(R.string.error_network_check),
+                    actionLabel = stringResource(R.string.retry),
+                    onAction = onRetry,
+                    isError = true
+                )
+            }
+            else -> Box(modifier, contentAlignment = Alignment.Center) {
+                EmptyBookmarksState(onDiscover = onDiscover)
             }
         }
     }
@@ -112,64 +135,49 @@ fun BookmarkCard(
     onClick: () -> Unit,
     onRemove: () -> Unit
 ) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onClick),
-        shape = RoundedCornerShape(20.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-    ) {
+    NatureCard(onClick = onClick, contentPadding = PaddingValues(start = 16.dp, top = 12.dp, bottom = 12.dp, end = 8.dp)) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.weight(1f)
+            Box(
+                modifier = Modifier
+                    .size(48.dp)
+                    .clip(CircleShape)
+                    .background(MaterialTheme.colorScheme.primaryContainer),
+                contentAlignment = Alignment.Center
             ) {
-                // Trail icon
-                Surface(
-                    shape = CircleShape,
-                    color = PathyColors.Primary.copy(alpha = 0.2f),
-                    modifier = Modifier.size(48.dp)
-                ) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Icon(
-                            imageVector = Icons.Filled.Hiking,
-                            contentDescription = null,
-                            tint = PathyColors.Primary,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
-                }
-                
-                // Trail info
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = bookmark.trailName,
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    
-                    Text(
-                        text = stringResource(R.string.bookmark_saved_ago, relativeTimeAgo(bookmark.bookmarkedAt)),
-                        fontSize = 13.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
+                Icon(
+                    imageVector = Icons.Filled.Hiking,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                    modifier = Modifier.size(24.dp)
+                )
             }
-            
-            // Remove button
+
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = bookmark.trailName,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Text(
+                    text = stringResource(R.string.bookmark_saved_ago, relativeTimeAgo(bookmark.bookmarkedAt)),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+
+            // A filled bookmark: pressing it takes the trail out of the list.
             IconButton(onClick = onRemove) {
                 Icon(
-                    imageVector = Icons.Filled.Favorite,
+                    imageVector = Icons.Filled.Bookmark,
                     contentDescription = stringResource(R.string.bookmarks_remove),
-                    tint = PathyColors.Error
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         }
@@ -177,39 +185,12 @@ fun BookmarkCard(
 }
 
 @Composable
-fun EmptyBookmarksState(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(48.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Icon(
-            imageVector = Icons.Filled.BookmarkBorder,
-            contentDescription = null,
-            modifier = Modifier.size(80.dp),
-            tint = Color.Gray.copy(alpha = 0.5f)
-        )
-        
-        Spacer(modifier = Modifier.height(16.dp))
-        
-        Text(
-            text = stringResource(R.string.bookmarks_empty_title),
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-        
-        Text(
-            text = stringResource(R.string.bookmarks_empty_body),
-            fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            modifier = Modifier.padding(top = 8.dp)
-        )
-    }
-}
-
-private enum class ViewMode {
-    GRID, LIST
+fun EmptyBookmarksState(onDiscover: () -> Unit = {}) {
+    NatureEmptyState(
+        icon = Icons.Filled.BookmarkBorder,
+        title = stringResource(R.string.bookmarks_empty_title),
+        message = stringResource(R.string.bookmarks_empty_body),
+        actionLabel = stringResource(R.string.home_discover),
+        onAction = onDiscover
+    )
 }

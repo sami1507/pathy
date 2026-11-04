@@ -45,6 +45,7 @@
 
     <!-- OnboardingScreen.kt -->
     <string name="onboarding_get_started">ابدأ الآن</string>
+    <string name="onboarding_page_of">الصفحة %1$d من %2$d</string>
     <string name="common_next">التالي</string>
     <string name="common_skip">تخطّي</string>
     <string name="onboarding_progress_body">سجّل مساراتك واكسب الإنجازات وشارك مغامراتك مع المجتمع.</string>
@@ -160,14 +161,13 @@
     <string name="bookmarks_empty_body">ابدأ بحفظ مساراتك المفضلة!</string>
     <string name="bookmarks_empty_title">لا توجد مسارات مفضلة بعد</string>
     <string name="bookmarks_remove">إزالة من المفضلة</string>
+    <string name="common_undo">تراجع</string>
     <string name="bookmark_saved_ago">تم الحفظ %1$s</string>
-    <string name="bookmarks_toggle_view">تبديل العرض</string>
     <string name="bookmarks_title">المفضلة</string>
 
     <!-- BookmarksActivity.kt -->
     <string name="bookmarks_remove_failed">تعذّرت الإزالة: %1$s</string>
     <string name="trail_details_unavailable">لا توجد تفاصيل مسار للعرض.</string>
-    <string name="bookmarks_load_failed">تعذّر تحميل المفضلة: %1$s</string>
     <string name="bookmarks_sign_in_required">سجّل الدخول لعرض مفضلتك.</string>
 
     <!-- ActivityHistoryScreen.kt -->
@@ -175,23 +175,28 @@
     <string name="history_empty_body">ابدأ بتسجيل مغامرتك الأولى!</string>
     <string name="history_empty_title">لا توجد أنشطة بعد</string>
     <string name="history_loading">جارٍ تحميل الأنشطة…</string>
+    <string name="history_stat_activities">الأنشطة</string>
 
     <!-- ProfileScreen.kt -->
     <string name="trail_load_failed">تعذّر تحميل المسار.</string>
     <string name="trail_not_found">المسار غير موجود.</string>
     <string name="trail_load_error">حدث خطأ أثناء تحميل المسار.</string>
     <string name="profile_user_details">بيانات المستخدم</string>
-    <string name="profile_sos_button">🆘 الطوارئ (SOS)</string>
-    <string name="profile_bookmarks_button">🔖 المفضلة</string>
-    <string name="profile_activity_history_button">📜 سجل الأنشطة</string>
-    <string name="profile_record_activity_button">🏃 تسجيل نشاط</string>
+    <string name="profile_sos_button">الطوارئ (SOS)</string>
+    <string name="profile_bookmarks_button">المفضلة</string>
+    <string name="profile_activity_history_button">سجل الأنشطة</string>
+    <string name="profile_record_activity_button">تسجيل نشاط</string>
     <string name="profile_user_points">نقاط المستخدم</string>
     <string name="profile_my_points">نقاطي</string>
     <string name="profile_image_desc">الصورة الشخصية</string>
-    <string name="profile_offline_trails_button">📁 المسارات دون اتصال</string>
+    <string name="profile_offline_trails_button">المسارات دون اتصال</string>
     <string name="profile_load_failed_retry">تعذّر تحميل البيانات. حاول مرة أخرى لاحقاً.</string>
-    <string name="profile_saved_trails_button">☁️ المسارات المحفوظة</string>
+    <string name="profile_saved_trails_button">المسارات المحفوظة</string>
     <string name="profile_change_photo">تغيير الصورة</string>
+    <string name="profile_points_count">النقاط: %1$s</string>
+    <string name="profile_posts_title">المنشورات والفعاليات</string>
+    <string name="profile_posts_empty_mine">لم تشارك شيئًا بعد. المنشورات والفعاليات التي تنشئها تظهر هنا.</string>
+    <string name="profile_posts_empty_other">لا توجد منشورات أو فعاليات بعد.</string>
     <string name="profile_edit_desc">تعديل الملف الشخصي</string>
 
     <!-- EnhancedProfileScreen.kt -->
@@ -301,6 +306,12 @@
     <string name="post_publishing">جارٍ نشر منشورك…</string>
     <string name="post_published">تم نشر المنشور!</string>
     <string name="community_title">المجتمع</string>
+    <string name="community_empty_title">لا توجد منشورات بعد</string>
+    <string name="community_empty_message">كن أول من يشارك مسارًا أو صورة أو رحلة جماعية.</string>
+    <string name="community_error_title">تعذّر تحميل المجتمع</string>
+    <string name="community_error_message">تحقق من اتصالك وحاول مرة أخرى.</string>
+    <string name="community_publishing">جارٍ النشر…</string>
+    <string name="community_published">تم النشر!</string>
     <string name="images_upload_failed">تعذّر رفع الصور: %1$s</string>
     <string name="event_create_failed">تعذّر إنشاء الفعالية: %1$s</string>
     <string name="default_user_name">مستخدم</string>

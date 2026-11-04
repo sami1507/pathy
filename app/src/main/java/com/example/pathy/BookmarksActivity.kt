@@ -1,10 +1,14 @@
 package com.example.pathy
 
 import com.example.pathy.i18n.PathyActivity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -55,22 +59,32 @@ private fun BookmarksRoute(onBack: () -> Unit) {
     val scope = rememberCoroutineScope()
     val uid = FirebaseAuth.getInstance().currentUser?.uid
     val manager = remember { BookmarkManager() }
+    val snackbar = remember { SnackbarHostState() }
     var bookmarks by remember { mutableStateOf<List<Bookmark>>(emptyList()) }
+    var isLoading by remember { mutableStateOf(uid != null) }
+    var loadFailed by remember { mutableStateOf(false) }
+    var retry by remember { mutableStateOf(0) }
 
-    LaunchedEffect(uid) {
+    LaunchedEffect(uid, retry) {
         if (uid == null) {
             Toast.makeText(context, context.getString(R.string.bookmarks_sign_in_required), Toast.LENGTH_SHORT).show()
             return@LaunchedEffect
         }
+        isLoading = true
+        loadFailed = false
         manager.loadBookmarks(uid)
             .onSuccess { bookmarks = it }
-            .onFailure { e ->
-                Toast.makeText(context, context.getString(R.string.bookmarks_load_failed, e.message), Toast.LENGTH_LONG).show()
-            }
+            .onFailure { loadFailed = true }
+        isLoading = false
     }
 
     BookmarksScreen(
         bookmarks = bookmarks,
+        isLoading = isLoading,
+        loadFailed = loadFailed,
+        onRetry = { retry++ },
+        onDiscover = { context.startActivity(Intent(context, TrailDiscoveryActivity::class.java)) },
+        snackbarHost = snackbar,
         onBookmarkClick = { trailId ->
             val trail = bookmarks.firstOrNull { it.trailId == trailId }?.let(::trailFromBookmark)
             if (trail != null) {
@@ -80,10 +94,26 @@ private fun BookmarksRoute(onBack: () -> Unit) {
             }
         },
         onRemoveBookmark = { trailId ->
-            if (uid != null) {
+            val removed = bookmarks.firstOrNull { it.trailId == trailId }
+            val before = bookmarks
+            if (uid != null && removed != null) {
                 scope.launch {
                     manager.removeBookmark(uid, trailId)
-                        .onSuccess { bookmarks = bookmarks.filterNot { it.trailId == trailId } }
+                        .onSuccess {
+                            bookmarks = bookmarks.filterNot { it.trailId == trailId }
+                            val answer = snackbar.showSnackbar(
+                                message = context.getString(R.string.bookmark_removed),
+                                actionLabel = context.getString(R.string.common_undo),
+                                duration = SnackbarDuration.Short
+                            )
+                            if (answer == SnackbarResult.ActionPerformed) {
+                                manager.bookmarkTrail(uid, removed.trailId, removed.trailName, removed.trailData)
+                                    .onSuccess { bookmarks = before }
+                                    .onFailure { e ->
+                                        Toast.makeText(context, context.getString(R.string.bookmarks_remove_failed, e.message), Toast.LENGTH_SHORT).show()
+                                    }
+                            }
+                        }
                         .onFailure { e ->
                             Toast.makeText(context, context.getString(R.string.bookmarks_remove_failed, e.message), Toast.LENGTH_SHORT).show()
                         }
