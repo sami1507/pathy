@@ -829,7 +829,7 @@
     <!-- VoiceScoutHelper.kt -->
 
     <!-- DrawerMenuItem.kt -->
-    <string name="menu_map">מפה</string>
+    <string name="menu_map">סגנון מפה</string>
 
     <!-- ProfileActivity.kt -->
     <string name="profile_not_found">הפרופיל לא נמצא.</string>
@@ -936,6 +936,32 @@
     <!-- offline -->
     <string name="trail_offline_failed">לא ניתן להוריד את המפה. בדוק את החיבור ונסה שוב.</string>
     <string name="trail_offline_hint">המפה סביב השביל הזה שמורה בטלפון שלך.</string>
+    <string name="map_trails_nearby_chip">מסלולים קרובים: %1$d</string>
+    <string name="map_search_area">חפש באזור הזה</string>
+    <string name="map_searching">מחפש…</string>
+    <string name="trail_action_share">שיתוף</string>
+    <string name="trail_tag_offline">ללא חיבור</string>
+    <string name="trail_action_start">התחלת מסלול</string>
+    <string name="trail_offline_save">שמור לשימוש ללא חיבור</string>
+    <string name="trail_offline_save_detail">הורד את המסלול ואת המפה סביבו כדי ללכת בו ללא קליטה.</string>
+    <string name="trail_offline_saved_title">שמור בטלפון</string>
+    <string name="trail_offline_saved_detail">המסלול והמפה סביבו פועלים ללא קליטה. תופס %1$s.</string>
+    <string name="trail_offline_saved_detail_nosize">המסלול והמפה סביבו פועלים ללא קליטה.</string>
+    <string name="trail_offline_saving">שומר את המפה… %1$d%%</string>
+    <string name="trail_offline_remove">הסר מהטלפון</string>
+    <string name="trail_offline_removed">הוסר מהטלפון</string>
+    <string name="trail_offline_needs_connection">התחבר לאינטרנט פעם אחת כדי לשמור את המסלול.</string>
+    <string name="trail_needs_connection">דורש חיבור</string>
+    <string name="trail_preview">תצוגה מקדימה</string>
+    <string name="trail_map_description">מפת המסלול</string>
+    <string name="trail_actions_title">שמירה ושיתוף</string>
+    <string name="offline_banner_title">אין חיבור לאינטרנט</string>
+    <string name="offline_banner_saved">מוצגים המסלולים ששמורים בטלפון.</string>
+    <string name="offline_banner_none">כאן יופיעו מסלולים ששמרת לשימוש ללא חיבור.</string>
+    <string name="saved_trails_empty_title">עדיין אין מסלולים שמורים</string>
+    <string name="saved_trails_empty_message">פתחו מסלול ולחצו על ״שמור לשימוש ללא חיבור״. הוא יעבוד בהר ללא קליטה.</string>
+    <string name="saved_trail_remove_desc">הסר את %1$s מהטלפון</string>
+    <string name="saved_trail_delete_one">להסיר את המסלול והמפה שלו מהטלפון?</string>
 
     <!-- gpx -->
     <string name="gpx_import">ייבוא מסלול GPX</string>

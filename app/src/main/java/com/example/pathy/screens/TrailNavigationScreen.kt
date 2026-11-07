@@ -81,6 +81,7 @@ import com.example.pathy.navigation.NavGuidance
 import com.example.pathy.tracking.RecordingController
 import com.example.pathy.tracking.RecordingHub
 import com.example.pathy.tracking.RecordingState
+import com.example.pathy.offline.OfflineRegions
 import com.example.pathy.ui.theme.MapPalette
 import com.example.pathy.ui.theme.PathyColors
 import com.google.android.gms.location.LocationCallback
@@ -305,7 +306,9 @@ fun TrailNavigationScreen(trail: SavedTrail, userLat: Double, userLng: Double) {
         AndroidView(
             factory = {
                 mapView.apply {
-                    getMapboxMap().loadStyleUri(Style.STANDARD) {
+                    // The same style the trail was saved with, so the map is there with no signal.
+                    // Mapbox Standard is not part of an offline region and shows a black screen.
+                    getMapboxMap().loadStyleUri(OfflineRegions.STYLE) {
                         it.applyAppLanguage(context)
                         getPlugin<AttributionPlugin>(Plugin.MAPBOX_ATTRIBUTION_PLUGIN_ID)?.updateSettings { enabled = false }
                         getPlugin<LogoPlugin>(Plugin.MAPBOX_LOGO_PLUGIN_ID)?.updateSettings { enabled = false }

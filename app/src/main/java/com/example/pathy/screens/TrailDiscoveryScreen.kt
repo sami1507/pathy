@@ -60,9 +60,16 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.pathy.TrailDetailsActivity
 import com.example.pathy.data.*
+import com.example.pathy.distanceTo
+import com.example.pathy.offline.OfflineTrails
+import com.example.pathy.offline.rememberIsOnline
+import com.example.pathy.ui.design.NatureEmptyState
+import com.example.pathy.ui.design.NatureOfflineBanner
 import com.example.pathy.ui.theme.PathyColors
 import com.mapbox.geojson.Point
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import kotlin.math.roundToInt
 
 /**
@@ -112,6 +119,12 @@ fun TrailDiscoveryScreen(
     var showFilters by remember { mutableStateOf(false) }
     var sortBy by remember { mutableStateOf(SortOption.RECOMMENDED) }
 
+    // Trails kept on the phone: shown with a badge, and offered in place of the list when there is no connection.
+    val online by rememberIsOnline()
+    var saved by remember { mutableStateOf<List<OfflineTrails.Saved>>(emptyList()) }
+    LaunchedEffect(Unit) { saved = withContext(Dispatchers.IO) { OfflineTrails.list(OfflineTrails.root(context)) } }
+    val savedIds = remember(saved) { saved.map { it.trail.id }.toSet() }
+
     fun runPlaceSearch() {
         if (query.trim().length < 2) return
         scope.launch {
@@ -125,7 +138,7 @@ fun TrailDiscoveryScreen(
 
     // Load trails. LaunchedEffect cancels the previous request when a filter changes; the short delay
     // waits until a slider stops moving before asking.
-    LaunchedEffect(exploreCenter?.latitude(), exploreCenter?.longitude(), selectedTypes, maxDistance, reload) {
+    LaunchedEffect(exploreCenter?.latitude(), exploreCenter?.longitude(), selectedTypes, maxDistance, reload, online) {
         val center = exploreCenter ?: return@LaunchedEffect
         delay(300L)
         isLoading = true
@@ -160,10 +173,14 @@ fun TrailDiscoveryScreen(
         }
     }
 
+    // The header counts what the list below shows. With no search possible that is the saved trails.
+    val showingSaved = !isLoading && exploreCenter != null && saved.isNotEmpty() &&
+        (loadFailed || (displayTrails.isEmpty() && !online))
+
     Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surfaceVariant)) {
         Column(modifier = Modifier.fillMaxSize()) {
             DiscoveryHeader(
-                trailCount = displayTrails.size,
+                trailCount = if (showingSaved) saved.size else displayTrails.size,
                 query = query,
                 onQueryChange = { query = it; placeNotFound = false },
                 onSearch = ::runPlaceSearch,
@@ -211,13 +228,27 @@ fun TrailDiscoveryScreen(
             when {
                 isLoading -> LoadingTrailCards(slow = slowLoad)
                 exploreCenter == null -> WaitingForLocationState(failed = locationFailed, onRetry = onRetryLocation)
-                loadFailed -> LoadFailedState(onRetry = { reload++ })
+                // No result and no way to ask for one: show what is saved on the phone instead of an error.
+                loadFailed || (displayTrails.isEmpty() && !online) -> when {
+                    saved.isNotEmpty() -> SavedFallback(saved, exploreCenter, online) { trail ->
+                        context.startActivity(TrailDetailsActivity.createIntent(context, trail))
+                    }
+                    !online -> NatureEmptyState(
+                        icon = Icons.Filled.CloudOff,
+                        title = stringResource(R.string.offline_banner_title),
+                        message = stringResource(R.string.offline_banner_none),
+                        actionLabel = stringResource(R.string.retry),
+                        onAction = { reload++ }
+                    )
+                    else -> LoadFailedState(onRetry = { reload++ })
+                }
                 displayTrails.isEmpty() -> EmptyState()
                 else -> LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(16.dp),
                     verticalArrangement = Arrangement.spacedBy(14.dp)
                 ) {
+                    if (!online) item(key = "offline") { NatureOfflineBanner(stringResource(R.string.offline_banner_saved)) }
                     val widened = if (searchedKm > maxDistance + 0.5) context.getString(R.string.discover_widened, searchedKm.roundToInt().toString()) else null
                     val hidden = if (hiddenClosed > 0) context.getString(R.string.discover_hidden_closed, hiddenClosed.toString()) else null
                     val notes = listOfNotNull(widened, hidden)
@@ -225,11 +256,37 @@ fun TrailDiscoveryScreen(
                     items(displayTrails, key = { it.id }) { trail ->
                         PremiumTrailCard(
                             trail = trail,
+                            offline = trail.id in savedIds,
                             onClick = { context.startActivity(TrailDetailsActivity.createIntent(context, trail.toTrailData())) }
                         )
                     }
                 }
             }
+        }
+    }
+}
+
+/** The trails saved on the phone, nearest first, shown when a search cannot be made. */
+@Composable
+private fun SavedFallback(saved: List<OfflineTrails.Saved>, from: Point?, online: Boolean, onOpen: (TrailData) -> Unit) {
+    val ordered = remember(saved, from) {
+        saved.map { s ->
+            val mid = s.trail.midpoint ?: s.trail.geoPoints.getOrNull(s.trail.geoPoints.size / 2)
+            val away = if (from != null && mid != null) Point.fromLngLat(mid.longitude, mid.latitude).distanceTo(from) else null
+            s to away
+        }.sortedBy { it.second ?: Double.MAX_VALUE }
+    }
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(16.dp),
+        verticalArrangement = Arrangement.spacedBy(14.dp)
+    ) {
+        item(key = "note") {
+            if (!online) NatureOfflineBanner(stringResource(R.string.offline_banner_saved))
+            else InfoNote(stringResource(R.string.discover_load_failed))
+        }
+        items(ordered, key = { it.first.trail.id }) { (item, away) ->
+            TrailListCard(item.trail.toCardModel(away), onClick = { onOpen(item.trail) }, offline = true)
         }
     }
 }

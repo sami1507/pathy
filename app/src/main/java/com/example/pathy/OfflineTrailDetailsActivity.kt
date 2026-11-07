@@ -1,60 +1,37 @@
 package com.example.pathy
 
-import androidx.compose.ui.res.stringResource
-import com.example.pathy.i18n.PathyActivity
-import com.example.pathy.ui.theme.PathyColors
-
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.material3.*
-import androidx.compose.ui.graphics.Color
-import com.example.pathy.data.SavedTrail
+import com.example.pathy.data.TrailData
+import com.example.pathy.i18n.PathyActivity
+import com.example.pathy.screens.TrailDetailsScreen
+import com.example.pathy.ui.theme.setPathyContent
 import com.google.gson.Gson
-import com.example.pathy.screens.OfflineTrailDetailsScreen
 import java.io.File
 
+/**
+ * Opens a trail that was saved on the phone. It is the same screen as any trail: it notices by itself
+ * that the trail is saved and that there is no connection. Kept as its own entry so links to saved
+ * trails (a file path) keep working.
+ */
 class OfflineTrailDetailsActivity : PathyActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val filePath = intent.getStringExtra("offlineTrailPath")
-        Log.d("OfflineTrail", "Received file path: $filePath")
+        val trail: TrailData? = intent.getStringExtra("offlineTrailPath")?.let { path ->
+            runCatching { Gson().fromJson(File(path).readText(), TrailData::class.java) }
+                .onFailure { Log.w("OfflineTrail", "Could not read the saved trail", it) }
+                .getOrNull()
+        }?.takeIf { it.geoPoints.size >= 2 }
 
-        val savedTrail = filePath?.let { path ->
-            val file = File(path)
-            Log.d("OfflineTrail", "File exists: ${file.exists()}")
-
-            if (file.exists()) {
-                try {
-                    val json = file.readText()
-                    Log.d("OfflineTrail", "File content: $json")
-
-                    val trail = Gson().fromJson(json, SavedTrail::class.java)
-                    Log.d("OfflineTrail", "Parsed trail name: ${trail.name}")
-                    trail
-                } catch (e: Exception) {
-                    Log.e("OfflineTrail", "Error parsing SavedTrail JSON", e)
-                    null
-                }
-            } else {
-                Log.e("OfflineTrail", "File does not exist at path: $path")
-                null
-            }
+        if (trail == null) {
+            android.widget.Toast.makeText(this, getString(R.string.trail_load_failed), android.widget.Toast.LENGTH_SHORT).show()
+            finish()
+            return
         }
 
-        setContent {
-            MaterialTheme {
-                if (savedTrail != null) {
-                    OfflineTrailDetailsScreen(savedTrail)
-                } else {
-                    Text(stringResource(R.string.trail_load_failed), color = PathyColors.Error)
-                }
-            }
+        setPathyContent {
+            TrailDetailsScreen(trail = trail)
         }
     }
 }
-
-
-

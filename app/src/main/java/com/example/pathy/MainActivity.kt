@@ -1,5 +1,6 @@
 package com.example.pathy
 
+import com.example.pathy.ui.theme.setPathyContent
 import com.example.pathy.i18n.applyAppLanguage
 import androidx.compose.ui.res.stringResource
 import com.example.pathy.i18n.PathyActivity
@@ -55,6 +56,14 @@ import com.google.firebase.FirebaseApp
 import com.example.pathy.data.Report
 import com.example.pathy.data.TrailData
 import com.example.pathy.screens.fetchTrails
+import com.example.pathy.offline.OfflineRegions
+import com.example.pathy.offline.OfflineTrails
+import com.example.pathy.screens.TrailListCard
+import com.example.pathy.screens.toCardModel
+import com.example.pathy.ui.map.HomeTrailLayers
+import com.mapbox.maps.plugin.gestures.OnMapClickListener
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import com.example.pathy.ui.theme.PathyColors
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -77,7 +86,7 @@ class MainActivity : PathyActivity() {
 
         AndroidThreeTen.init(this)
         FirebaseApp.initializeApp(this)
-        setContent {
+        setPathyContent {
             MapWithUserLocation()
         }
     }
@@ -119,7 +128,8 @@ class MainActivity : PathyActivity() {
         val drawerState = rememberDrawerState(DrawerValue.Closed)
         val scope = rememberCoroutineScope()
         var showStyleDialog by remember { mutableStateOf(false) }
-        var selectedStyle by remember { mutableStateOf(Style.STANDARD) }
+        // Outdoors is the style that shows paths, contours and terrain, and the one trails are saved in for offline use.
+        var selectedStyle by remember { mutableStateOf(OfflineRegions.STYLE) }
         val mapViewRef = remember { mutableStateOf<MapView?>(null) }
         var showPitchDialog by remember { mutableStateOf(false) }
         var pitchValue by remember { mutableStateOf(0.0) }
@@ -131,6 +141,32 @@ class MainActivity : PathyActivity() {
         var openPointOfInterestDialog by remember { mutableStateOf(false) }
         var selectedReport by remember { mutableStateOf<Report?>(null) }
         var showReward by remember { mutableStateOf(false) }
+
+        // Natural trails on the map: the ones around the person, the ones saved on the phone (they still
+        // show with no connection), and the ones around a place the person moved the map to.
+        val online by com.example.pathy.offline.rememberIsOnline()
+        val nearby by NearbyTrailsHolder.trails.collectAsState()
+        var saved by remember { mutableStateOf<List<TrailData>>(emptyList()) }
+        var areaTrails by remember { mutableStateOf<List<TrailData>>(emptyList()) }
+        var areaCenter by remember { mutableStateOf<Point?>(null) }
+        var areaFetchedAt by remember { mutableStateOf<Point?>(null) }
+        var areaLoading by remember { mutableStateOf(false) }
+        var selectedTrail by remember { mutableStateOf<TrailData?>(null) }
+        var styleVersion by remember { mutableStateOf(0) }
+        LaunchedEffect(Unit) {
+            saved = withContext(Dispatchers.IO) { OfflineTrails.list(OfflineTrails.root(context)).map { it.trail } }
+        }
+        val savedIds = remember(saved) { saved.map { it.id }.toSet() }
+        val trailsOnMap = remember(nearby, areaTrails, saved) {
+            ((nearby + areaTrails).filter { it.isHikingTrail } + saved).distinctBy { it.id }
+        }
+        val trailsNow by rememberUpdatedState(trailsOnMap)
+        LaunchedEffect(trailsOnMap, styleVersion) {
+            mapViewRef.value?.getMapboxMap()?.getStyle()?.let { HomeTrailLayers.update(it, trailsOnMap) }
+        }
+        LaunchedEffect(selectedTrail, styleVersion) {
+            mapViewRef.value?.getMapboxMap()?.getStyle()?.let { HomeTrailLayers.select(it, selectedTrail) }
+        }
 
         LaunchedEffect(Unit) {
             if (!isLocationEnabled(context)) {
@@ -153,6 +189,8 @@ class MainActivity : PathyActivity() {
                         it,
                         isFlyToFinished = { isFlyToFinished = true })
                 }
+                // A new style starts without our layers, so the trails are drawn onto it again.
+                styleVersion++
             }
         }
 
@@ -264,7 +302,6 @@ class MainActivity : PathyActivity() {
                                 drawerState = drawerState,
                                 scope = scope,
                                 context = context,
-                                lastLocation = lastLocation,
                                 onOpenMapStyleDialog = { showStyleDialog = true }
                             )
                         }
@@ -275,6 +312,10 @@ class MainActivity : PathyActivity() {
                                 factory = {
                                     MapView(context).apply {
                                         mapViewRef.value = this
+                                        // A short scale bar: the default one ran under the trails chip at the top.
+                                        getPlugin<com.mapbox.maps.plugin.scalebar.ScaleBarPlugin>(
+                                            com.mapbox.maps.plugin.Plugin.MAPBOX_SCALEBAR_PLUGIN_ID
+                                        )?.updateSettings { ratio = 0.22f }
                                         getMapboxMap().setCamera(
                                             CameraOptions.Builder()
                                                 .center(lastLocation)
@@ -287,6 +328,7 @@ class MainActivity : PathyActivity() {
                                                 it,
                                                 this,
                                                 isFlyToFinished = { isFlyToFinished = true })
+                                            styleVersion++
                                         }
                                         gestures.addOnMoveListener(object : OnMoveListener {
                                             override fun onMoveBegin(detector: MoveGestureDetector) {
@@ -295,12 +337,64 @@ class MainActivity : PathyActivity() {
 
                                             override fun onMove(detector: MoveGestureDetector): Boolean = false
 
-                                            override fun onMoveEnd(detector: MoveGestureDetector) {}
+                                            override fun onMoveEnd(detector: MoveGestureDetector) {
+                                                // Far from where trails were last looked up: offer to look here too.
+                                                val here = getMapboxMap().cameraState.center
+                                                val reference = areaFetchedAt ?: lastTrailFetch
+                                                areaCenter = if (reference == null || here.distanceTo(reference) > 2_000.0) here else null
+                                            }
+                                        })
+                                        // Touching a trail opens its card; touching anywhere else closes it.
+                                        gestures.addOnMapClickListener(object : OnMapClickListener {
+                                            override fun onMapClick(point: Point): Boolean {
+                                                HomeTrailLayers.idAt(getMapboxMap(), point) { id ->
+                                                    selectedTrail = id?.let { wanted -> trailsNow.firstOrNull { it.id == wanted } }
+                                                }
+                                                return false
+                                            }
                                         })
 
                                     }
                                 }
                             )
+                            Column(
+                                modifier = Modifier.align(Alignment.TopCenter).padding(top = 12.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                if (trailsOnMap.isNotEmpty()) {
+                                    MapChip(
+                                        icon = Icons.Filled.Hiking,
+                                        text = stringResource(R.string.map_trails_nearby_chip, trailsOnMap.size),
+                                        onClick = { context.startActivity(Intent(context, TrailDiscoveryActivity::class.java)) }
+                                    )
+                                }
+                                // Looking up trails in another place needs a connection, so it is only offered with one.
+                                areaCenter?.takeIf { online }?.let { center ->
+                                    MapChip(
+                                        icon = Icons.Filled.Search,
+                                        text = stringResource(if (areaLoading) R.string.map_searching else R.string.map_search_area),
+                                        onClick = {
+                                            if (!areaLoading) {
+                                                areaLoading = true
+                                                scope.launch {
+                                                    try {
+                                                        areaTrails = fetchTrails(center)
+                                                        areaFetchedAt = center
+                                                        areaCenter = null
+                                                    } catch (e: kotlinx.coroutines.CancellationException) {
+                                                        throw e
+                                                    } catch (e: Exception) {
+                                                        Toast.makeText(context, context.getString(R.string.discover_load_failed), Toast.LENGTH_LONG).show()
+                                                    } finally {
+                                                        areaLoading = false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    )
+                                }
+                            }
                             if (isCameraMoved) {
                                 IconButton(
                                     onClick = {
@@ -391,6 +485,24 @@ class MainActivity : PathyActivity() {
                                     context.startActivity(Intent(context, ScoutActivity::class.java))
                                 }
                             )
+                            selectedTrail?.let { trail ->
+                                val mid = trail.midpoint
+                                val away = lastLocation?.let { me -> mid?.let { Point.fromLngLat(it.longitude, it.latitude).distanceTo(me) } }
+                                Box(
+                                    Modifier.align(Alignment.BottomCenter).padding(horizontal = 12.dp).padding(bottom = 104.dp)
+                                ) {
+                                    TrailListCard(
+                                        model = trail.toCardModel(awayMeters = away),
+                                        onClick = { context.startActivity(TrailDetailsActivity.createIntent(context, trail)) },
+                                        offline = trail.id in savedIds,
+                                        trailing = {
+                                            IconButton(onClick = { selectedTrail = null }, modifier = Modifier.size(48.dp)) {
+                                                Icon(Icons.Filled.Close, contentDescription = stringResource(R.string.common_close))
+                                            }
+                                        }
+                                    )
+                                }
+                            }
                             ReportDialogsAndSheets(
                                 context = context,
                                 location = lastLocation?.let { pointToAndroidLocation(it) },
@@ -581,5 +693,26 @@ class MainActivity : PathyActivity() {
 
     private companion object {
         const val TRAIL_REFRESH_M = 400.0
+    }
+}
+
+/** A small button floating on the map: the number of trails around, or "search this area". */
+@Composable
+private fun MapChip(icon: androidx.compose.ui.graphics.vector.ImageVector, text: String, onClick: () -> Unit) {
+    Surface(
+        onClick = onClick,
+        shape = CircleShape,
+        color = MaterialTheme.colorScheme.surface,
+        shadowElevation = 6.dp,
+        modifier = Modifier.heightIn(min = 48.dp)
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(icon, contentDescription = null, tint = PathyColors.Primary, modifier = Modifier.size(20.dp))
+            Spacer(Modifier.width(8.dp))
+            Text(text, style = MaterialTheme.typography.labelLarge, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onSurface)
+        }
     }
 }

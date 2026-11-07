@@ -3,76 +3,76 @@ package com.example.pathy.screens
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.CloudDownload
+import androidx.compose.material.icons.filled.DeleteOutline
+import androidx.compose.material.icons.filled.FileOpen
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.pluralStringResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.example.pathy.R
 import com.example.pathy.TrailDetailsActivity
 import com.example.pathy.data.GpxImport
+import com.example.pathy.data.TrailData
+import com.example.pathy.offline.OfflineRegions
+import com.example.pathy.offline.OfflineTrails
+import com.example.pathy.offline.rememberIsOnline
+import com.example.pathy.ui.design.NatureEmptyState
+import com.example.pathy.ui.design.NatureLoadingState
+import com.example.pathy.ui.design.NatureOfflineBanner
+import com.example.pathy.ui.design.pathyTopBarColors
+import com.example.pathy.ui.design.pathyTopBarSubtitleColor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import androidx.compose.ui.res.pluralStringResource
-import androidx.compose.ui.res.stringResource
-import com.example.pathy.R
-import com.example.pathy.ui.theme.PathyColors
 
-import android.content.Intent
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
-import com.example.pathy.OfflineTrailDetailsActivity
-import com.example.pathy.data.SavedTrail
-import com.example.pathy.offline.OfflineRegions
-import com.google.gson.Gson
-import java.io.File
-
+/** The trails kept on this phone. Everything here is read from files, so it opens with no connection. */
 @Composable
-fun SavedTrailsScreen() {
+fun SavedTrailsScreen(onBack: () -> Unit = {}) {
     val context = LocalContext.current
-    var savedTrails by remember { mutableStateOf<List<Pair<String, SavedTrail>>>(emptyList()) }
-    var isDeleteMode by remember { mutableStateOf(false) }
-    var showConfirmDelete by remember { mutableStateOf(false) }
-    val selectedFiles = remember { mutableStateListOf<String>() }
     val scope = rememberCoroutineScope()
+    val root = remember { OfflineTrails.root(context) }
+    val online by rememberIsOnline()
+    var items by remember { mutableStateOf<List<OfflineTrails.Saved>?>(null) }
+    var toRemove by remember { mutableStateOf<TrailData?>(null) }
 
-    fun loadTrails() {
-        val trailsDir = File(context.filesDir, "trails")
-        if (!trailsDir.exists()) {
-            savedTrails = emptyList()
-            return
-        }
-
-        val gson = Gson()
-        savedTrails = trailsDir.listFiles()?.mapNotNull { dir ->
-            if (dir.isDirectory) {
-                val trailFile = File(dir, "trail.json")
-                if (trailFile.exists()) {
-                    try {
-                        val content = trailFile.readText()
-                        val trail = gson.fromJson(content, SavedTrail::class.java)
-                        dir.name to trail
-                    } catch (_: Exception) {
-                        null
-                    }
-                } else null
-            } else null
-        } ?: emptyList()
+    suspend fun reload() {
+        items = withContext(Dispatchers.IO) { OfflineTrails.list(root) }
     }
-
-    LaunchedEffect(Unit) {
-        loadTrails()
-    }
-
-    LaunchedEffect(selectedFiles.size) {
-        isDeleteMode = selectedFiles.isNotEmpty()
-    }
+    LaunchedEffect(Unit) { reload() }
 
     // A GPX file from a website, a friend or another app becomes a trail that can be followed.
     val importLauncher = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
@@ -96,98 +96,129 @@ fun SavedTrailsScreen() {
         }
     }
 
-    Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
-        Text(stringResource(R.string.saved_trails_title), style = MaterialTheme.typography.headlineMedium)
+    SavedTrailsContent(
+        items = items,
+        online = online,
+        onBack = onBack,
+        onOpen = { context.startActivity(TrailDetailsActivity.createIntent(context, it)) },
+        onRemove = { toRemove = it },
+        onImport = { importLauncher.launch(arrayOf("application/gpx+xml", "application/xml", "text/xml", "application/octet-stream")) }
+    )
 
-        Spacer(modifier = Modifier.height(8.dp))
-
-        OutlinedButton(
-            onClick = { importLauncher.launch(arrayOf("application/gpx+xml", "application/xml", "text/xml", "application/octet-stream")) },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(stringResource(R.string.gpx_import))
-        }
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        if (isDeleteMode) {
-            Button(
-                onClick = { showConfirmDelete = true },
-                colors = ButtonDefaults.buttonColors(containerColor = PathyColors.Error),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(pluralStringResource(R.plurals.delete_trails_count, selectedFiles.size, selectedFiles.size), color = Color.White)
-            }
-        }
-
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            itemsIndexed(savedTrails) { index, (fileName, trail) ->
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .pointerInput(Unit) {
-                            detectTapGestures(
-                                onLongPress = {
-                                    if (!selectedFiles.contains(fileName)) {
-                                        selectedFiles.add(fileName)
-                                    }
-                                },
-                                onTap = {
-                                    if (selectedFiles.isNotEmpty()) {
-                                        if (selectedFiles.contains(fileName)) selectedFiles.remove(fileName)
-                                        else selectedFiles.add(fileName)
-                                    } else {
-                                        val trailDir = File(context.filesDir, "trails/${trail.id}")
-                                        val trailJsonFile = File(trailDir, "trail.json")
-
-                                        val intent = Intent(context, OfflineTrailDetailsActivity::class.java).apply {
-                                            putExtra("offlineTrailPath", trailJsonFile.absolutePath)
-                                        }
-                                        context.startActivity(intent)
-                                    }
-                                }
-                            )
-                        },
-                    border = if (selectedFiles.contains(fileName)) BorderStroke(2.dp, PathyColors.Error) else null,
-                    shape = RoundedCornerShape(16.dp)
-                ) {
-                    Column(modifier = Modifier.padding(12.dp)) {
-                        Text(trail.name, style = MaterialTheme.typography.titleMedium)
-                        Text(stringResource(R.string.saved_trail_summary, stringResource(R.string.unit_km, "%.1f".format(trail.distanceInMeters / 1000.0)), stringResource(R.string.duration_minutes, trail.durationInMillis / 60000)), style = MaterialTheme.typography.bodySmall)
-                    }
-                }
-            }
-        }
-    }
-
-    if (showConfirmDelete) {
+    toRemove?.let { trail ->
         AlertDialog(
-            onDismissRequest = { showConfirmDelete = false },
+            onDismissRequest = { toRemove = null },
+            title = { Text(stringResource(R.string.confirm_delete_title)) },
+            text = { Text(stringResource(R.string.saved_trail_delete_one)) },
             confirmButton = {
                 TextButton(onClick = {
-                    val toDelete = selectedFiles.toList()
-                    toDelete.forEach { fileKey ->
-                        val offlineDir = File(context.filesDir, "trails/$fileKey")
-                        if (offlineDir.exists() && offlineDir.isDirectory) {
-                            offlineDir.deleteRecursively()
+                    toRemove = null
+                    scope.launch {
+                        withContext(Dispatchers.IO) {
+                            OfflineTrails.delete(root, trail.id)
+                            runCatching { OfflineRegions.remove(trail.id) }
                         }
-                        runCatching { OfflineRegions.remove(fileKey) }
+                        reload()
+                        Toast.makeText(context, context.getString(R.string.trail_offline_removed), Toast.LENGTH_SHORT).show()
                     }
-                    selectedFiles.clear()
-                    showConfirmDelete = false
-                    loadTrails()
-                }) {
-                    Text(stringResource(R.string.common_delete), color = PathyColors.Error)
-                }
+                }) { Text(stringResource(R.string.trail_offline_remove), color = MaterialTheme.colorScheme.error) }
             },
-            dismissButton = {
-                TextButton(onClick = { showConfirmDelete = false }) {
-                    Text(stringResource(R.string.common_cancel))
-                }
-            },
-            title = { Text(stringResource(R.string.confirm_delete_title)) },
-            text = { Text(stringResource(R.string.saved_trails_delete_confirm)) }
+            dismissButton = { TextButton(onClick = { toRemove = null }) { Text(stringResource(R.string.common_cancel)) } }
         )
     }
 }
 
+/** Draws the list, the first read, and the empty list. [items] is null while the files are being read. */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+internal fun SavedTrailsContent(
+    items: List<OfflineTrails.Saved>?,
+    online: Boolean,
+    onBack: () -> Unit,
+    onOpen: (TrailData) -> Unit,
+    onRemove: (TrailData) -> Unit,
+    onImport: () -> Unit
+) {
+    Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
+        topBar = {
+            TopAppBar(
+                title = {
+                    Column {
+                        Text(stringResource(R.string.saved_trails_title), fontWeight = FontWeight.Bold)
+                        if (!items.isNullOrEmpty()) {
+                            Text(
+                                text = pluralStringResource(R.plurals.saved_trails_count, items.size, items.size),
+                                style = MaterialTheme.typography.labelMedium,
+                                color = pathyTopBarSubtitleColor()
+                            )
+                        }
+                    }
+                },
+                colors = pathyTopBarColors(),
+                navigationIcon = {
+                    IconButton(onClick = onBack) { Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(R.string.back)) }
+                }
+            )
+        }
+    ) { inner ->
+        when {
+            items == null -> NatureLoadingState(
+                message = stringResource(R.string.common_loading),
+                modifier = Modifier.padding(inner).fillMaxSize()
+            )
+
+            items.isEmpty() -> Column(
+                modifier = Modifier.padding(inner).fillMaxSize(),
+                horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                if (!online) NatureOfflineBanner(stringResource(R.string.offline_banner_none), Modifier.padding(horizontal = 16.dp))
+                NatureEmptyState(
+                    icon = Icons.Filled.CloudDownload,
+                    title = stringResource(R.string.saved_trails_empty_title),
+                    message = stringResource(R.string.saved_trails_empty_message)
+                )
+                ImportButton(onImport)
+            }
+
+            else -> LazyColumn(
+                modifier = Modifier.padding(inner).fillMaxSize(),
+                contentPadding = PaddingValues(16.dp),
+                verticalArrangement = Arrangement.spacedBy(14.dp)
+            ) {
+                if (!online) item(key = "offline") { NatureOfflineBanner(stringResource(R.string.offline_banner_saved)) }
+                items(items, key = { it.trail.id }) { saved ->
+                    val model = saved.trail.toCardModel()
+                    TrailListCard(
+                        model = model,
+                        onClick = { onOpen(saved.trail) },
+                        offline = true,
+                        trailing = {
+                            IconButton(onClick = { onRemove(saved.trail) }, modifier = Modifier.size(48.dp)) {
+                                Icon(
+                                    imageVector = Icons.Filled.DeleteOutline,
+                                    contentDescription = stringResource(R.string.saved_trail_remove_desc, model.name),
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                    )
+                }
+                item(key = "import") { ImportButton(onImport) }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ImportButton(onImport: () -> Unit) {
+    OutlinedButton(
+        onClick = onImport,
+        modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp).heightIn(min = 48.dp)
+    ) {
+        Icon(Icons.Filled.FileOpen, contentDescription = null, modifier = Modifier.size(18.dp))
+        Spacer(Modifier.width(8.dp))
+        Text(stringResource(R.string.gpx_import))
+    }
+}

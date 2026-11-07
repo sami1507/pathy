@@ -821,7 +821,7 @@
     <!-- VoiceScoutHelper.kt -->
 
     <!-- DrawerMenuItem.kt -->
-    <string name="menu_map">Map</string>
+    <string name="menu_map">Map style</string>
 
     <!-- ProfileActivity.kt -->
     <string name="profile_not_found">Profile not found.</string>
@@ -927,6 +927,32 @@
     <!-- offline -->
     <string name="trail_offline_failed">Couldn\'t download the map. Check your connection and try again.</string>
     <string name="trail_offline_hint">The map around this trail is saved on your phone.</string>
+    <string name="map_trails_nearby_chip">Trails nearby: %1$d</string>
+    <string name="map_search_area">Search this area</string>
+    <string name="map_searching">Searching…</string>
+    <string name="trail_action_share">Share</string>
+    <string name="trail_tag_offline">Offline</string>
+    <string name="trail_action_start">Start trail</string>
+    <string name="trail_offline_save">Save for offline use</string>
+    <string name="trail_offline_save_detail">Download the route and the map around it, so you can follow it with no signal.</string>
+    <string name="trail_offline_saved_title">Saved on this phone</string>
+    <string name="trail_offline_saved_detail">The route and the map around it work with no signal. Takes %1$s.</string>
+    <string name="trail_offline_saved_detail_nosize">The route and the map around it work with no signal.</string>
+    <string name="trail_offline_saving">Saving the map… %1$d%%</string>
+    <string name="trail_offline_remove">Remove from this phone</string>
+    <string name="trail_offline_removed">Removed from this phone</string>
+    <string name="trail_offline_needs_connection">Connect to the internet once to save this trail.</string>
+    <string name="trail_needs_connection">Needs a connection</string>
+    <string name="trail_preview">Preview</string>
+    <string name="trail_map_description">Map of the trail</string>
+    <string name="trail_actions_title">Keep and share</string>
+    <string name="offline_banner_title">You\'re offline</string>
+    <string name="offline_banner_saved">Showing trails saved on this phone.</string>
+    <string name="offline_banner_none">Trails you save for offline use will appear here.</string>
+    <string name="saved_trails_empty_title">No trails saved yet</string>
+    <string name="saved_trails_empty_message">Open a trail and tap “Save for offline use”. It will work on the mountain with no signal.</string>
+    <string name="saved_trail_remove_desc">Remove %1$s from this phone</string>
+    <string name="saved_trail_delete_one">Remove this trail and its map from the phone?</string>
 
     <!-- gpx -->
     <string name="gpx_import">Import GPX route</string>

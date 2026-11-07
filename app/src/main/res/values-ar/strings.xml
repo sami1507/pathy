@@ -859,7 +859,7 @@
     <!-- VoiceScoutHelper.kt -->
 
     <!-- DrawerMenuItem.kt -->
-    <string name="menu_map">الخريطة</string>
+    <string name="menu_map">نمط الخريطة</string>
 
     <!-- ProfileActivity.kt -->
     <string name="profile_not_found">الملف الشخصي غير موجود.</string>
@@ -969,6 +969,32 @@
     <!-- offline -->
     <string name="trail_offline_failed">تعذّر تنزيل الخريطة. تحقّق من الاتصال وحاول مجددًا.</string>
     <string name="trail_offline_hint">خريطة هذا المسار محفوظة على هاتفك.</string>
+    <string name="map_trails_nearby_chip">مسارات قريبة: %1$d</string>
+    <string name="map_search_area">ابحث في هذه المنطقة</string>
+    <string name="map_searching">جارٍ البحث…</string>
+    <string name="trail_action_share">مشاركة</string>
+    <string name="trail_tag_offline">بدون إنترنت</string>
+    <string name="trail_action_start">ابدأ المسار</string>
+    <string name="trail_offline_save">احفظ للاستخدام بدون إنترنت</string>
+    <string name="trail_offline_save_detail">نزّل المسار والخريطة حوله لتتبعه بدون إشارة.</string>
+    <string name="trail_offline_saved_title">محفوظ على هذا الهاتف</string>
+    <string name="trail_offline_saved_detail">المسار والخريطة حوله يعملان بدون إشارة. يشغل %1$s.</string>
+    <string name="trail_offline_saved_detail_nosize">المسار والخريطة حوله يعملان بدون إشارة.</string>
+    <string name="trail_offline_saving">جارٍ حفظ الخريطة… %1$d%%</string>
+    <string name="trail_offline_remove">إزالة من هذا الهاتف</string>
+    <string name="trail_offline_removed">أُزيل من هذا الهاتف</string>
+    <string name="trail_offline_needs_connection">اتصل بالإنترنت مرة واحدة لحفظ هذا المسار.</string>
+    <string name="trail_needs_connection">يحتاج إلى اتصال</string>
+    <string name="trail_preview">معاينة</string>
+    <string name="trail_map_description">خريطة المسار</string>
+    <string name="trail_actions_title">احفظ وشارك</string>
+    <string name="offline_banner_title">أنت غير متصل بالإنترنت</string>
+    <string name="offline_banner_saved">نعرض المسارات المحفوظة على هذا الهاتف.</string>
+    <string name="offline_banner_none">ستظهر هنا المسارات التي تحفظها للاستخدام بدون إنترنت.</string>
+    <string name="saved_trails_empty_title">لا توجد مسارات محفوظة بعد</string>
+    <string name="saved_trails_empty_message">افتح مسارًا واضغط «احفظ للاستخدام بدون إنترنت». سيعمل في الجبل بلا إشارة.</string>
+    <string name="saved_trail_remove_desc">إزالة %1$s من هذا الهاتف</string>
+    <string name="saved_trail_delete_one">هل تريد إزالة هذا المسار وخريطته من الهاتف؟</string>
 
     <!-- gpx -->
     <string name="gpx_import">استيراد مسار GPX</string>
