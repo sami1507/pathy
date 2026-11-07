@@ -56,19 +56,25 @@ object OverpassQueries {
             parts += """relation["route"~"^(hiking|foot|walking)$"]$around;"""
             // Named footways are mostly pavements and staircases in towns, so only paths and signed rough footways are fetched.
             parts += """way["highway"="path"]["name"]$around;"""
-            parts += """way["highway"~"^(path|footway)$"]["sac_scale"]$around;"""
+            // Exact matches use the server's index. The regular expression "^(path|footway)$" made the same search take
+            // over half a minute (and time out) where this takes three seconds.
+            parts += """way["highway"="path"]["sac_scale"]$around;"""
+            parts += """way["highway"="footway"]["sac_scale"]$around;"""
             parts += """way["highway"="track"]["name"]["foot"~"^(yes|designated)$"]$around;"""
         }
         if (OsmKind.MTB in kinds) {
             parts += """relation["route"="mtb"]$around;"""
-            parts += """way["highway"~"^(path|track|cycleway)$"]["mtb:scale"]$around;"""
+            parts += """way["highway"="path"]["mtb:scale"]$around;"""
+            parts += """way["highway"="track"]["mtb:scale"]$around;"""
+            parts += """way["highway"="cycleway"]["mtb:scale"]$around;"""
         }
         if (OsmKind.CYCLING in kinds) {
             parts += """relation["route"="bicycle"]$around;"""
             parts += """way["highway"="cycleway"]["name"]$around;"""
         }
         if (OsmKind.OFFROAD in kinds) {
-            parts += """way["highway"="track"]["tracktype"~"^grade[45]$"]$around;"""
+            parts += """way["highway"="track"]["tracktype"="grade4"]$around;"""
+            parts += """way["highway"="track"]["tracktype"="grade5"]$around;"""
             parts += """way["highway"="track"]["4wd_only"="yes"]$around;"""
         }
         if (parts.isEmpty()) return ""

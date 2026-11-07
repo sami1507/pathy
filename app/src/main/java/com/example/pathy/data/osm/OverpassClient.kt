@@ -39,10 +39,27 @@ object OverpassClient {
     private const val MAX_CACHE_FILES = 60
 
     private val servers = listOf(
+        "https://overpass.openstreetmap.fr/api/interpreter",
         "https://overpass-api.de/api/interpreter",
         "https://overpass.kumi.systems/api/interpreter",
         "https://overpass.private.coffee/api/interpreter"
     )
+
+    /** A server that failed is tried last for this long, so one that hangs does not delay every search by its full timeout. */
+    private const val COOL_DOWN_MS = 5 * 60 * 1000L
+    private val failedAt = java.util.concurrent.ConcurrentHashMap<String, Long>()
+
+    @Volatile
+    private var lastGood: String? = null
+
+    /**
+     * The order to ask the servers in: the one that answered last time first, then the others as listed,
+     * and those that failed recently at the very end (still tried, in case they are the only ones left).
+     */
+    internal fun order(all: List<String>, failedAt: Map<String, Long>, lastGood: String?, now: Long, coolDownMs: Long = COOL_DOWN_MS): List<String> {
+        val (cooling, healthy) = all.partition { url -> failedAt[url]?.let { now - it < coolDownMs } ?: false }
+        return healthy.sortedBy { if (it == lastGood) 0 else 1 } + cooling
+    }
 
     /** Where answers are kept. Set once by the app; without it nothing is cached. */
     @Volatile
@@ -50,9 +67,9 @@ object OverpassClient {
 
     private val http: OkHttpClient by lazy {
         OkHttpClient.Builder()
-            .connectTimeout(8, TimeUnit.SECONDS)
-            .readTimeout(30, TimeUnit.SECONDS)
-            .callTimeout(35, TimeUnit.SECONDS)
+            .connectTimeout(6, TimeUnit.SECONDS)
+            .readTimeout(25, TimeUnit.SECONDS)
+            .callTimeout(28, TimeUnit.SECONDS)
             .build()
     }
 
@@ -74,7 +91,8 @@ object OverpassClient {
     }
 
     private suspend fun askServers(query: String): String? {
-        for ((index, url) in servers.withIndex()) {
+        val ordered = order(servers, failedAt, lastGood, System.currentTimeMillis())
+        for ((index, url) in ordered.withIndex()) {
             try {
                 val request = Request.Builder()
                     .url(url)
@@ -84,19 +102,28 @@ object OverpassClient {
                 http.newCall(request).await().use { response ->
                     val body = response.body?.string().orEmpty()
                     when {
-                        response.isSuccessful && body.trimStart().startsWith("{") && body.contains("\"elements\"") -> return body
+                        response.isSuccessful && body.trimStart().startsWith("{") && body.contains("\"elements\"") -> {
+                            lastGood = url
+                            failedAt.remove(url)
+                            return body
+                        }
                         // Busy (429) or timed out (504): wait a moment and let the next server try.
                         response.code == 429 || response.code == 504 -> {
                             Log.w(TAG, "$url is busy (${response.code})")
-                            if (index < servers.lastIndex) delay(1_500)
+                            failedAt[url] = System.currentTimeMillis()
+                            if (index < ordered.lastIndex) delay(1_500)
                         }
-                        else -> Log.w(TAG, "$url answered ${response.code}")
+                        else -> {
+                            Log.w(TAG, "$url answered ${response.code}")
+                            failedAt[url] = System.currentTimeMillis()
+                        }
                     }
                 }
             } catch (e: CancellationException) {
                 throw e
             } catch (e: IOException) {
                 Log.w(TAG, "$url failed: ${e.message}")
+                failedAt[url] = System.currentTimeMillis()
             }
         }
         return null
