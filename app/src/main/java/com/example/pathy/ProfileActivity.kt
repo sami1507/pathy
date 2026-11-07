@@ -1,5 +1,6 @@
 package com.example.pathy
 
+import com.example.pathy.ui.theme.setPathyContent
 import com.example.pathy.i18n.PathyActivity
 import android.content.Intent
 import android.os.Bundle
@@ -36,7 +37,7 @@ class ProfileActivity : PathyActivity() {
         val viewedUserId = intent.getStringExtra("userId") ?: currentUser.uid
         val isCurrentUser = viewedUserId == currentUser.uid
 
-        setContent {
+        setPathyContent {
             val context = LocalContext.current
             val authViewModel: AuthViewModel = viewModel()
             val comViewModel: CommunityViewModel = viewModel()

@@ -1,5 +1,6 @@
 package com.example.pathy
 
+import com.example.pathy.ui.theme.setPathyContent
 import com.example.pathy.i18n.PathyActivity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -18,7 +19,7 @@ class MapResultActivity : PathyActivity() {
         val trails = TrailData.fromJson(trailsJson)
         val selectedPoint = Point.fromLngLat(lng, lat)
 
-        setContent {
+        setPathyContent {
             MapResultScreen(centerPoint = selectedPoint, trails = trails, onBack = { finish() })
         }
     }

@@ -1,5 +1,6 @@
 package com.example.pathy
 
+import com.example.pathy.ui.theme.setPathyContent
 import com.example.pathy.i18n.PathyActivity
 import android.os.Build
 import android.os.Bundle
@@ -17,7 +18,7 @@ class WalkieTalkieActivity : PathyActivity() {
         val isHost   = intent.getBooleanExtra("extra_is_host", true)
         val userName = intent.getStringExtra("extra_user_name").orEmpty()
 
-        setContent {
+        setPathyContent {
             WalkieTalkieScreen(
                 presetGroupId = groupId.ifBlank { null },
                 presetIsHost = isHost,

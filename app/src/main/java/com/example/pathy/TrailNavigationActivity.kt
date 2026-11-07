@@ -1,5 +1,6 @@
 package com.example.pathy
 
+import com.example.pathy.ui.theme.setPathyContent
 import com.example.pathy.i18n.PathyActivity
 import android.Manifest
 import android.annotation.SuppressLint
@@ -50,7 +51,7 @@ class TrailNavigationActivity : PathyActivity() {
             return
         }
 
-        setContent {
+        setPathyContent {
             TrailNavigationScreen(trail = trail, userLat = lat, userLng = lng)
         }
     }

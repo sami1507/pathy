@@ -2,6 +2,7 @@ package com.example.pathy.ui.screens
 
 import androidx.compose.ui.res.stringResource
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -41,6 +42,7 @@ import com.example.pathy.ui.design.MountainHero
 import com.example.pathy.ui.theme.PathyColors
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
@@ -140,7 +142,13 @@ fun SignInScreen(
 
             }
         } catch (e: ApiException) {
-            showToast(context.getString(R.string.auth_google_failed))
+            // The button spun forever after a failed or cancelled attempt. Status 10 means this build's
+            // signing certificate is not registered in Firebase, so the code is worth keeping in the log.
+            isLoading = false
+            Log.w("SignIn", "Google sign-in ended with status ${e.statusCode}")
+            if (e.statusCode != GoogleSignInStatusCodes.SIGN_IN_CANCELLED) {
+                showToast(context.getString(R.string.auth_google_failed))
+            }
         }
     }
 

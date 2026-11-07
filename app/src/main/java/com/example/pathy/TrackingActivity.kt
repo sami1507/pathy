@@ -1,5 +1,6 @@
 package com.example.pathy
 
+import com.example.pathy.ui.theme.setPathyContent
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
@@ -34,7 +35,7 @@ class TrackingActivity : PathyActivity() {
         // Reopening the screen after the app was killed during an outing: bring the outing back.
         if (!RecordingService.isRunning && hasLocationPermission()) RecordingController.restore(this)
 
-        setContent {
+        setPathyContent {
             val context = LocalContext.current
             val state by RecordingHub.state.collectAsState()
             val stats by RecordingHub.stats.collectAsState()

@@ -1,5 +1,6 @@
 package com.example.pathy.ui.screens
 
+import com.example.pathy.ui.theme.setPathyContent
 import com.example.pathy.i18n.PathyActivity
 import android.os.Build
 import android.os.Bundle
@@ -18,7 +19,7 @@ class NavigationActivity : PathyActivity() {
         val groupId     = intent.getStringExtra("groupId")
         val fromGroups  = intent.getBooleanExtra("fromGroups", false)
 
-        setContent {
+        setPathyContent {
             NavigationScreen(
                 lat = lat,
                 lng = lng,

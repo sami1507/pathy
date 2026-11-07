@@ -1,5 +1,6 @@
 package com.example.pathy
 
+import com.example.pathy.ui.theme.setPathyContent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.LaunchedEffect
@@ -19,7 +20,7 @@ class EditProfileActivity : PathyActivity() {
 
         val store = ProfileDataStore(this)
 
-        setContent {
+        setPathyContent {
             // The profile is read from disk off the main thread; the form appears as soon as it is ready.
             var profile by remember { mutableStateOf<ProfileInfo?>(null) }
             LaunchedEffect(Unit) { profile = store.profileFlow.first() }

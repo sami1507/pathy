@@ -1,10 +1,14 @@
 package com.example.pathy.ui.theme
 
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalConfiguration
 
@@ -107,10 +111,23 @@ fun TEMPATHYTheme(
     // The type scale depends on the script of the active language (see pathyTypography).
     val language = LocalConfiguration.current.locales[0]?.language
     val typography = remember(language) { pathyTypography(language) }
+    val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
     MaterialTheme(
-        colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme,
+        colorScheme = colorScheme,
         typography = typography,
-        shapes = PathyShapes,
-        content = content
-    )
+        shapes = PathyShapes
+    ) {
+        // Text outside a Surface otherwise falls back to black, which disappears on the dark
+        // background (the "Remember me" label on the sign-in screen did exactly that).
+        CompositionLocalProvider(LocalContentColor provides colorScheme.onBackground, content = content)
+    }
+}
+
+/**
+ * The way every activity should set its content. A screen that calls the plain `setContent` runs on
+ * Material's default purple theme and system font instead of PATHY's, which is how thirteen screens
+ * (the home map, profile, search, sign-up and others) went out looking off-brand.
+ */
+fun ComponentActivity.setPathyContent(content: @Composable () -> Unit) {
+    setContent { TEMPATHYTheme(content = content) }
 }

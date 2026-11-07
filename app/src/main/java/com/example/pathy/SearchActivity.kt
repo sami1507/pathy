@@ -1,5 +1,6 @@
 package com.example.pathy
 
+import com.example.pathy.ui.theme.setPathyContent
 import com.example.pathy.i18n.PathyActivity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +12,7 @@ class SearchActivity : PathyActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContent {
+        setPathyContent {
             SearchScreen()
         }
     }

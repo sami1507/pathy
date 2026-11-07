@@ -1,5 +1,6 @@
 package com.example.pathy
 
+import com.example.pathy.ui.theme.TEMPATHYTheme
 import com.example.pathy.i18n.PathyActivity
 import android.content.Context
 import android.content.Intent
@@ -28,7 +29,7 @@ class TrailDetailsActivity : PathyActivity() {
         }
 
         setContent {
-            MaterialTheme {
+            TEMPATHYTheme {
                 TrailDetailsScreen(trail = trail)
             }
         }
