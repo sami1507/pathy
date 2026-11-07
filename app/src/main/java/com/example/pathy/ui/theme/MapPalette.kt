@@ -23,6 +23,10 @@ object MapPalette {
     private val routeUpcoming = Sky600
     private val userPuck = Sky600
 
+    // Where a trail starts and where it ends, drawn as dots on its line
+    val startMarkerHex: String = Moss600.toHex()
+    val endMarkerHex: String = Forest950.toHex()
+
     val routeLineHex: String = routeLine.toHex()
     val routeCasingHex: String = routeCasing.toHex()
     val routeUpcomingHex: String = routeUpcoming.toHex()

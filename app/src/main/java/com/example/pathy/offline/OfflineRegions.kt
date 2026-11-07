@@ -109,4 +109,12 @@ object OfflineRegions {
     fun remove(trailId: String) {
         TileStore.create().removeTileRegion(regionId(trailId))
     }
+
+    /** How much room the saved map of this trail takes on the phone, or null when it is not saved or cannot be read. */
+    suspend fun sizeBytes(trailId: String): Long? = suspendCancellableCoroutine { cont ->
+        TileStore.create().getAllTileRegions { result ->
+            val size = result.value?.firstOrNull { it.id == regionId(trailId) }?.completedResourceSize
+            if (cont.isActive) cont.resume(size)
+        }
+    }
 }
