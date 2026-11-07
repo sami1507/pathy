@@ -24,7 +24,11 @@
 |---|---|---|---|
 | <img src="docs/screenshots/profile-en.png" width="200"> | <img src="docs/screenshots/community-feed-en.png" width="200"> | <img src="docs/screenshots/bookmarks-dark.png" width="200"> | <img src="docs/screenshots/onboarding-en.png" width="200"> |
 
-*The first three are from a real Android 17 emulator, the rest are rendered by the project's own screenshot tests.*
+| Trails drawn on the map | Saved trail, with no connection | Saved trails list, with no connection | Guidance, with no connection |
+|---|---|---|---|
+| <img src="docs/screenshots/map-trails.png" width="200"> | <img src="docs/screenshots/trail-details-offline.png" width="200"> | <img src="docs/screenshots/saved-trails-offline.png" width="200"> | <img src="docs/screenshots/guidance-offline.png" width="200"> |
+
+*The first three and the last row are from a real Android 17 emulator (the last three in airplane mode), the rest are rendered by the project's own screenshot tests.*
 
 ## What it does
 
@@ -33,7 +37,8 @@
 - **Finds trails anywhere.** Search any place in the world, or look near you. Trails come from OpenStreetMap; the app stitches route relations into one line, grades difficulty, and **leaves out trails the data marks closed, abandoned, planned or private**. Marked routes without a name are recognised by their paint colour.
 - **Tells you how much to trust a trail.** Each trail shows whether it is marked, seasonal, hard to follow, and how recently it was checked. Hikers can report "open / muddy / blocked / closed / not found" and the latest reports are shown on the trail.
 - **Never invents numbers.** Climb comes from the map data or from real terrain elevation; when it is unknown the app says so.
-- **Works offline.** Save the map around a trail with Mapbox offline storage; recordings are stored locally first; recent trail searches are cached on the phone.
+- **Works offline.** "Save for offline use" keeps a trail and the map around it on the phone (about 10 MB for a 6 km trail). Saved trails open from the side menu with no account and no signal, appear in Discover when a search cannot be made, and can be followed with turn-by-turn guidance. Recordings are stored locally first; recent trail searches are cached on the phone.
+- **Shows trails on the map.** Trails near you are drawn on the home map in their difficulty colour, tap one for its card, and "Search this area" looks elsewhere when there is a connection.
 - **Share and import.** Export a walk as GPX, or import a GPX file from any other app and follow it.
 - **Community.** Posts with photos and comments, events, groups, a walkie-talkie (Nearby Connections without internet, WebRTC with it), emergency SOS by SMS, and Scout, an AI trail assistant that runs on a server so no API key ships in the app.
 - **Speaks three languages**, including full right-to-left layouts: English, Arabic, Hebrew.
@@ -47,7 +52,7 @@
 | **Data quality** | Overpass queries with mirrors, retries and a disk cache; relation stitching; availability and freshness assessment; place search; auto-widening search so a quiet area never shows an empty screen. |
 | **Security** | No third-party API key in the APK (OpenAI, moderation and weather go through Cloud Functions). Firestore and Storage rules validate shape and size. A build refuses to embed a secret Mapbox token. See [SECURITY.md](SECURITY.md). |
 | **Accessibility** | Touch targets of at least 48 dp on the main controls (asserted in tests), content descriptions, whole-card semantics for screen readers, layouts rendered at 200% font size, content-aware text direction for posts that mix languages. |
-| **Testing** | 189 automated tests: GPS filtering, route following, OSM parsing against real Overpass data, Room migration, Firestore document format, navigation wording in all three languages, string parity, and screenshot tests in Arabic and Hebrew. |
+| **Testing** | 337 automated tests (230 app, 107 core): GPS filtering, route following, OSM parsing against real Overpass data, Room migration, Firestore document format, navigation wording in all three languages, string parity, and screenshot tests in Arabic and Hebrew. |
 
 ## Architecture
 
@@ -85,7 +90,7 @@ app/                  The Android app                                   (:app)
   tracking/           Recording service, Room entities, upload worker
   data/osm/           Overpass client, elevation, place search, trail repository
   data/conditions/    Hiker condition reports
-  offline/            Offline map areas
+  offline/            Offline map areas, saved trails, network state
   navigation/         Spoken and written guidance
   screens/ ui/        Compose screens and design system
   i18n/               Languages, fonts, right-to-left helpers
@@ -120,7 +125,7 @@ OpenStreetMap is edited by people, so no app can promise a trail is open today. 
 
 - The walkie-talkie over the internet uses STUN only, so it cannot connect phones behind strict NATs without a TURN server. Only one phone enforces "one speaker at a time".
 - Live location sharing between group members is not shipped: it needs rules that check group membership.
-- The recording service and trail discovery were exercised on an emulator. Offline map download, the walkie-talkie and the Firestore rule changes (deployed separately with `firebase deploy`) still need testing on real devices and accounts.
+- The recording service, trail discovery and the offline flow (save a trail, then open the map, saved list, details, Discover and guidance in airplane mode) were exercised on an emulator. The offline flow on a real phone, the walkie-talkie and the Firestore rule changes (deployed separately with `firebase deploy`) still need testing on real devices and accounts.
 
 ## License
 

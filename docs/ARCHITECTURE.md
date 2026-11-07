@@ -18,7 +18,7 @@ tracking/        recording on the phone: Room entities, RecordingService (foregr
                  RecordingRepository, RecordingHub (state for the screens), UploadWorker (WorkManager)
 history/         cloud history (one Firestore document per outing) + local outings
 data/osm/        Overpass client (mirrors, retry, disk cache), ElevationService, TrailRepository
-offline/         offline map areas (Mapbox TileStore)
+offline/         offline map areas (Mapbox TileStore), saved trails (files/trails/<id>/trail.json), network state
 navigation/      NavGuidance: turns navigator state into words in the app language
 export/          GPX sharing (FileProvider)
 screens/, ui/    Compose screens and theme
