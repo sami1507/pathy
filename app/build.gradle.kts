@@ -197,7 +197,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 
     // Firebase BOM - Your version is newer, keep it!
-    implementation(platform("com.google.firebase:firebase-bom:33.13.0")) // ✅ Keep your version
+    implementation(platform("com.google.firebase:firebase-bom:35.1.0")) // ✅ Keep your version
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.firebase:firebase-storage-ktx")
