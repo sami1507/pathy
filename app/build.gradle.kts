@@ -231,7 +231,7 @@ dependencies {
     // Tests
     testImplementation(libs.junit)
     // Design screenshot tests (JVM, no emulator needed)
-    testImplementation("org.robolectric:robolectric:4.14.1")
+    testImplementation("org.robolectric:robolectric:4.17")
     testImplementation("androidx.compose.ui:ui-test-junit4")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
